@@ -25,6 +25,9 @@ lib
 # CACHE
 .yarn-offline-mirror
 .yarn-cache
+.yarn/cache
+.yarn/plugins
+.yarn/install-state.gz
 
 packages/private
 packages/**/.yarnrc
