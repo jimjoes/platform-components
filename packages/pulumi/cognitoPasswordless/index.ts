@@ -2,21 +2,13 @@ import * as aws from "@pulumi/aws";
 import CreateAuthChallenge from "./createAuthChallenge";
 import DefineAuthChallenge from "./defineAuthChallenge";
 import VerifyAuthChallengeResponse from "./verifyAuthChallengeResponse";
-import UserGroups from "./userGroups";
 
 const DEBUG = String(process.env.DEBUG);
 
 class CognitoPasswordless {
   userPoolClient: aws.cognito.UserPoolClient;
   userPool: aws.cognito.UserPool;
-  groups: UserGroups;
-  constructor({
-    api,
-    defaultStage,
-  }: {
-    api: aws.apigatewayv2.Api;
-    defaultStage: aws.apigatewayv2.Stage;
-  }) {
+  constructor() {
     const createAuthChallenge = new CreateAuthChallenge({
       env: {
         REGION: process.env.AWS_REGION,
@@ -107,12 +99,6 @@ class CognitoPasswordless {
         userPoolId: this.userPool.id,
       }
     );
-
-    this.groups = new UserGroups({
-      userPool: this.userPool,
-      api: api,
-      defaultStage: defaultStage,
-    });
   }
 }
 
