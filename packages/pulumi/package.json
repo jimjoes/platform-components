@@ -1,0 +1,27 @@
+{
+  "name": "@jimjoes/pulumi-packages",
+  "version": "1.0.0",
+  "description": "Pulumi code shared between webiny projects",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "author": "James Hunter",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "build": "run-s clean build:tsc",
+    "build:tsc": "tsc -b",
+    "clean": "rimraf lib coverage tsconfig.tsbuildinfo",
+    "compile": "rm -rf dist/* && tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@pulumi/aws": "4.28.0",
+    "@pulumi/pulumi": "3.19.0"
+  },
+  "devDependencies": {
+    "ts-node": "^8.6.2",
+    "typescript": "^4.6.3"
+  },
+  "keywords": []
+}
