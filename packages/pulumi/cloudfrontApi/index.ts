@@ -38,17 +38,15 @@ class Cloudfront {
   aliases: string[];
   constructor({
     routes,
-    devSubdomain,
-    prodSubdomain,
+    subdomain,
   }: {
     routes: Array<any>;
-    devSubdomain: string;
-    prodSubdomain: string;
+    subdomain: string;
   }) {
     if (stackEnv === "dev") {
-      alternateCnames.push(buildDomain(rootDomain, devSubdomain));
+      alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
     } else if (stackEnv === "prod") {
-      alternateCnames.push(buildDomain(rootDomain, prodSubdomain));
+      alternateCnames.push(buildDomain(rootDomain, subdomain));
     }
 
     let viewerCertificate: inputs.cloudfront.DistributionViewerCertificate;
