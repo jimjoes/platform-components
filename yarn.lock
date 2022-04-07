@@ -3730,6 +3730,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"material-amplify@workspace:packages/material-amplify":
+  version: 0.0.0-use.local
+  resolution: "material-amplify@workspace:packages/material-amplify"
+  dependencies:
+    "@pulumi/aws": 4.28.0
+    "@pulumi/pulumi": 3.19.0
+    typescript: ^4.6.3
+  languageName: unknown
+  linkType: soft
+
 "meow@npm:^8.0.0":
   version: 8.1.2
   resolution: "meow@npm:8.1.2"
@@ -6064,6 +6074,12 @@ __metadata:
   checksum: 1f526507aa491f972a0c1409d07f8444e1d28778dfa269a9971f2e157182f3d496dc33296e4ed45b157fdb3bf535bb90c90bf10c50dcf1dd6caacb2a34cc84fb
   languageName: node
   linkType: hard
+
+"webiny-apps@workspace:packages/webiny-apps":
+  version: 0.0.0-use.local
+  resolution: "webiny-apps@workspace:packages/webiny-apps"
+  languageName: unknown
+  linkType: soft
 
 "whatwg-url@npm:^5.0.0":
   version: 5.0.0
