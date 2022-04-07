@@ -1,0 +1,32 @@
+{
+  "name": "material-amplify",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "author": "James Hunter",
+  "license": "UNLICENSED",
+  "scripts": {
+    "prepack": "yarn build",
+    "build": "rm -rf dist/* && tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@pulumi/aws": "4.28.0",
+    "@pulumi/pulumi": "3.19.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  },
+  "keywords": [],
+  "homepage": "https://github.com/jimjoes/platform-components#readme",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimjoes/platform-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jimjoes/platform-components/issues"
+  }
+}
