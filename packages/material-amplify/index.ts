@@ -4,6 +4,8 @@ import VerifyCode from "./src/pages/verify";
 import RequestCode from "./src/pages/requestCode";
 import ForgotPassword from "./src/pages/forgotPassword";
 import Login from "./src/pages/login";
+import { Password } from "./src/components/authComponents";
+import { useValidPassword } from "./src/hooks/useAuthHooks";
 import AuthProvider, {
   AuthContext,
   AuthIsSignedIn,
@@ -15,6 +17,8 @@ import AuthProvider, {
  */
 
 export {
+  Password,
+  useValidPassword,
   AuthProvider,
   AuthContext,
   SignIn,
