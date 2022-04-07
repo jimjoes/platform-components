@@ -1,0 +1,65 @@
+{
+  "name": "@jimjoes/amplify-material-ui",
+  "version": "1.0.0",
+  "description": "A Material-UI based implementation of aws amplify",
+  "author": "James Hunter",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "rimraf dist && yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "prepack": "yarn build"
+  },
+  "keywords": [],
+  "homepage": "https://github.com/jimjoes/platform-components#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimjoes/platform-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jimjoes/platform-components/issues"
+  },
+  "main": "./dust/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@jimjoes/amplify-auth-hooks": "^1.0.0",
+    "@mui/styles": "^5.4.1",
+    "clsx": "^1.1.1",
+    "formik": "^2.2.9",
+    "formik-mui": "^4.0.0-alpha.3",
+    "langtag-utils": "^2.0.2",
+    "qrcode.react": "^1.0.0",
+    "react-intl": "^5.23.0",
+    "react-recaptcha-hook": "^1.2.2",
+    "tiny-invariant": "^1.2.0",
+    "yup": "^0.32.9"
+  },
+  "peerDependencies": {
+    "@aws-amplify/core": "^4.3.10",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.7",
+    "react": ">=17"
+  },
+  "devDependencies": {
+    "@aws-amplify/core": "^4.3.10",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.7",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@types/qrcode.react": "^1.0.1",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/yup": "^0.29.11",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "typescript": "^4.6.3"
+  },
+  "sideEffects": false
+}
