@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -9,91 +9,95 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
-import logoImage from "/logo.png";
-
 import { AuthContext } from "../contexts/authContext";
 
 const useStyles = makeStyles({
-    root: {},
-    title: {
-        textAlign: "center"
-    },
-    session: {
-        width: "80vw",
-        overflow: "auto",
-        overflowWrap: "break-word",
-        fontSize: "16px"
-    },
-    hero: {
-        width: "100%",
-        background: "rgb(220,220,220)"
-    }
+  root: {},
+  title: {
+    textAlign: "center",
+  },
+  session: {
+    width: "80vw",
+    overflow: "auto",
+    overflowWrap: "break-word",
+    fontSize: "16px",
+  },
+  hero: {
+    width: "100%",
+    background: "rgb(220,220,220)",
+  },
 });
 
-export default function Login() {
-    const classes = useStyles();
+export default function Login({ logoSrc }: { logoSrc: string }) {
+  const classes = useStyles();
 
-    const history = useHistory();
+  const navigate = useNavigate();
 
-    const auth = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
-    function signOutClicked() {
-        auth.signOut();
-        history.push("/");
-    }
+  function signOutClicked() {
+    auth.signOut();
+    navigate("/");
+  }
 
-    function changePasswordClicked() {
-        history.push("changepassword");
-    }
+  function changePasswordClicked() {
+    navigate("changepassword");
+  }
 
-    return (
-        <Grid container>
-            <Grid
-                className={classes.root}
-                container
-                direction="column"
-                justify="center"
-                alignItems="center"
-            >
-                <Box className={classes.hero} p={4}>
-                    <Grid
-                        className={classes.root}
-                        container
-                        direction="column"
-                        justify="center"
-                        alignItems="center"
-                    >
-                        <Box m={2}>
-                            <img src={logoImage} width={224} height={224} alt="logo" />
-                        </Box>
+  return (
+    <Grid container>
+      <Grid
+        className={classes.root}
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Box className={classes.hero} p={4}>
+          <Grid
+            className={classes.root}
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Box m={2}>
+              <img src={logoSrc} width={224} height={224} alt="logo" />
+            </Box>
 
-                        <Box m={2}>
-                            <Button onClick={signOutClicked} variant="contained" color="primary">
-                                Sign Out
-                            </Button>
-                        </Box>
-                        <Box m={2}>
-                            <Button
-                                onClick={changePasswordClicked}
-                                variant="contained"
-                                color="primary"
-                            >
-                                Change Password
-                            </Button>
-                        </Box>
-                    </Grid>
-                </Box>
-                <Box m={2}>
-                    <Typography variant="h5">Session Info</Typography>
-                    <pre className={classes.session}>
-                        {JSON.stringify(auth.sessionInfo, null, 2)}
-                    </pre>
-                </Box>
-                <Box m={2}>
-                    <Typography variant="h5">User Attributes</Typography>
-                    <pre className={classes.session}>{JSON.stringify(auth.attrInfo, null, 2)}</pre>
-                </Box>
-            </Grid>
-        </Grid>
-    );
+            <Box m={2}>
+              <Button
+                onClick={signOutClicked}
+                variant="contained"
+                color="primary"
+              >
+                Sign Out
+              </Button>
+            </Box>
+            <Box m={2}>
+              <Button
+                onClick={changePasswordClicked}
+                variant="contained"
+                color="primary"
+              >
+                Change Password
+              </Button>
+            </Box>
+          </Grid>
+        </Box>
+        <Box m={2}>
+          <Typography variant="h5">Session Info</Typography>
+          <pre className={classes.session}>
+            {JSON.stringify(auth.sessionInfo, null, 2)}
+          </pre>
+        </Box>
+        <Box m={2}>
+          <Typography variant="h5">User Attributes</Typography>
+          <pre className={classes.session}>
+            {JSON.stringify(auth.attrInfo, null, 2)}
+          </pre>
+        </Box>
+      </Grid>
+    </Grid>
+  );
 }
