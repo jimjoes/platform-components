@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { useIntl, FormattedMessage } from "react-intl";
 import { Button, Grid } from "@mui/material";
 import { Theme } from "@mui/material/styles";
@@ -40,7 +41,7 @@ export const SignIn: React.FC<SignInProps> = (props) => {
     hideForgotPasswordLink = false,
     usernameAttribute,
   } = props;
-
+  const navigate = useNavigate();
   const classes = useStyles();
   const { formatMessage } = useIntl();
   const { showNotification } = useNotificationContext();
@@ -67,6 +68,7 @@ export const SignIn: React.FC<SignInProps> = (props) => {
             defaultMessage: error.message,
           });
           showNotification({ content, variant: "error" });
+          navigate("/");
         }
       }}
     >
