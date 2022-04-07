@@ -35,7 +35,6 @@
     "amazon-cognito-identity-js": ">=3.2.0",
     "react": ">=16"
   },
-  "private": false,
   "devDependencies": {
     "@aws-amplify/auth": "^4.3.18",
     "@aws-amplify/core": "^4.3.10",

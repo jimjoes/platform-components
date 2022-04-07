@@ -1077,6 +1077,7 @@ __metadata:
     react-intl: ^5.23.0
     react-recaptcha-hook: ^1.2.2
     tiny-invariant: ^1.2.0
+    tiny-warning: ^1.0.3
     typescript: ^4.6.3
     yup: ^0.32.9
   peerDependencies:
@@ -7793,7 +7794,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiny-warning@npm:^1.0.2":
+"tiny-warning@npm:^1.0.2, tiny-warning@npm:^1.0.3":
   version: 1.0.3
   resolution: "tiny-warning@npm:1.0.3"
   checksum: da62c4acac565902f0624b123eed6dd3509bc9a8d30c06e017104bedcf5d35810da8ff72864400ad19c5c7806fc0a8323c68baf3e326af7cb7d969f846100d71

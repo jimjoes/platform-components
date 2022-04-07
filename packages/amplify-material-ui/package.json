@@ -26,7 +26,7 @@
     "dist"
   ],
   "dependencies": {
-    "@jimjoes/amplify-auth-hooks": "^1.0.2",
+    "@jimjoes/amplify-auth-hooks": "^1.0.0",
     "@mui/styles": "^5.4.1",
     "clsx": "^1.1.1",
     "formik": "^2.2.9",
@@ -36,9 +36,9 @@
     "react-intl": "^5.23.0",
     "react-recaptcha-hook": "^1.2.2",
     "tiny-invariant": "^1.2.0",
+    "tiny-warning": "^1.0.3",
     "yup": "^0.32.9"
   },
-  "private": false,
   "peerDependencies": {
     "@aws-amplify/core": "^4.3.10",
     "@mui/icons-material": "^5.2.5",
