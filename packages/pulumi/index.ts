@@ -1,5 +1,5 @@
-import Cloudfront from "./cloudfrontApi";
-import UserGroups from "./userGroups";
-import CognitoPasswordless from "./cognitoPasswordless";
+import Cloudfront from "./src/cloudfrontApi";
+import UserGroups from "./src/userGroups";
+import CognitoPasswordless from "./src/cognitoPasswordless";
 
 export { Cloudfront, UserGroups, CognitoPasswordless };
