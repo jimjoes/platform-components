@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
+import { useLogin } from "react-admin";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -30,18 +31,14 @@ const SignIn: React.FunctionComponent<{}> = () => {
   const signInClicked = async () => {
     try {
       await authContext.signInWithEmail(username, password);
-      navigate("home");
+      navigate("/");
     } catch (err: any) {
       if (err.code === "UserNotConfirmedException") {
-        navigate("verify");
+        navigate("/verify");
       } else {
         setError(err.message);
       }
     }
-  };
-
-  const passwordResetClicked = async () => {
-    navigate("requestcode");
   };
 
   return (
@@ -94,14 +91,14 @@ const SignIn: React.FunctionComponent<{}> = () => {
                 justifyContent="flex-start"
                 alignItems="center"
               >
-                <Box onClick={passwordResetClicked} mt={2}>
+                <Link to="/requestcode">
                   <Typography
-                    sx={{ "&:hover": { cursor: "pointer" } }}
+                    sx={{ mt: 2, "&:hover": { cursor: "pointer" } }}
                     variant="body2"
                   >
                     Forgot Password?
                   </Typography>
-                </Box>
+                </Link>
               </Grid>
             </Box>
 
@@ -137,14 +134,14 @@ const SignIn: React.FunctionComponent<{}> = () => {
               </Grid>
             </Box>
             <Box mt={2}>
-              <Box onClick={() => navigate("signup")}>
+              <Link to="/signup">
                 <Typography
-                  sx={{ "&:hover": { cursor: "pointer" } }}
+                  sx={{ mt: 2, "&:hover": { cursor: "pointer" } }}
                   variant="body1"
                 >
                   Register a new account
                 </Typography>
-              </Box>
+              </Link>
             </Box>
           </Grid>
         </Paper>
