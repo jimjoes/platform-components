@@ -62,13 +62,13 @@ export const SignIn: React.FC<SignInProps> = (props) => {
             values["password"].trim(),
             validationData
           );
+          navigate("/");
         } catch (error) {
           const content = formatMessage({
             id: `signIn.errors.${error.code}`,
             defaultMessage: error.message,
           });
           showNotification({ content, variant: "error" });
-          navigate("/");
         }
       }}
     >
