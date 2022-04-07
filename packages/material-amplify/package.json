@@ -1,6 +1,6 @@
 {
   "name": "@jimjoes/material-amplify",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Mui5 amplify login pages (used for react-admin v4)",
   "types": "dist/index.d.ts",
   "module": "./dist/esm/index.js",
