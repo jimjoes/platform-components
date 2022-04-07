@@ -31,5 +31,5 @@
   "files": [
     "dist"
   ],
-  "gitHead": "6498d1059d76485bc5d15af4f47e4506881a8215"
+  "private": false
 }
