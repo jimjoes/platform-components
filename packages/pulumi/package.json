@@ -1,8 +1,9 @@
 {
   "name": "@jimjoes/pulumi-packages",
-  "version": "1.1.4",
+  "version": "1.0.0",
   "description": "Pulumi code shared between webiny projects",
   "types": "dist/index.d.ts",
+  "module": "./dist/esm/index.js",
   "main": "dist/index.js",
   "author": "James Hunter",
   "license": "UNLICENSED",
