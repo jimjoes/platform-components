@@ -59,6 +59,8 @@ const defaultChildren = [
 
 export interface AuthRouterProps extends AuthProps, AuthConfig {
   hide?: React.FC[];
+  initialAuthState?: any;
+  onStateChange?: any;
 }
 
 export const AuthRouter: React.FC<AuthRouterProps> = (props) => {

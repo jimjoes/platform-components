@@ -6,7 +6,8 @@
   ],
   "name": "platform-components",
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "rimraf": "^3.0.2"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"

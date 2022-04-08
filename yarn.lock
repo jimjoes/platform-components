@@ -7531,6 +7531,7 @@ __metadata:
   resolution: "platform-components@workspace:."
   dependencies:
     lerna: ^4.0.0
+    rimraf: ^3.0.2
   languageName: unknown
   linkType: soft
 

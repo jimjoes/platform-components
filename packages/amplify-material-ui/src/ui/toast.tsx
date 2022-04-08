@@ -1,14 +1,21 @@
-import * as React from 'react';
-import clsx from 'clsx';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ErrorIcon from '@mui/icons-material/Error';
-import InfoIcon from '@mui/icons-material/Info';
-import CloseIcon from '@mui/icons-material/Close';
-import WarningIcon from '@mui/icons-material/Warning';
-import { colors, IconButton, Snackbar, SnackbarOrigin, SnackbarContent } from '@mui/material';
-import { Theme } from '@mui/material/styles';
+//TODO: Refactor makeStyles to use sx prop.
+import * as React from "react";
+import clsx from "clsx";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ErrorIcon from "@mui/icons-material/Error";
+import InfoIcon from "@mui/icons-material/Info";
+import CloseIcon from "@mui/icons-material/Close";
+import WarningIcon from "@mui/icons-material/Warning";
+import {
+  colors,
+  IconButton,
+  Snackbar,
+  SnackbarOrigin,
+  SnackbarContent,
+} from "@mui/material";
+import { Theme } from "@mui/material/styles";
 
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -38,8 +45,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(1),
   },
   message: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
   },
 }));
 
@@ -50,19 +57,22 @@ export interface ToastProps {
   content?: string;
   variant?: keyof typeof variantIcon;
   open?: boolean;
-  onClose?: (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => void;
+  onClose?: (
+    event: React.SyntheticEvent | React.MouseEvent,
+    reason?: string
+  ) => void;
 }
 
 export const Toast: React.FC<ToastProps> = (props) => {
   const {
     autoHideDuration = 6000,
     anchorOrigin = {
-      vertical: 'top',
-      horizontal: 'center',
+      vertical: "top",
+      horizontal: "center",
     } as SnackbarOrigin,
     className,
     content,
-    variant = 'info',
+    variant = "info",
     open = false,
     onClose,
   } = props;
@@ -72,7 +82,12 @@ export const Toast: React.FC<ToastProps> = (props) => {
   const Icon = variantIcon[variant];
 
   return (
-    <Snackbar anchorOrigin={anchorOrigin} open={open} autoHideDuration={autoHideDuration} onClose={onClose}>
+    <Snackbar
+      anchorOrigin={anchorOrigin}
+      open={open}
+      autoHideDuration={autoHideDuration}
+      onClose={onClose}
+    >
       <SnackbarContent
         className={clsx(classes[variant], className)}
         aria-describedby="client-snackbar"
@@ -88,7 +103,8 @@ export const Toast: React.FC<ToastProps> = (props) => {
             aria-label="Close"
             color="inherit"
             onClick={onClose}
-            size="large">
+            size="large"
+          >
             <CloseIcon className={classes.icon} />
           </IconButton>,
         ]}

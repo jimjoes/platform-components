@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useIntl, FormattedMessage } from "react-intl";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Box } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import makeStyles from "@mui/styles/makeStyles";
 import createStyles from "@mui/styles/createStyles";
@@ -9,7 +9,7 @@ import { Formik, Field, Form } from "formik";
 import { TextField } from "formik-mui";
 import { useSignIn } from "@jimjoes/amplify-auth-hooks";
 
-import { FormSection, SectionHeader, SectionBody, SectionFooter } from "../ui";
+import { FormSection, SectionHeader } from "../ui";
 import { useNotificationContext } from "../notification";
 import { useUsernameField } from "./use-username-field";
 import { ChangeAuthStateLink } from "./change-auth-state-link";
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     form: {
       width: "100%", // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
+      margin: theme.spacing(2),
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
@@ -81,12 +81,15 @@ export const SignIn: React.FC<SignInProps> = (props) => {
             />
           </SectionHeader>
           <Form
-            className={classes.form}
             onSubmit={handleSubmit}
             data-testid="signInForm"
             //noValidate
           >
-            <SectionBody>
+            <Box
+              sx={{
+                mt: 2,
+              }}
+            >
               {usernameField}
               <Field
                 variant="outlined"
@@ -103,8 +106,8 @@ export const SignIn: React.FC<SignInProps> = (props) => {
                 autoComplete="current-password"
                 component={TextField}
               />
-            </SectionBody>
-            <SectionFooter>
+            </Box>
+            <Box sx={{ mt: 2 }}>
               <Button
                 type="submit"
                 disabled={!isValid}
@@ -145,7 +148,7 @@ export const SignIn: React.FC<SignInProps> = (props) => {
                   </Grid>
                 )}
               </Grid>
-            </SectionFooter>
+            </Box>
           </Form>
         </FormSection>
       )}
