@@ -48,7 +48,7 @@ export const useAuth = (props: AuthProps): AuthContextProps => {
       try {
         const user = await Auth.currentAuthenticatedUser();
         handleStateChange("signedIn", user);
-      } catch (error) {
+      } catch (error: any) {
         handleStateChange(initialAuthState, null);
       }
     };

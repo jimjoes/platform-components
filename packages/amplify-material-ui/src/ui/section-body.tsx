@@ -3,9 +3,9 @@ import { Box } from "@mui/material";
 
 export type SectionBodyProps = {
   children: React.ReactNode;
-  sx: any;
+  sx?: any;
 };
 
-export const SectionBody: React.FC = ({ children }) => {
+export const SectionBody = ({ children, sx }: SectionBodyProps) => {
   return <Box>{children}</Box>;
 };

@@ -2,11 +2,13 @@
   "name": "@jimjoes/amplify-material-ui",
   "version": "1.1.4",
   "description": "A Material-UI based implementation of aws amplify",
+  "main": "src/index.ts",
+  "typings": "src/index.d.ts",
   "author": "James Hunter",
   "license": "UNLICENSED",
   "scripts": {
     "prepack": "yarn build",
-    "build": "rm -rf dist/* && tsc -p tsconfig.json"
+    "build": "rimraf dist && tsc -p tsconfig.json"
   },
   "keywords": [],
   "homepage": "https://github.com/jimjoes/platform-components#readme",
@@ -17,14 +19,11 @@
   "bugs": {
     "url": "https://github.com/jimjoes/platform-components/issues"
   },
-  "main": "./dust/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@jimjoes/amplify-auth-hooks": "^1.1.1",
+    "@jimjoes/amplify-auth-hooks": "1.1.1",
     "@mui/styles": "^5.4.1",
     "clsx": "^1.1.1",
     "formik": "^2.2.9",
@@ -55,11 +54,12 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/qrcode.react": "^1.0.1",
-    "@types/react": "^17.0.0",
+    "@types/react": "^18.0.1",
     "@types/react-dom": "^17.0.0",
     "@types/yup": "^0.29.11",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.6.3"
   },
   "sideEffects": false

@@ -1,4 +1,3 @@
-import * as aws from "@pulumi/aws";
 import Bucket from "./bucket";
 import CloudfrontWebApp from "../cloudfrontWebapp";
 import BuildProject from "./buildProject";

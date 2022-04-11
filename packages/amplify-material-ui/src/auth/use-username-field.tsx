@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { useIntl } from 'react-intl';
-import { Field } from 'formik';
-import { TextField } from 'formik-mui';
+import * as React from "react";
+import { useIntl } from "react-intl";
+import { Field } from "formik";
+import { TextField } from "formik-mui";
 
-import { PhoneField } from '../ui';
-import { UsernameAttribute } from './types';
+import { PhoneField } from "../ui";
+import { UsernameAttribute } from "./types";
 
 export const useUsernameField = (
-  usernameAttribute?: UsernameAttribute,
+  usernameAttribute?: UsernameAttribute
 ): { usernamefieldName: string; usernameField: React.ReactElement } => {
   const { formatMessage } = useIntl();
 
   switch (usernameAttribute) {
     case UsernameAttribute.EMAIL:
       return {
-        usernamefieldName: 'email',
+        usernamefieldName: "email",
         usernameField: (
           <Field
             variant="outlined"
@@ -23,8 +23,8 @@ export const useUsernameField = (
             fullWidth
             id="email"
             label={formatMessage({
-              id: 'global.labels.email',
-              defaultMessage: 'Email',
+              id: "global.labels.email",
+              defaultMessage: "Email",
             })}
             name="email"
             autoFocus
@@ -35,13 +35,13 @@ export const useUsernameField = (
 
     case UsernameAttribute.PHONE_NUMBER:
       return {
-        usernamefieldName: 'phone',
+        usernamefieldName: "phone",
         usernameField: (
           <PhoneField
             required
             label={formatMessage({
-              id: 'global.labels.phoneNumber',
-              defaultMessage: 'Phone Number',
+              id: "global.labels.phoneNumber",
+              defaultMessage: "Phone Number",
             })}
           />
         ),
@@ -49,7 +49,7 @@ export const useUsernameField = (
 
     default:
       return {
-        usernamefieldName: 'username',
+        usernamefieldName: "username",
         usernameField: (
           <Field
             variant="outlined"
@@ -58,8 +58,8 @@ export const useUsernameField = (
             fullWidth
             id="username"
             label={formatMessage({
-              id: 'global.labels.username',
-              defaultMessage: 'Username',
+              id: "global.labels.username",
+              defaultMessage: "Username",
             })}
             name="username"
             autoFocus

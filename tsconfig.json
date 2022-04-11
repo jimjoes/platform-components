@@ -3,5 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./"
   },
-  "include": ["./packages/*/**.ts"]
+  "include": [
+    "./packages/amplify-material-ui/src/index.tsx",
+    "./packages/amplify-auth-hooks/src/index.tsx",
+    "packages/pulumi/src/index.ts"
+  ]
 }

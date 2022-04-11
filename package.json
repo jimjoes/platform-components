@@ -1,15 +1,4 @@
 {
-  "packageManager": "yarn@3.2.0",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "name": "platform-components",
-  "devDependencies": {
-    "lerna": "^4.0.0",
-    "rimraf": "^3.0.2"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  }
+  "packageManager": "yarn@3.2.0"
 }

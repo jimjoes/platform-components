@@ -86,6 +86,7 @@ export const Toast: React.FC<ToastProps> = (props) => {
       anchorOrigin={anchorOrigin}
       open={open}
       autoHideDuration={autoHideDuration}
+      //@ts-ignore
       onClose={onClose}
     >
       <SnackbarContent

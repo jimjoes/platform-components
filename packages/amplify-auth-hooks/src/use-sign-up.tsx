@@ -1,21 +1,21 @@
-import invariant from 'tiny-invariant';
-import Auth from '@aws-amplify/auth';
-import { ConsoleLogger as Logger } from '@aws-amplify/core';
+import invariant from "tiny-invariant";
+import Auth from "@aws-amplify/auth";
+import { ConsoleLogger as Logger } from "@aws-amplify/core";
 
-import { useAuthContext } from './use-auth-context';
-import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import { useAuthContext } from "./use-auth-context";
+import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 
-const logger = new Logger('useSignUp');
+const logger = new Logger("useSignUp");
 
 export const useSignUp = (): ((
   username: string,
   password: string,
   validationData?: Record<string, string>,
-  attributes?: Record<string, string>,
+  attributes?: Record<string, string>
 ) => Promise<void>) => {
   invariant(
-    Auth && typeof Auth.signUp === 'function',
-    'No Auth module found, please ensure @aws-amplify/auth is imported',
+    Auth && typeof Auth.signUp === "function",
+    "No Auth module found, please ensure @aws-amplify/auth is imported"
   );
 
   const { handleStateChange } = useAuthContext();
@@ -24,7 +24,7 @@ export const useSignUp = (): ((
     username: string,
     password: string,
     validationData?: Record<string, string>,
-    attributes?: Record<string, string>,
+    attributes?: Record<string, string>
   ): Promise<void> => {
     const validationDataArray: CognitoUserAttribute[] = [];
 
@@ -34,7 +34,7 @@ export const useSignUp = (): ((
           new CognitoUserAttribute({
             Name: name,
             Value: value,
-          }),
+          })
         );
       }
     }
@@ -48,8 +48,8 @@ export const useSignUp = (): ((
 
     try {
       const data = await Auth.signUp(signupInfo);
-      handleStateChange('confirmSignUp', { username: data.user.getUsername() });
-    } catch (error) {
+      handleStateChange("confirmSignUp", { username: data.user.getUsername() });
+    } catch (error: any) {
       logger.error(error);
       throw error;
     }

@@ -76,7 +76,7 @@ export const VerifyContact: React.FC = () => {
         onSubmit={async ({ contact }): Promise<void> => {
           try {
             await verify(contact);
-          } catch (error) {
+          } catch (error: any) {
             const content = formatMessage({
               id: `verifyContact.errors.${error.code}`,
               defaultMessage: error.message,
@@ -148,7 +148,7 @@ export const VerifyContact: React.FC = () => {
       onSubmit={async ({ code }): Promise<void> => {
         try {
           await submit(code);
-        } catch (error) {
+        } catch (error: any) {
           const content = formatMessage({
             id: `verifyContact.errors.${error.code}`,
             defaultMessage: error.message,

@@ -51,7 +51,7 @@ export const ForgotPassword: React.FC = () => {
       onSubmit={async ({ code, password }): Promise<void> => {
         try {
           await submit(code, password);
-        } catch (error) {
+        } catch (error: any) {
           const content = formatMessage({
             id: `forgotPassword.errors.${error.code}`,
             defaultMessage: error.message,
@@ -138,7 +138,7 @@ export const ForgotPassword: React.FC = () => {
       onSubmit={async (values): Promise<void> => {
         try {
           await send(values[usernamefieldName]);
-        } catch (error) {
+        } catch (error: any) {
           const content = formatMessage({
             id: `forgotPassword.errors.${error.code}`,
             defaultMessage: error.message,
