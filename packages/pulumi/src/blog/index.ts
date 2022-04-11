@@ -1,6 +1,6 @@
 import * as aws from "@pulumi/aws";
 import Bucket from "./bucket";
-import { CloudfrontWebApp } from "@jimjoes/pulumi-packages";
+import CloudfrontWebApp from "../cloudfrontWebapp";
 import BuildProject from "./buildProject";
 import Parameters from "./parameters";
 

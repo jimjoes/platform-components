@@ -5,10 +5,8 @@
   "author": "James Hunter",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "rimraf dist && yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
-    "prepack": "yarn build"
+    "prepack": "yarn build",
+    "build": "rm -rf dist/* && tsc -p tsconfig.json"
   },
   "keywords": [],
   "homepage": "https://github.com/jimjoes/platform-components#readme",
@@ -36,6 +34,7 @@
     "react-intl": "^5.23.0",
     "react-recaptcha-hook": "^1.2.2",
     "react-router-dom": "^6.3.0",
+    "rimraf": "^3.0.2",
     "tiny-invariant": "^1.2.0",
     "tiny-warning": "^1.0.3",
     "yup": "^0.32.9"

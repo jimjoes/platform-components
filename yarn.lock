@@ -1077,6 +1077,7 @@ __metadata:
     react-intl: ^5.23.0
     react-recaptcha-hook: ^1.2.2
     react-router-dom: ^6.3.0
+    rimraf: ^3.0.2
     tiny-invariant: ^1.2.0
     tiny-warning: ^1.0.3
     typescript: ^4.6.3
@@ -1089,17 +1090,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jimjoes/pulumi-packages@file:../../../platform-components/packages/pulumi::locator=%40jimjoes%2Fwebiny-backends%40workspace%3Apackages%2Fwebiny-apps":
-  version: 1.0.1
-  resolution: "@jimjoes/pulumi-packages@file:../../../platform-components/packages/pulumi#../../../platform-components/packages/pulumi::hash=a04ab2&locator=%40jimjoes%2Fwebiny-backends%40workspace%3Apackages%2Fwebiny-apps"
-  dependencies:
-    "@pulumi/aws": 4.28.0
-    "@pulumi/pulumi": 3.19.0
-    rimraf: ^3.0.2
-  checksum: 769a0b4ab55692ae3c7565064ad712fcacb9f182eaada81967687095bd81f52b8629ebd6c7f32e95effa70f6bf54443f6ed306cbea9a987e785f4d0f9192b618
-  languageName: node
-  linkType: hard
-
 "@jimjoes/pulumi-packages@workspace:packages/pulumi":
   version: 0.0.0-use.local
   resolution: "@jimjoes/pulumi-packages@workspace:packages/pulumi"
@@ -1107,17 +1097,6 @@ __metadata:
     "@pulumi/aws": 4.28.0
     "@pulumi/pulumi": 3.19.0
     rimraf: ^3.0.2
-    typescript: ^4.6.3
-  languageName: unknown
-  linkType: soft
-
-"@jimjoes/webiny-backends@workspace:packages/webiny-apps":
-  version: 0.0.0-use.local
-  resolution: "@jimjoes/webiny-backends@workspace:packages/webiny-apps"
-  dependencies:
-    "@jimjoes/pulumi-packages": "file:../../../platform-components/packages/pulumi"
-    "@pulumi/aws": 4.28.0
-    "@pulumi/pulumi": 3.19.0
     typescript: ^4.6.3
   languageName: unknown
   linkType: soft
