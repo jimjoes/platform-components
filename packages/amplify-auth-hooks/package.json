@@ -1,6 +1,6 @@
 {
   "name": "@jimjoes/amplify-auth-hooks",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Hooks for aws amplify auth",
   "author": "James Hunter",
   "license": "UNLICENSED",
