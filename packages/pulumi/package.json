@@ -1,6 +1,6 @@
 {
   "name": "@jimjoes/pulumi-packages",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Pulumi code shared between webiny projects",
   "main": "src/index.ts",
   "typings": "src/index.d.ts",
