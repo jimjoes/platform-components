@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "@pulumi/aws": "4.28.0",
-    "@pulumi/pulumi": "3.19.0"
+    "@pulumi/pulumi": "3.19.0",
+    "rimraf": "^3.0.2"
   },
   "files": [
     "dist"

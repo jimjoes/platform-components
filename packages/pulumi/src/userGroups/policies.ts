@@ -1,10 +1,6 @@
 import * as aws from "@pulumi/aws";
 import * as pulumi from "@pulumi/pulumi";
 
-export type EsDomain =
-  | aws.elasticsearch.Domain
-  | pulumi.Output<aws.elasticsearch.GetDomainResult>;
-
 class Policies {
   private readonly awsRegion: string;
   private readonly callerIdentityOutput: pulumi.Output<aws.GetCallerIdentityResult>;
@@ -15,7 +11,30 @@ class Policies {
     this.awsRegion = aws.config.requireRegion();
   }
 
-  getAdminApiPolicy({
+  getAdminsGroupAccessGroupPolicy({
+    api,
+    defaultStage,
+  }: {
+    api: aws.apigatewayv2.Api;
+    defaultStage: aws.apigatewayv2.Stage;
+  }): aws.iam.Policy {
+    return new aws.iam.Policy("AdminsCognitoGroupPolicy", {
+      description: "This policy enables access to  Lambda",
+      policy: {
+        Version: "2012-10-17",
+        Statement: [
+          {
+            Sid: "PermissionForLambda",
+            Effect: "Allow",
+            Action: ["lambda:InvokeFunction"],
+            Resource: pulumi.interpolate`arn:aws:execute-api:${this.awsRegion}:${this.callerIdentityOutput.accountId}:${api.id}/${defaultStage.name}/*`,
+          },
+        ],
+      },
+    });
+  }
+
+  getUsersGroupAccessGroupPolicy({
     api,
     defaultStage,
   }: {

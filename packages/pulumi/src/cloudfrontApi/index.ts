@@ -2,7 +2,7 @@ import * as aws from "@pulumi/aws";
 import { input as inputs } from "@pulumi/aws/types";
 import { parse } from "url";
 import ApiGateway from "./apiGateway";
-import Route53 from "./route53";
+import Route53 from "../route53";
 
 type DomainDescriptor = {
   domain: string;
@@ -32,7 +32,7 @@ const rootZoneId = String(process.env.ROOT_ZONE_ID);
 const rootAcmCertificateArn = String(process.env.ROOT_ACM_CERTIFICATE_ARN);
 const alternateCnames: DomainDescriptor[] = [];
 
-class Cloudfront {
+class CloudfrontApi {
   cloudfront: aws.cloudfront.Distribution;
   apiGateway: ApiGateway;
   aliases: string[];
@@ -182,4 +182,4 @@ class Cloudfront {
   }
 }
 
-export default Cloudfront;
+export default CloudfrontApi;
