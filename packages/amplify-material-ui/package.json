@@ -1,6 +1,6 @@
 {
   "name": "@jimjoes/amplify-material-ui",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "A Material-UI based implementation of aws amplify",
   "main": "src/index.ts",
   "typings": "src/index.d.ts",
@@ -23,7 +23,7 @@
     "dist"
   ],
   "dependencies": {
-    "@jimjoes/amplify-auth-hooks": "1.1.1",
+    "@jimjoes/amplify-auth-hooks": "^1.1.2",
     "@mui/styles": "^5.4.1",
     "clsx": "^1.1.1",
     "formik": "^2.2.9",
