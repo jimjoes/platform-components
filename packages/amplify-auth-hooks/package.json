@@ -36,6 +36,7 @@
     "react": ">=16"
   },
   "devDependencies": {
+    "typescript": "^4.6.3",
     "@aws-amplify/auth": "^4.3.18",
     "@aws-amplify/core": "^4.3.10",
     "@types/gapi.auth2": "^0.0.55",
