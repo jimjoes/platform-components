@@ -6,8 +6,12 @@ import CognitoPasswordless from "./src/cognitoPasswordless";
 import CloudfrontPagebuilderDelivery from "./src/cloudfrontPagebuilderDelivery";
 import StripeCheckout from "./src/stripeCheckout/pulumi";
 import stripeCheckoutHandler from "./src/stripeCheckout/code";
+import Options from "./src/options/pulumi";
+import optionsHandler from "./src/options/code";
 
 export {
+  optionsHandler,
+  Options,
   stripeCheckoutHandler,
   StripeCheckout,
   CloudfrontPagebuilderDelivery,
