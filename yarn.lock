@@ -1101,6 +1101,7 @@ __metadata:
     "@middy/validator": ^2.5.7
     "@pulumi/aws": 4.28.0
     "@pulumi/pulumi": 3.19.0
+    stripe: ^8.216.0
     typescript: ^4.6.3
   languageName: unknown
   linkType: soft
@@ -2700,7 +2701,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0":
+"@types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0, @types/node@npm:>=8.1.0":
   version: 17.0.23
   resolution: "@types/node@npm:17.0.23"
   checksum: a3517554737cbb042e76c30d0e5482192ac4d9bea0eeb086e2622d9cabf460a0eb52a696b99fcd18e7fcc93c96db6cc7ae507f6608f256ef0b5c1d8c87a5a470
@@ -6894,7 +6895,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.9.4":
+"qs@npm:^6.10.3, qs@npm:^6.9.4":
   version: 6.10.3
   resolution: "qs@npm:6.10.3"
   dependencies:
@@ -7916,6 +7917,16 @@ __metadata:
   dependencies:
     min-indent: ^1.0.0
   checksum: 18f045d57d9d0d90cd16f72b2313d6364fd2cb4bf85b9f593523ad431c8720011a4d5f08b6591c9d580f446e78855c5334a30fb91aa1560f5d9f95ed1b4a0530
+  languageName: node
+  linkType: hard
+
+"stripe@npm:^8.216.0":
+  version: 8.216.0
+  resolution: "stripe@npm:8.216.0"
+  dependencies:
+    "@types/node": ">=8.1.0"
+    qs: ^6.10.3
+  checksum: 147c9f7b78b97af42b39493eb1671bcbf7524c743c5091771e47e80bb1a76b69b514ac8cc337af9ba17d7f7cbb08383eaf59a40298ecb0d78393bd935685d06b
   languageName: node
   linkType: hard
 

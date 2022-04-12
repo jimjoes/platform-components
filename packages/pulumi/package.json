@@ -32,7 +32,8 @@
     "@middy/http-json-body-parser": "^2.5.7",
     "@middy/validator": "^2.5.7",
     "@pulumi/aws": "4.28.0",
-    "@pulumi/pulumi": "3.19.0"
+    "@pulumi/pulumi": "3.19.0",
+    "stripe": "^8.216.0"
   },
   "files": [
     "dist"
