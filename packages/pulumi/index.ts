@@ -8,11 +8,13 @@ import StripeCheckout from "./src/stripeCheckout/pulumi";
 import stripeCheckoutHandler from "./src/stripeCheckout/code";
 import Options from "./src/options/pulumi";
 import optionsHandler from "./src/options/code";
+import stripeWebinyClickHandler from "./src/stripeCheckout/clickHandler";
 
 export {
   optionsHandler,
   Options,
   stripeCheckoutHandler,
+  stripeWebinyClickHandler,
   StripeCheckout,
   CloudfrontPagebuilderDelivery,
   Blog,

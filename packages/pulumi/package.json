@@ -33,6 +33,8 @@
     "@middy/validator": "^2.5.7",
     "@pulumi/aws": "4.28.0",
     "@pulumi/pulumi": "3.19.0",
+    "@stripe/stripe-js": "^1.27.0",
+    "@webiny/app-page-builder": "^5.25.0",
     "stripe": "^8.216.0"
   },
   "files": [
