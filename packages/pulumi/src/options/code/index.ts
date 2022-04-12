@@ -1,4 +1,5 @@
 const handler = async (event: any, context: any) => {
+  console.log("handler in the imported function");
   const statusCode = 200;
   const headers = {
     "Access-Control-Allow-Headers": "*",
