@@ -13,7 +13,7 @@ interface StripeCheckoutParams {
 
 class StripeCheckout {
   functions: {
-    api: aws.lambda.Function;
+    checkout: aws.lambda.Function;
   };
   role: aws.iam.Role;
 
@@ -53,7 +53,7 @@ class StripeCheckout {
     );
 
     this.functions = {
-      api: new aws.lambda.Function("stripe-checkout", {
+      checkout: new aws.lambda.Function("stripe-checkout", {
         runtime: "nodejs14.x",
         handler: "handler.handler",
         role: this.role.arn,

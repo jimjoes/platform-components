@@ -3,12 +3,16 @@ import * as aws from "@pulumi/aws";
 import policies from "./policies";
 
 interface OptionsParams {
-  env: Record<string, any>;
+  env: {
+    DEBUG: string;
+    WEBINY_LOGS_FORWARD_URL: string;
+    ALLOWED_ORIGIN: string;
+  };
 }
 
 class Options {
   functions: {
-    api: aws.lambda.Function;
+    options: aws.lambda.Function;
   };
   role: aws.iam.Role;
 
@@ -45,7 +49,7 @@ class Options {
     );
 
     this.functions = {
-      api: new aws.lambda.Function("options", {
+      options: new aws.lambda.Function("options", {
         runtime: "nodejs14.x",
         handler: "handler.handler",
         role: this.role.arn,
