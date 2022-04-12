@@ -1,4 +1,4 @@
-const handler = async (event: any, context: any) => {
+const handler = (event: any, context: any) => {
   console.log("handler in the imported function");
   console.log("process.env.ALLOWED_ORIGIN: ", process.env.ALLOWED_ORIGIN);
   const statusCode = 200;
