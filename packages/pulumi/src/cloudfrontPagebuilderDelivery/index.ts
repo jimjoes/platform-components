@@ -1,0 +1,156 @@
+import * as aws from "@pulumi/aws";
+import { input as inputs } from "@pulumi/aws/types";
+import { parse } from "url";
+import Route53 from "../route53";
+
+type DomainDescriptor = {
+  domain: string;
+  subDomain: string;
+  parentDomain: string;
+  domainParts: string[];
+};
+
+const buildDomain = (
+  parentDomain: string,
+  ...subDomainParts: string[]
+): DomainDescriptor => {
+  const subDomain = subDomainParts.join(".");
+  const domain = [subDomain, parentDomain].join(".");
+  const domainParts = domain.split(".").reverse();
+  return {
+    domain,
+    subDomain,
+    parentDomain: parentDomain + ".",
+    domainParts,
+  };
+};
+
+const stackEnv = process.env.PULUMI_NODEJS_STACK;
+const rootDomain = String(process.env.ROOT_DOMAIN);
+const rootZoneId = String(process.env.ROOT_ZONE_ID);
+const rootAcmCertificateArn = String(process.env.ROOT_ACM_CERTIFICATE_ARN);
+const alternateCnames: DomainDescriptor[] = [];
+
+class CloudfrontPagebuilderDelivery {
+  cloudfront: aws.cloudfront.Distribution;
+  bucket: aws.s3.Bucket;
+  aliases: string[];
+  constructor({
+    subdomain,
+    appS3Bucket,
+  }: {
+    subdomain: string;
+    appS3Bucket: aws.s3.Bucket;
+  }) {
+    if (stackEnv === "dev") {
+      alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
+    } else if (stackEnv === "prod") {
+      alternateCnames.push(buildDomain(rootDomain, subdomain));
+    }
+
+    let viewerCertificate: inputs.cloudfront.DistributionViewerCertificate;
+    if (rootAcmCertificateArn) {
+      viewerCertificate = {
+        acmCertificateArn: rootAcmCertificateArn,
+        sslSupportMethod: "sni-only",
+      };
+    } else {
+      viewerCertificate = {
+        cloudfrontDefaultCertificate: true,
+      };
+    }
+
+    this.bucket = new aws.s3.Bucket("delivery", {
+      acl: "public-read",
+      forceDestroy: true,
+      website: {
+        indexDocument: "index.html",
+        errorDocument: "_NOT_FOUND_PAGE_/index.html",
+      },
+    });
+
+    this.aliases = alternateCnames.map(
+      (domainDescriptor) => domainDescriptor.domain
+    );
+
+    this.cloudfront = new aws.cloudfront.Distribution("delivery", {
+      enabled: true,
+      waitForDeployment: false,
+      origins: [
+        {
+          originId: this.bucket.arn,
+          domainName: this.bucket.websiteEndpoint,
+          customOriginConfig: {
+            originProtocolPolicy: "http-only",
+            httpPort: 80,
+            httpsPort: 443,
+            originSslProtocols: ["TLSv1.2"],
+          },
+        },
+        {
+          originId: appS3Bucket.arn,
+          domainName: appS3Bucket.websiteEndpoint,
+          customOriginConfig: {
+            originProtocolPolicy: "http-only",
+            httpPort: 80,
+            httpsPort: 443,
+            originSslProtocols: ["TLSv1.2"],
+          },
+        },
+      ],
+      aliases: this.aliases,
+      orderedCacheBehaviors: [
+        {
+          compress: true,
+          allowedMethods: ["GET", "HEAD", "OPTIONS"],
+          cachedMethods: ["GET", "HEAD", "OPTIONS"],
+          forwardedValues: {
+            cookies: {
+              forward: "none",
+            },
+            headers: [],
+            queryString: false,
+          },
+          pathPattern: "/static/*",
+          viewerProtocolPolicy: "allow-all",
+          targetOriginId: appS3Bucket.arn,
+          // MinTTL <= DefaultTTL <= MaxTTL
+          minTtl: 0,
+          defaultTtl: 2592000, // 30 days
+          maxTtl: 2592000,
+        },
+      ],
+      defaultRootObject: "index.html",
+      defaultCacheBehavior: {
+        compress: true,
+        targetOriginId: this.bucket.arn,
+        viewerProtocolPolicy: "redirect-to-https",
+        allowedMethods: ["GET", "HEAD", "OPTIONS"],
+        cachedMethods: ["GET", "HEAD", "OPTIONS"],
+        forwardedValues: {
+          cookies: { forward: "none" },
+          queryString: true,
+        },
+        // MinTTL <= DefaultTTL <= MaxTTL
+        minTtl: 0,
+        defaultTtl: 30,
+        maxTtl: 30,
+      },
+      priceClass: "PriceClass_100",
+      restrictions: {
+        geoRestriction: {
+          restrictionType: "none",
+        },
+      },
+      viewerCertificate,
+    });
+    alternateCnames
+      .map(
+        (domainDescriptor) =>
+          new Route53(domainDescriptor, this.cloudfront, rootZoneId)
+      )
+      .map((route53) => route53.record.fqdn);
+  }
+}
+
+export default CloudfrontPagebuilderDelivery;
