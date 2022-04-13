@@ -6,6 +6,8 @@ import Parameters from "./parameters";
 class Blog {
   bucket: Bucket;
   webapp: CloudfrontWebApp;
+  buildProject: BuildProject;
+  parameters: Parameters;
   constructor({ subdomain, repo }: { subdomain: string; repo: string }) {
     this.bucket = new Bucket();
     this.webapp = new CloudfrontWebApp({
@@ -13,12 +15,12 @@ class Blog {
       subdomain: subdomain,
     });
 
-    const buildProject = new BuildProject({
+    this.buildProject = new BuildProject({
       bucket: this.bucket.bucket,
       repo: repo,
     });
 
-    const parameters = new Parameters();
+    this.parameters = new Parameters();
   }
 }
 export default Blog;
