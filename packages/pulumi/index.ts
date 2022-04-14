@@ -8,11 +8,17 @@ import CloudfrontPagebuilderDelivery from "./src/cloudfrontPagebuilderDelivery";
 import StripeCheckout from "./src/stripeCheckout/pulumi";
 import stripeCheckoutHandler from "./src/stripeCheckout/code";
 import stripeWebinyClickHandler from "./src/stripeCheckout/clickHandler";
+import Subscribe from "./src/subscribe/pulumi";
+import subscribeHandler from "./src/subscribe/code";
+import subscribeWebinyClickHandler from "./src/subscribe/clickHandler";
 
 export {
+  Subscribe,
+  subscribeHandler,
+  subscribeWebinyClickHandler,
+  StripeCheckout,
   stripeCheckoutHandler,
   stripeWebinyClickHandler,
-  StripeCheckout,
   CloudfrontPagebuilderDelivery,
   Options,
   Blog,
