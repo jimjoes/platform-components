@@ -1,6 +1,7 @@
 import Blog from "./src/blog";
 import CloudfrontApi from "./src/cloudfrontApi";
 import Options from "./src/options";
+import DynamoDB from "./src/dynamoDb";
 import CloudfrontWebApp from "./src/cloudfrontWebapp";
 import UserGroups from "./src/userGroups";
 import CognitoPasswordless from "./src/cognitoPasswordless";
@@ -26,4 +27,5 @@ export {
   CloudfrontApi,
   UserGroups,
   CognitoPasswordless,
+  DynamoDB,
 };
