@@ -1,6 +1,7 @@
 const subscribeWebinyClickHandler = {};
 
 export default subscribeWebinyClickHandler;
+
 // import { PbButtonElementClickHandlerPlugin } from "@webiny/app-page-builder/types";
 // import { loadStripe } from "@stripe/stripe-js";
 
