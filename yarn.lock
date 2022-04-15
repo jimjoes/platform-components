@@ -2072,7 +2072,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.14.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.2.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.5, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.14.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.2.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.5, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
   version: 7.17.9
   resolution: "@babel/runtime@npm:7.17.9"
   dependencies:
@@ -2673,6 +2673,32 @@ __metadata:
     "@webiny/app-page-builder": ^5.25.0
     stripe: ^8.216.0
     typescript: ^4.6.3
+  languageName: unknown
+  linkType: soft
+
+"@jimjoes/webiny-plugins@workspace:packages/webiny-plugins":
+  version: 0.0.0-use.local
+  resolution: "@jimjoes/webiny-plugins@workspace:packages/webiny-plugins"
+  dependencies:
+    "@emotion/react": ^11.7.1
+    "@emotion/styled": ^11.6.0
+    "@middy/core": ^2.5.7
+    "@middy/http-cors": ^2.5.7
+    "@middy/http-error-handler": ^2.5.7
+    "@middy/http-json-body-parser": ^2.5.7
+    "@middy/validator": ^2.5.7
+    "@pulumi/aws": 4.28.0
+    "@pulumi/pulumi": 3.19.0
+    "@stripe/stripe-js": ^1.27.0
+    "@webiny/app-page-builder": ^5.25.0
+    "@webiny/ui": ^5.25.0
+    final-form: ^4.20.6
+    react-final-form: ^6.5.9
+    stripe: ^8.216.0
+    typescript: ^4.6.3
+    use-http: ^1.0.26
+  peerDependencies:
+    "@webiny/app-page-builder": ^5.25.0
   languageName: unknown
   linkType: soft
 
@@ -6079,7 +6105,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webiny/ui@npm:5.25.0":
+"@webiny/ui@npm:5.25.0, @webiny/ui@npm:^5.25.0":
   version: 5.25.0
   resolution: "@webiny/ui@npm:5.25.0"
   dependencies:
@@ -8443,6 +8469,15 @@ __metadata:
   version: 1.1.0
   resolution: "filter-obj@npm:1.1.0"
   checksum: cf2104a7c45ff48e7f505b78a3991c8f7f30f28bd8106ef582721f321f1c6277f7751aacd5d83026cb079d9d5091082f588d14a72e7c5d720ece79118fa61e10
+  languageName: node
+  linkType: hard
+
+"final-form@npm:^4.20.6":
+  version: 4.20.6
+  resolution: "final-form@npm:4.20.6"
+  dependencies:
+    "@babel/runtime": ^7.10.0
+  checksum: 6f8ac3643f0cd0cb34b204c41dec114382a3542d839b73e1376d6360da35eac3cd3e1c59b5ba8cfe915fe39d110af7178134131fe8ad667e23e657f682cbf359
   languageName: node
   linkType: hard
 
@@ -11965,6 +12000,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-final-form@npm:^6.5.9":
+  version: 6.5.9
+  resolution: "react-final-form@npm:6.5.9"
+  dependencies:
+    "@babel/runtime": ^7.15.4
+  peerDependencies:
+    final-form: ^4.20.4
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 2ab79b1b0230545af1b93b324e2ce61992087beda344f762e1c1306867c177ca6258651e992515fa6681a790f94380a388c18e898ffb20468562e62c83c6b289
+  languageName: node
+  linkType: hard
+
 "react-helmet@npm:6.1.0":
   version: 6.1.0
   resolution: "react-helmet@npm:6.1.0"
@@ -13977,6 +14024,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"urs@npm:^0.0.8":
+  version: 0.0.8
+  resolution: "urs@npm:0.0.8"
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0
+    react-dom: ^16.13.1 || ^17.0.0
+  checksum: ab36ebdc648ca29f2fbbd40ebb300d5b750b1d4e0b4c7855b21ad630e6724f5a419f49976f5f06685ab20ca052e75137119bfed58dc23187e4bbb5ae1369f8c5
+  languageName: node
+  linkType: hard
+
+"use-http@npm:^1.0.26":
+  version: 1.0.26
+  resolution: "use-http@npm:1.0.26"
+  dependencies:
+    urs: ^0.0.8
+    use-ssr: ^1.0.24
+    utility-types: ^3.10.0
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0
+    react-dom: ^16.13.1 || ^17.0.0
+  checksum: 5d235a5ba9e24104cc1f3c97a68d8f223280d3bdfc3699dc787b9c9122bce7619db18c4cf31f735548ac02b7ac642facfead552c447d3f5ab2f0e5a1b09f05ec
+  languageName: node
+  linkType: hard
+
+"use-ssr@npm:^1.0.24":
+  version: 1.0.24
+  resolution: "use-ssr@npm:1.0.24"
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0
+    react-dom: ^16.13.1 || ^17.0.0
+  checksum: 527c41649e2c7b98ad9e0cc2fea957cd98c6e55ec13000fed7dd68d44f23e07a6ab2b0ee543f69230efdccb61c5b066f0eeff4036b82b521621992d30e2bc012
+  languageName: node
+  linkType: hard
+
 "util-deprecate@npm:^1.0.1, util-deprecate@npm:~1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -13990,6 +14071,13 @@ __metadata:
   dependencies:
     object.getownpropertydescriptors: ^2.0.3
   checksum: 75e74c46213e49e8d6a85cef942dcbfd8abf2389e789eddfde10e354349778cfca36fe33fa7c74a3ff1c7170462a7f856d5471bd69b06eb37a69362ffe21434e
+  languageName: node
+  linkType: hard
+
+"utility-types@npm:^3.10.0":
+  version: 3.10.0
+  resolution: "utility-types@npm:3.10.0"
+  checksum: 8f274415c6196ab62883b8bd98c9d2f8829b58016e4269aaa1ebd84184ac5dda7dc2ca45800c0d5e0e0650966ba063bf9a412aaeaea6850ca4440a391283d5c8
   languageName: node
   linkType: hard
 

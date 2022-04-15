@@ -1,0 +1,52 @@
+{
+  "name": "@jimjoes/webiny-plugins",
+  "version": "1.0.13",
+  "description": "Pulumi code shared between webiny projects",
+  "types": "dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "main": "dist/index.js",
+  "author": "James Hunter",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "rimraf dist && yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "prepack": "yarn build"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  },
+  "keywords": [],
+  "homepage": "https://github.com/jimjoes/platform-components#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimjoes/platform-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jimjoes/platform-components/issues"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@middy/core": "^2.5.7",
+    "@middy/http-cors": "^2.5.7",
+    "@middy/http-error-handler": "^2.5.7",
+    "@middy/http-json-body-parser": "^2.5.7",
+    "@middy/validator": "^2.5.7",
+    "@pulumi/aws": "4.28.0",
+    "@pulumi/pulumi": "3.19.0",
+    "@stripe/stripe-js": "^1.27.0",
+    "@webiny/app-page-builder": "^5.25.0",
+    "@webiny/ui": "^5.25.0",
+    "final-form": "^4.20.6",
+    "react-final-form": "^6.5.9",
+    "stripe": "^8.216.0",
+    "use-http": "^1.0.26"
+  },
+  "peerDependencies": {
+    "@webiny/app-page-builder": "^5.25.0"
+  },
+  "files": [
+    "dist"
+  ]
+}
