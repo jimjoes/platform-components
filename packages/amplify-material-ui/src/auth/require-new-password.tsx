@@ -52,7 +52,7 @@ export const RequireNewPassword: React.FC = () => {
       onSubmit={async ({ password }): Promise<void> => {
         try {
           await completeNewPassword(password);
-        } catch (error) {
+        } catch (error: any) {
           const content = formatMessage({
             id: `requireNewPassword.errors.${error.code}`,
             defaultMessage: error.message,

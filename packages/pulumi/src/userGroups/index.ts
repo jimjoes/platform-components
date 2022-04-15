@@ -9,14 +9,16 @@ interface UserGroupsParams {
 
 class UserGroups {
   groups: {
-    admin: aws.cognito.UserGroup;
+    admins: aws.cognito.UserGroup;
+    users: aws.cognito.UserGroup;
   };
 
   constructor({ userPool, api, defaultStage }: UserGroupsParams) {
-    const roleName = "adminGroupRole";
+    const adminsGroupRoleName = "adminsGroupRole";
+    const usersGroupRoleName = "usersGroupRole";
 
-    const groupRole = new aws.iam.Role("adminsGroupRole", {
-      name: roleName,
+    const adminsGroupRole = new aws.iam.Role("adminsGroupRole", {
+      name: adminsGroupRoleName,
       assumeRolePolicy: {
         Version: "2012-10-17",
         Statement: [
@@ -32,26 +34,63 @@ class UserGroups {
       },
     });
 
-    const policy = policies.getAdminApiPolicy({
+    const usersGroupRole = new aws.iam.Role("usersGroupRole", {
+      name: usersGroupRoleName,
+      assumeRolePolicy: {
+        Version: "2012-10-17",
+        Statement: [
+          {
+            Sid: "",
+            Effect: "Allow",
+            Principal: {
+              Service: "apigateway.amazonaws.com",
+            },
+            Action: "sts:AssumeRole",
+          },
+        ],
+      },
+    });
+
+    const adminsGroupPolicy = policies.getAdminsGroupAccessGroupPolicy({
+      api,
+      defaultStage,
+    });
+
+    const usersGroupPolicy = policies.getUsersGroupAccessGroupPolicy({
       api,
       defaultStage,
     });
 
     new aws.iam.RolePolicyAttachment(
-      `${roleName}-AdminsGroupRoleToAccessLambda`,
+      `${adminsGroupRoleName}-AdminsGroupRoleToAccessLambda`,
       {
-        role: groupRole,
-        policyArn: policy.arn.apply((arn: any) => arn),
+        role: adminsGroupRole,
+        policyArn: adminsGroupPolicy.arn.apply((arn: any) => arn),
+      }
+    );
+
+    new aws.iam.RolePolicyAttachment(
+      `${usersGroupRoleName}-UsersGroupRoleToAccessLambda`,
+      {
+        role: usersGroupRole,
+        policyArn: usersGroupPolicy.arn.apply((arn: any) => arn),
       }
     );
 
     this.groups = {
-      admin: new aws.cognito.UserGroup("admins", {
+      admins: new aws.cognito.UserGroup("admins", {
         name: "admins",
         userPoolId: userPool.id,
         description: "administrators",
         precedence: 1,
-        roleArn: groupRole.arn,
+        roleArn: adminsGroupRole.arn,
+      }),
+      users: new aws.cognito.UserGroup("users", {
+        name: "users",
+        userPoolId: userPool.id,
+        description: "users",
+        precedence: 2,
+        roleArn: usersGroupRole.arn,
       }),
     };
   }

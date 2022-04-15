@@ -1,27 +1,28 @@
-import * as React from 'react';
-import invariant from 'tiny-invariant';
-import Auth from '@aws-amplify/auth';
-import { ConsoleLogger as Logger } from '@aws-amplify/core';
+import * as React from "react";
+import invariant from "tiny-invariant";
+import Auth from "@aws-amplify/auth";
+import { ConsoleLogger as Logger } from "@aws-amplify/core";
 
-import { useAuthContext } from './use-auth-context';
+import { useAuthContext } from "./use-auth-context";
 
-const logger = new Logger('useForgotPassword');
+const logger = new Logger("useForgotPassword");
 
 export const useForgotPassword = () => {
   invariant(
-    (Auth && typeof Auth.forgotPassword === 'function') || typeof Auth.forgotPasswordSubmit === 'function',
-    'No Auth module found, please ensure @aws-amplify/auth is imported',
+    (Auth && typeof Auth.forgotPassword === "function") ||
+      typeof Auth.forgotPasswordSubmit === "function",
+    "No Auth module found, please ensure @aws-amplify/auth is imported"
   );
   const [delivery, setDelivery] = React.useState(null);
-  const [username, setUsername] = React.useState('');
+  const [username, setUsername] = React.useState("");
 
   const { handleStateChange } = useAuthContext();
 
   const submit = async (code: string, password: string): Promise<void> => {
     try {
       await Auth.forgotPasswordSubmit(username, code, password);
-      handleStateChange('signIn', null);
-    } catch (error) {
+      handleStateChange("signIn", null);
+    } catch (error: any) {
       logger.error(error);
       throw error;
     }
@@ -32,7 +33,7 @@ export const useForgotPassword = () => {
       const data = await Auth.forgotPassword(usernameValue);
       setDelivery(data.CodeDeliveryDetails);
       setUsername(usernameValue);
-    } catch (error) {
+    } catch (error: any) {
       logger.error(error);
       throw error;
     }

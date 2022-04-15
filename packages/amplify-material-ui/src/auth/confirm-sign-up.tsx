@@ -38,7 +38,7 @@ export const ConfirmSignUp: React.FC = () => {
       onSubmit={async ({ code }): Promise<void> => {
         try {
           await confirm(code);
-        } catch (error) {
+        } catch (error: any) {
           const content = formatMessage({
             id: `confirmSignUp.errors.${error.code}`,
             defaultMessage: error.message,

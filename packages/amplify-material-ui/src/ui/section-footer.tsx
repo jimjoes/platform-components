@@ -1,12 +1,11 @@
 import * as React from "react";
 import { Box } from "@mui/material";
 
-export const SectionFooter: React.FC = ({
-  children,
-  sx,
-}: {
+type SectionFooterProps = {
   children: React.ReactNode;
-  sx: any;
-}) => {
+  sx?: any;
+};
+
+export const SectionFooter = ({ children, sx }: SectionFooterProps) => {
   return <Box sx={{ sx }}>{children}</Box>;
 };

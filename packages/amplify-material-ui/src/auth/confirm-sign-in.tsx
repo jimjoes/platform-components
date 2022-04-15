@@ -38,7 +38,7 @@ export const ConfirmSignIn: React.FC = () => {
       onSubmit={async ({ code }): Promise<void> => {
         try {
           await confirm(code);
-        } catch (error) {
+        } catch (error: any) {
           const content = formatMessage({
             id: `confirmSignIn.errors.${error.code}`,
             defaultMessage: error.message,
