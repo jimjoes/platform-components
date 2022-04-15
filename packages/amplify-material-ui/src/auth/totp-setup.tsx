@@ -41,7 +41,7 @@ export const TOTPSetup: React.FC = () => {
       onSubmit={async ({ totpCode }): Promise<void> => {
         try {
           await verifyTotpToken(totpCode);
-        } catch (error) {
+        } catch (error: any) {
           const content = formatMessage({
             id: `totpSetup.errors.${error.code}`,
             defaultMessage: error.message,

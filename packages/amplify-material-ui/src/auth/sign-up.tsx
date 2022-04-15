@@ -113,7 +113,7 @@ export const SignUp: React.FC<SignUpProps> = (props) => {
       onSubmit={async ({ email, password, ...attributes }): Promise<void> => {
         try {
           await signUp(email, password, validationData, attributes);
-        } catch (error) {
+        } catch (error: any) {
           const content = formatMessage({
             id: `signUp.errors.${error.code}`,
             defaultMessage: error.message,
