@@ -1,6 +1,6 @@
 {
   "name": "@jimjoes/webiny-plugins",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Pulumi code shared between webiny projects",
   "types": "dist/index.d.ts",
   "module": "./dist/esm/index.js",
