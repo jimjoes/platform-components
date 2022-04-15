@@ -1,6 +1,6 @@
 {
   "name": "@jimjoes/amplify-material-ui",
-  "version": "1.0.2",
+  "version": "0.0.1",
   "description": "A Material-UI based implementation of aws amplify",
   "author": "James Hunter",
   "license": "UNLICENSED",
@@ -50,7 +50,7 @@
     "@aws-amplify/core": "^4.3.10",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@jimjoes/amplify-auth-hooks": "^1.0.1",
+    "@jimjoes/amplify-auth-hooks": "^0.0.1",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.7",
     "@testing-library/jest-dom": "^5.16.1",
