@@ -97,10 +97,7 @@ class CognitoPasswordless {
       "api-user-pool-client",
       {
         userPoolId: this.userPool.id,
-        authFlows: {
-          custom: true,
-          refreshToken: true,
-        },
+        explicitAuthFlows: ["CUSTOM_AUTH_FLOW_ONLY"],
       }
     );
   }

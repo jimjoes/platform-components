@@ -1,6 +1,6 @@
 {
   "name": "@jimjoes/amplify-material-ui",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "description": "A Material-UI based implementation of aws amplify",
   "author": "James Hunter",
   "license": "UNLICENSED",
