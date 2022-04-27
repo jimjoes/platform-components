@@ -71,7 +71,7 @@ class CognitoPasswordless {
         {
           attributeDataType: "String",
           name: "family_name",
-          required: true,
+          required: false,
           developerOnlyAttribute: false,
           mutable: true,
           stringAttributeConstraints: {
@@ -82,7 +82,7 @@ class CognitoPasswordless {
         {
           attributeDataType: "String",
           name: "given_name",
-          required: true,
+          required: false,
           developerOnlyAttribute: false,
           mutable: true,
           stringAttributeConstraints: {
@@ -97,6 +97,10 @@ class CognitoPasswordless {
       "api-user-pool-client",
       {
         userPoolId: this.userPool.id,
+        authFlows: {
+          custom: true,
+          refreshToken: true,
+        },
       }
     );
   }

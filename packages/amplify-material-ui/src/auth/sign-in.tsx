@@ -41,6 +41,7 @@ export const SignIn: React.FC<SignInProps> = (props) => {
     hideForgotPasswordLink = false,
     usernameAttribute,
   } = props;
+
   const navigate = useNavigate();
   const classes = useStyles();
   const { formatMessage } = useIntl();
