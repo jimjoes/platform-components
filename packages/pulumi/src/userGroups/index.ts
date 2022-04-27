@@ -2,6 +2,7 @@ import * as aws from "@pulumi/aws";
 import policies from "./policies";
 
 interface UserGroupsParams {
+  prefix: string;
   userPool: aws.cognito.UserPool;
   api: aws.apigatewayv2.Api;
   defaultStage: aws.apigatewayv2.Stage;
@@ -12,10 +13,10 @@ class UserGroups {
     admin: aws.cognito.UserGroup;
   };
 
-  constructor({ userPool, api, defaultStage }: UserGroupsParams) {
-    const roleName = "adminGroupRole";
+  constructor({ prefix, userPool, api, defaultStage }: UserGroupsParams) {
+    const roleName = prefix + "-adminGroupRole";
 
-    const groupRole = new aws.iam.Role("adminsGroupRole", {
+    const groupRole = new aws.iam.Role(prefix + "-adminsGroupRole", {
       name: roleName,
       assumeRolePolicy: {
         Version: "2012-10-17",
@@ -46,10 +47,10 @@ class UserGroups {
     );
 
     this.groups = {
-      admin: new aws.cognito.UserGroup("admins", {
+      admin: new aws.cognito.UserGroup(prefix + "-admins", {
         name: "admins",
         userPoolId: userPool.id,
-        description: "administrators",
+        description: prefix + " administrators",
         precedence: 1,
         roleArn: groupRole.arn,
       }),
