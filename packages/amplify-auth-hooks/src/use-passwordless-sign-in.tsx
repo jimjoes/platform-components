@@ -8,7 +8,9 @@ import { useCheckContact } from "./use-check-contact";
 
 const logger = new Logger("useSignIn");
 
-export const useSignIn = (): ((username: string) => Promise<void>) => {
+export const usePasswordlessSignIn = (): ((
+  username: string
+) => Promise<void>) => {
   invariant(
     Auth && typeof Auth.signIn === "function",
     "No Auth module found, please ensure @aws-amplify/auth is imported"
