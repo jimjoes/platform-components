@@ -1,6 +1,6 @@
 {
   "name": "@jimjoes/webiny-plugins",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "plugin code shared between webiny projects",
   "types": "dist/index.d.ts",
   "module": "./dist/esm/index.js",
@@ -48,5 +48,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "gitHead": "5747af77857eae7c21aca59348fb1285ded48557"
 }
