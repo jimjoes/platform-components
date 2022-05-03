@@ -14,7 +14,7 @@ import {
 } from "./styled";
 
 const validator = require("validator");
-const { useQueryString } = require("@custom-components/custom-hooks");
+const { useQueryString } = require("./queryString");
 
 type Submission = { email: string; tags?: string[]; referrer?: string };
 
