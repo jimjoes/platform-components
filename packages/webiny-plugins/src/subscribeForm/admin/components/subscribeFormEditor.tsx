@@ -3,7 +3,7 @@ import React from "react";
 import { css } from "emotion";
 import styled from "@emotion/styled";
 import { ElementRoot } from "@webiny/app-page-builder/render/components/ElementRoot";
-import icon from "./assets/mailchimp_logo.png";
+import icon from "../assets/mailchimp_logo.png";
 
 import {
   FormContainer,
