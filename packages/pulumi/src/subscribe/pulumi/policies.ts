@@ -15,8 +15,12 @@ class Policies {
     this.awsRegion = aws.config.requireRegion();
   }
 
-  getSubscribeHandlerLambdaPolicy(): aws.iam.Policy {
-    return new aws.iam.Policy("subscribeHandlerLambdaPolicy", {
+  getSubscribeHandlerLambdaPolicy({
+    userPool,
+  }: {
+    userPool?: aws.cognito.UserPool;
+  }): aws.iam.Policy {
+    const policy: any = {
       description: "This policy enables access to Lambda",
       policy: {
         Version: "2012-10-17",
@@ -29,7 +33,16 @@ class Policies {
           },
         ],
       },
-    });
+    };
+    if (userPool) {
+      policy.policy.Statement.push({
+        Sid: "PermissionForCognito",
+        Effect: "Allow",
+        Action: ["cognito-idp:AdminCreateUser"],
+        Resource: pulumi.interpolate`${userPool.arn}`,
+      });
+    }
+    return new aws.iam.Policy("subscribeHandlerLambdaPolicy", policy);
   }
 }
 

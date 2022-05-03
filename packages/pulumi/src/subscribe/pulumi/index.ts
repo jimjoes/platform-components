@@ -5,6 +5,7 @@ import policies from "./policies";
 interface SubscribeHandlerParams {
   env: Record<string, any>;
   auditTable: aws.dynamodb.Table;
+  userPool?: aws.cognito.UserPool;
 }
 
 class SubscribeHandler {
@@ -13,7 +14,7 @@ class SubscribeHandler {
   };
   role: aws.iam.Role;
 
-  constructor({ env, auditTable }: SubscribeHandlerParams) {
+  constructor({ env, userPool, auditTable }: SubscribeHandlerParams) {
     const roleName = "mailchimp-handler-api-lambda-role";
     this.role = new aws.iam.Role(roleName, {
       assumeRolePolicy: {
@@ -30,7 +31,13 @@ class SubscribeHandler {
       },
     });
 
-    const policy = policies.getSubscribeHandlerLambdaPolicy();
+    let policyParams: any = {};
+
+    if (userPool) {
+      policyParams.userPool = userPool;
+    }
+
+    const policy = policies.getSubscribeHandlerLambdaPolicy(policyParams);
 
     new aws.iam.RolePolicyAttachment(
       `${roleName}-SubscribeHandlerLambdaPolicy`,
@@ -50,7 +57,7 @@ class SubscribeHandler {
 
     this.functions = {
       subscribe: new aws.lambda.Function("subscribe-handler", {
-        runtime: "nodejs12.x",
+        runtime: "nodejs14.x",
         handler: "handler.handler",
         role: this.role.arn,
         timeout: 600,
