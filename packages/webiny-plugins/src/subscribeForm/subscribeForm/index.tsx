@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useFetch from "use-http";
 import { Form, Field } from "react-final-form";
+import { useQueryString } from "./queryString";
 // import { errorOptions } from "./errorStyles";
 import {
   FormContainer,
@@ -14,7 +15,6 @@ import {
 } from "./styled";
 
 const validator = require("validator");
-const { useQueryString } = require("./queryString");
 
 type Submission = { email: string; tags?: string[]; referrer?: string };
 
