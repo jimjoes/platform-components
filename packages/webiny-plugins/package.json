@@ -1,6 +1,6 @@
 {
   "name": "@jimjoes/webiny-plugins",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "plugin code shared between webiny projects",
   "author": "James Hunter",
   "license": "UNLICENSED",
@@ -55,5 +55,5 @@
     "use-http": "^1.0.26",
     "validator": "^13.7.0"
   },
-  "gitHead": "5747af77857eae7c21aca59348fb1285ded48557"
+  "gitHead": "b096d445daa6a77f7a91a04d2a601b259c0ebeb1"
 }
