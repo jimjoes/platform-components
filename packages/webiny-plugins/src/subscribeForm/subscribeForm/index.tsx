@@ -33,7 +33,7 @@ type SubscribeFormProps = {
 export const SubscribeForm = ({
   data: {
     ctaText = "Subscribe",
-    successMessage = "You have applied successfully. Sit back, relax, and we will ll get back to you soon!",
+    successMessage = "You have applied successfully. Sit back, relax, and we will get back to you soon!",
     errorMessage = "There was a problem. Maybe you've already subscribed?",
     termsText = "*By signing up, you agree to the Terms of Service.",
     tags = [],
@@ -60,13 +60,18 @@ export const SubscribeForm = ({
     if (tags && Array.isArray(tags) && tags.length > 0) {
       submission.tags = tags;
     }
-    if (referrer && typeof referrer === "string" && referrer.length > 0) {
+    if (
+      referrer &&
+      typeof referrer === "string" &&
+      referrer.length > 0 &&
+      referrer !== "undefined"
+    ) {
       submission.referrer = String(referrer);
     }
     try {
       await post("/subscribe", submission);
       console.log("response: ", response);
-      if (response.data.status || fetchError) {
+      if (response?.data?.status || fetchError) {
         throw errorMessage;
       }
       setSubmitted(true);
