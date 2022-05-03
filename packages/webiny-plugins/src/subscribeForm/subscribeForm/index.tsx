@@ -101,7 +101,7 @@ export const SubscribeForm = ({
     ) : (
       <CompletedText>{successMessage}</CompletedText>
     )
-  ) : (
+  ) : !fetchError ? (
     <Form
       onSubmit={onSubmit}
       render={({ handleSubmit }: { handleSubmit: any }) => (
@@ -141,5 +141,7 @@ export const SubscribeForm = ({
         </FormContainer>
       )}
     />
+  ) : (
+    <>There was an error</>
   );
 };
