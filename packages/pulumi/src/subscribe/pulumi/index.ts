@@ -4,7 +4,7 @@ import policies from "./policies";
 
 interface SubscribeHandlerParams {
   env: Record<string, any>;
-  auditTable: aws.dynamodb.Table;
+  platformTable?: aws.dynamodb.Table;
   userPool?: aws.cognito.UserPool;
 }
 
@@ -14,7 +14,7 @@ class SubscribeHandler {
   };
   role: aws.iam.Role;
 
-  constructor({ env, userPool, auditTable }: SubscribeHandlerParams) {
+  constructor({ env, userPool, platformTable }: SubscribeHandlerParams) {
     const roleName = "mailchimp-handler-api-lambda-role";
     this.role = new aws.iam.Role(roleName, {
       assumeRolePolicy: {
@@ -35,6 +35,10 @@ class SubscribeHandler {
 
     if (userPool) {
       policyParams.userPool = userPool;
+    }
+
+    if (platformTable) {
+      policyParams.platformTable = platformTable;
     }
 
     const policy = policies.getSubscribeHandlerLambdaPolicy(policyParams);
