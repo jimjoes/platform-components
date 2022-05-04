@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import useFetch from "use-http";
 import { Form, Field } from "react-final-form";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useQueryString } from "./queryString";
 // import { errorOptions } from "./errorStyles";
 import {
@@ -16,7 +17,12 @@ import {
 
 const validator = require("validator");
 
-type Submission = { email: string; tags?: string[]; referrer?: string };
+type Submission = {
+  email: string;
+  humanKey: string;
+  tags?: string[];
+  referrer?: string;
+};
 
 type SubscribeFormData = {
   ctaText?: string;
@@ -30,6 +36,8 @@ type SubscribeFormProps = {
   data: SubscribeFormData;
 };
 
+const recaptchaSiteKey = String(process.env.RECAPTCHA_SITE_KEY);
+
 export const SubscribeForm = ({
   data: {
     ctaText = "Subscribe",
@@ -39,6 +47,7 @@ export const SubscribeForm = ({
     tags = [],
   },
 }: SubscribeFormProps) => {
+  const recaptchaRef = useRef();
   const [referrer] = useQueryString({ key: "r" });
   // const [submitting, setSubmitting] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -51,11 +60,15 @@ export const SubscribeForm = ({
     loading,
     error: fetchError,
   } = useFetch(process.env.REACT_APP_REST_API_URL);
+
   const onSubmit = async (formValues: any) => {
+    //@ts-ignore
+    const recaptchaToken = await recaptchaRef.current.executeAsync();
     setSubmitting(true);
     console.log(formValues);
     const submission: Submission = {
       email: formValues.email,
+      humanKey: recaptchaToken,
     };
     if (tags && Array.isArray(tags) && tags.length > 0) {
       submission.tags = tags;
@@ -72,6 +85,7 @@ export const SubscribeForm = ({
       await post("/subscribe", submission);
       console.log("response: ", response);
       if (response?.data?.status || fetchError) {
+        setSubmitting(false);
         throw errorMessage;
       }
       setSubmitted(true);
@@ -104,8 +118,12 @@ export const SubscribeForm = ({
   ) : (
     <Form
       onSubmit={onSubmit}
-      render={({ handleSubmit }: { handleSubmit: any }) => (
-        <FormContainer onSubmit={handleSubmit}>
+      render={({ handleSubmit, form }: { handleSubmit: any; form: any }) => (
+        <FormContainer
+          onSubmit={(event) => {
+            handleSubmit(event).then(form.reset());
+          }}
+        >
           <SignupFieldContainer>
             <>
               <Field name="email" validate={requiredEmail}>
@@ -124,7 +142,7 @@ export const SubscribeForm = ({
                         placeholder="Enter your email and..."
                       />
                       {submitting ? (
-                        <h1>Loading</h1>
+                        <Button>✓</Button>
                       ) : (
                         <Button>{ctaText}</Button>
                       )}
@@ -138,6 +156,7 @@ export const SubscribeForm = ({
             <Error>{error && error}</Error>
             <Terms className="terms">{termsText}</Terms>
           </TermsContainer>
+          <ReCAPTCHA sitekey={recaptchaSiteKey} size="invisible" />
         </FormContainer>
       )}
     />
