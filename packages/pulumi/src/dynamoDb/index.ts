@@ -2,13 +2,13 @@ import * as aws from "@pulumi/aws";
 
 class DynamoDB {
   table: aws.dynamodb.Table;
-  constructor({ name, gskCount = 0 }: { name: string; gskCount: number }) {
+  constructor({ name, gsiCount = 0 }: { name: string; gsiCount: number }) {
     let attributes = [
       { name: "PK", type: "S" },
       { name: "SK", type: "S" },
     ];
     let globalSecondaryIndexes = [];
-    for (let i = 0; i < gskCount; i++) {
+    for (let i = 0; i < gsiCount; i++) {
       attributes.push(
         { name: `GSI${i + 1}_PK`, type: "S" },
         { name: `GSI${i + 1}_SK`, type: "S" }
