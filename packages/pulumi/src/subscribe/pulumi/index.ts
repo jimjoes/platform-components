@@ -15,7 +15,7 @@ class SubscribeHandler {
   role: aws.iam.Role;
 
   constructor({ env, userPool, platformTableArn }: SubscribeHandlerParams) {
-    const roleName = "mailchimp-handler-api-lambda-role";
+    const roleName = "subscribe-handler-api-lambda-role";
     this.role = new aws.iam.Role(roleName, {
       assumeRolePolicy: {
         Version: "2012-10-17",

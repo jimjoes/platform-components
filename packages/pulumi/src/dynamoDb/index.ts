@@ -2,26 +2,37 @@ import * as aws from "@pulumi/aws";
 
 class DynamoDB {
   table: aws.dynamodb.Table;
-  constructor({ name }: { name: string }) {
-    this.table = new aws.dynamodb.Table(name, {
-      attributes: [
-        { name: "PK", type: "S" },
-        { name: "SK", type: "S" },
-        { name: "GSI1_PK", type: "S" },
-        { name: "GSI1_SK", type: "S" },
-      ],
+  constructor({ name, gskCount = 0 }: { name: string; gskCount: number }) {
+    let attributes = [
+      { name: "PK", type: "S" },
+      { name: "SK", type: "S" },
+    ];
+    let globalSecondaryIndexes = [];
+    for (let i = 0; i < gskCount; i++) {
+      attributes.push(
+        { name: `GSI${i + 1}_PK`, type: "S" },
+        { name: `GSI${i + 1}_SK`, type: "S" }
+      );
+      globalSecondaryIndexes.push({
+        name: `GSI${i + 1}`,
+        hashKey: `GSI${i + 1}_PK`,
+        rangeKey: `GSI${i + 1}_SK`,
+        projectionType: "ALL",
+      });
+    }
+
+    let params: any = {
+      attributes: attributes,
       billingMode: "PAY_PER_REQUEST",
       hashKey: "PK",
       rangeKey: "SK",
-      globalSecondaryIndexes: [
-        {
-          name: "GSI1",
-          hashKey: "GSI1_PK",
-          rangeKey: "GSI1_SK",
-          projectionType: "ALL",
-        },
-      ],
-    });
+    };
+
+    if (globalSecondaryIndexes.length > 0) {
+      params.globalSecondaryIndexes = globalSecondaryIndexes;
+    }
+
+    this.table = new aws.dynamodb.Table(name, params);
   }
 }
 
