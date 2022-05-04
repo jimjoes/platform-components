@@ -47,7 +47,7 @@ export const SubscribeForm = ({
     tags = [],
   },
 }: SubscribeFormProps) => {
-  const recaptchaRef = useRef();
+  const recaptchaRef = useRef(null);
   const [referrer] = useQueryString({ key: "r" });
   // const [submitting, setSubmitting] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -156,7 +156,11 @@ export const SubscribeForm = ({
             <Error>{error && error}</Error>
             <Terms className="terms">{termsText}</Terms>
           </TermsContainer>
-          <ReCAPTCHA sitekey={recaptchaSiteKey} size="invisible" />
+          <ReCAPTCHA
+            sitekey={recaptchaSiteKey}
+            size="invisible"
+            ref={recaptchaRef}
+          />
         </FormContainer>
       )}
     />
