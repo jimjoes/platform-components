@@ -38,7 +38,7 @@ class SubscribeHandler {
     }
 
     if (platformTableArn) {
-      policyParams.platformTable = platformTableArn;
+      policyParams.platformTableArn = platformTableArn;
     }
 
     const policy = policies.getSubscribeHandlerLambdaPolicy(policyParams);
