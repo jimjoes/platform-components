@@ -36,7 +36,7 @@ type SubscribeFormProps = {
   data: SubscribeFormData;
 };
 
-const recaptchaSiteKey = String(process.env.RECAPTCHA_SITE_KEY);
+const recaptchaSiteKey = String(process.env.REACT_APP_RECAPTCHA_SITE_KEY);
 
 export const SubscribeForm = ({
   data: {
