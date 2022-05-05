@@ -75,6 +75,7 @@ export const SignInPasswordless: React.FC<SignInProps> = (props) => {
           <Form
             onSubmit={handleSubmit}
             data-testid="signInForm"
+            style={{ width: "80%" }}
             //noValidate
           >
             <Box

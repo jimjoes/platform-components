@@ -36,6 +36,7 @@ exports[`sign-in should be rendered correctly 1`] = `
         action="#"
         class="makeStyles-form-1"
         data-testid="signInForm"
+        style={{width:"80%"}}
       >
         <div
           class="makeStyles-box-6 MuiBox-root css-0"
