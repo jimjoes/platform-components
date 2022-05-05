@@ -18,26 +18,20 @@ export interface AuthenticatorProps
   notificationProps?: NotificationProviderProps;
   signUpConfig?: SignUpConfig;
   passwordless?: boolean;
+  customSignupUrl?: string;
+  customSignupLabel?: string;
 }
 
 export const Authenticator: React.FC<AuthenticatorProps> = (props) => {
-  const {
-    children,
-    intlProps,
-    notificationProps,
-    theme,
-    passwordless,
-    ...authConfig
-  } = props;
+  const { children, intlProps, notificationProps, theme, ...authConfig } =
+    props;
 
   return (
     <IntlProvider {...intlProps}>
       <NotificationProvider {...notificationProps}>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
-            <AuthRouter {...authConfig} passwordless>
-              {children}
-            </AuthRouter>
+            <AuthRouter {...authConfig}>{children}</AuthRouter>
           </ThemeProvider>
         </StyledEngineProvider>
       </NotificationProvider>

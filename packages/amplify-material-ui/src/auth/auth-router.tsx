@@ -17,6 +17,7 @@ import { AuthRoute, AuthConfig } from "./auth-route";
 
 export interface AuthRouterProps extends AuthProps, AuthConfig {
   passwordless?: boolean;
+  customSignupPath?: string;
   hide?: React.FC[];
   initialAuthState?: any;
   onStateChange?: any;

@@ -2,11 +2,13 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useIntl, FormattedMessage } from "react-intl";
 import { Button, Grid, Box } from "@mui/material";
+import { Link } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import makeStyles from "@mui/styles/makeStyles";
 import createStyles from "@mui/styles/createStyles";
 import { Formik, Field, Form } from "formik";
 import { TextField } from "formik-mui";
+
 import { useSignIn } from "@jimjoes/amplify-auth-hooks";
 
 import { FormSection, SectionHeader } from "../ui";
@@ -32,6 +34,8 @@ export interface SignInProps {
   hideSignUpLink?: boolean;
   hideForgotPasswordLink?: boolean;
   usernameAttribute?: UsernameAttribute;
+  customSignupUrl?: string;
+  customSignupLabel?: string;
 }
 
 export const SignIn: React.FC<SignInProps> = (props) => {
@@ -40,6 +44,8 @@ export const SignIn: React.FC<SignInProps> = (props) => {
     hideSignUpLink = false,
     hideForgotPasswordLink = false,
     usernameAttribute,
+    customSignupUrl,
+    customSignupLabel,
   } = props;
 
   const navigate = useNavigate();
@@ -139,14 +145,20 @@ export const SignIn: React.FC<SignInProps> = (props) => {
                 )}
                 {!hideSignUpLink && (
                   <Grid item>
-                    <ChangeAuthStateLink
-                      label={formatMessage({
-                        id: "signIn.links.signUp",
-                        defaultMessage: "Create account",
-                      })}
-                      newState="signUp"
-                      data-testid="sign-up-link"
-                    />
+                    {customSignupUrl ? (
+                      <Link href={customSignupUrl} variant="body2">
+                        {customSignupLabel}
+                      </Link>
+                    ) : (
+                      <ChangeAuthStateLink
+                        label={formatMessage({
+                          id: "signIn.links.signUp",
+                          defaultMessage: "Create account",
+                        })}
+                        newState="signUp"
+                        data-testid="sign-up-link"
+                      />
+                    )}
                   </Grid>
                 )}
               </Grid>
