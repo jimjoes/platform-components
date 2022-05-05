@@ -121,36 +121,34 @@ export const SubscribeForm = ({
       render={({ handleSubmit, form }: { handleSubmit: any; form: any }) => (
         <FormContainer
           onSubmit={(event) => {
-            handleSubmit(event).then(form.reset());
+            handleSubmit(event).then(form.change("email", ""));
           }}
         >
           <SignupFieldContainer>
-            <>
-              <Field name="email" validate={requiredEmail}>
-                {({ input, meta }: { input: any; meta: any }) => {
-                  if (meta.error && meta.touched) {
-                    setError(meta.error);
-                  }
-                  if (!meta.error && meta.touched) {
-                    setError(null);
-                  }
-                  return (
-                    <SignupFieldContainer>
-                      <Input
-                        {...input}
-                        type="email"
-                        placeholder="Enter your email and..."
-                      />
-                      {submitting ? (
-                        <Button>✓</Button>
-                      ) : (
-                        <Button>{ctaText}</Button>
-                      )}
-                    </SignupFieldContainer>
-                  );
-                }}
-              </Field>
-            </>
+            <Field name="email" validate={requiredEmail}>
+              {({ input, meta }: { input: any; meta: any }) => {
+                if (meta.error && meta.touched) {
+                  setError(meta.error);
+                }
+                if (!meta.error && meta.touched) {
+                  setError(null);
+                }
+                return (
+                  <SignupFieldContainer>
+                    <Input
+                      {...input}
+                      type="email"
+                      placeholder="Enter your email and..."
+                    />
+                    {submitting ? (
+                      <Button>✓</Button>
+                    ) : (
+                      <Button>{ctaText}</Button>
+                    )}
+                  </SignupFieldContainer>
+                );
+              }}
+            </Field>
           </SignupFieldContainer>
           <TermsContainer>
             <Error>{error && error}</Error>
