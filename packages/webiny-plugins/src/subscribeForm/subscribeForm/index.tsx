@@ -3,6 +3,8 @@ import useFetch from "use-http";
 import { Form, Field } from "react-final-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useQueryString } from "./queryString";
+import { useSnackbar } from "react-simple-snackbar";
+
 // import { errorOptions } from "./errorStyles";
 import {
   FormContainer,
@@ -47,6 +49,7 @@ export const SubscribeForm = ({
     tags = [],
   },
 }: SubscribeFormProps) => {
+  const [openSnackbar] = useSnackbar();
   const recaptchaRef = useRef(null);
   const [referrer] = useQueryString({ key: "r" });
   // const [submitting, setSubmitting] = useState<boolean>(false);
@@ -92,6 +95,7 @@ export const SubscribeForm = ({
       setSubmitting(false);
     } catch (error) {
       console.log(error);
+      openSnackbar(error.message);
     }
   };
 
