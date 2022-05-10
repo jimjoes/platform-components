@@ -3,7 +3,7 @@ import useFetch from "use-http";
 import { Form, Field } from "react-final-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useQueryString } from "./queryString";
-import SnackbarProvider, { useSnackbar } from "react-simple-snackbar";
+import { useSnackbar } from "react-simple-snackbar";
 
 // import { errorOptions } from "./errorStyles";
 import {
@@ -120,53 +120,51 @@ export const SubscribeForm = ({
       <CompletedText>{successMessage}</CompletedText>
     )
   ) : (
-    <SnackbarProvider>
-      <Form
-        onSubmit={onSubmit}
-        render={({ handleSubmit, form }: { handleSubmit: any; form: any }) => (
-          <FormContainer
-            onSubmit={(event) => {
-              handleSubmit(event).then(form.change("email", ""));
-            }}
-          >
-            <SignupFieldContainer>
-              <Field name="email" validate={requiredEmail}>
-                {({ input, meta }: { input: any; meta: any }) => {
-                  if (meta.error && meta.touched) {
-                    setError(meta.error);
-                  }
-                  if (!meta.error && meta.touched) {
-                    setError(null);
-                  }
-                  return (
-                    <SignupFieldContainer>
-                      <Input
-                        {...input}
-                        type="email"
-                        placeholder="Enter your email and..."
-                      />
-                      {submitting ? (
-                        <Button>✓</Button>
-                      ) : (
-                        <Button>{ctaText}</Button>
-                      )}
-                    </SignupFieldContainer>
-                  );
-                }}
-              </Field>
-            </SignupFieldContainer>
-            <TermsContainer>
-              <Error>{error && error}</Error>
-              <Terms className="terms">{termsText}</Terms>
-            </TermsContainer>
-            <ReCAPTCHA
-              sitekey={recaptchaSiteKey}
-              size="invisible"
-              ref={recaptchaRef}
-            />
-          </FormContainer>
-        )}
-      />
-    </SnackbarProvider>
+    <Form
+      onSubmit={onSubmit}
+      render={({ handleSubmit, form }: { handleSubmit: any; form: any }) => (
+        <FormContainer
+          onSubmit={(event) => {
+            handleSubmit(event).then(form.change("email", ""));
+          }}
+        >
+          <SignupFieldContainer>
+            <Field name="email" validate={requiredEmail}>
+              {({ input, meta }: { input: any; meta: any }) => {
+                if (meta.error && meta.touched) {
+                  setError(meta.error);
+                }
+                if (!meta.error && meta.touched) {
+                  setError(null);
+                }
+                return (
+                  <SignupFieldContainer>
+                    <Input
+                      {...input}
+                      type="email"
+                      placeholder="Enter your email and..."
+                    />
+                    {submitting ? (
+                      <Button>✓</Button>
+                    ) : (
+                      <Button>{ctaText}</Button>
+                    )}
+                  </SignupFieldContainer>
+                );
+              }}
+            </Field>
+          </SignupFieldContainer>
+          <TermsContainer>
+            <Error>{error && error}</Error>
+            <Terms className="terms">{termsText}</Terms>
+          </TermsContainer>
+          <ReCAPTCHA
+            sitekey={recaptchaSiteKey}
+            size="invisible"
+            ref={recaptchaRef}
+          />
+        </FormContainer>
+      )}
+    />
   );
 };
