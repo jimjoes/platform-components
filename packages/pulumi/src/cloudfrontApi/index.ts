@@ -43,10 +43,24 @@ class CloudfrontApi {
     routes: Array<any>;
     subdomain: string;
   }) {
+    let allowedOrigins: string[] = [];
+
     if (stackEnv === "dev") {
       alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
+      allowedOrigins = [
+        "localhost:3000",
+        buildDomain(rootDomain, "www" + "-dev").domain,
+        buildDomain(rootDomain, "platform" + "-dev").domain,
+        buildDomain(rootDomain, "survey" + "-dev").domain,
+        buildDomain(rootDomain, "content" + "-dev").domain,
+      ];
     } else if (stackEnv === "prod") {
       alternateCnames.push(buildDomain(rootDomain, subdomain));
+      allowedOrigins = [
+        buildDomain(rootDomain, subdomain).domain,
+        buildDomain(rootDomain, subdomain).domain,
+        buildDomain(rootDomain, subdomain).domain,
+      ];
     }
 
     let viewerCertificate: inputs.cloudfront.DistributionViewerCertificate;
@@ -65,7 +79,7 @@ class CloudfrontApi {
       (domainDescriptor) => domainDescriptor.domain
     );
 
-    this.apiGateway = new ApiGateway({ routes });
+    this.apiGateway = new ApiGateway({ routes, allowedOrigins });
 
     this.cloudfront = new aws.cloudfront.Distribution("api-cloudfront", {
       waitForDeployment: false,
