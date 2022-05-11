@@ -45,36 +45,38 @@ class ApiGateway {
           "overwrite:header.X-Real-Ip": `$context.identity.sourceIp`,
         },
       });
-      const ok = new aws.apigatewayv2.IntegrationResponse("200-ok", {
-        apiId: this.api.id,
-        integrationId: integration.id,
-        integrationResponseKey: "/200/",
-        templateSelectionExpression: "",
-      });
-      const clientError = new aws.apigatewayv2.IntegrationResponse(
-        "400-client-error",
-        {
-          apiId: this.api.id,
-          integrationId: integration.id,
-          integrationResponseKey: "/400/",
-          templateSelectionExpression: "^Missing.*",
-          responseTemplates: {
-            message: `$input.json("$.errorMessage")`,
-          },
-        }
-      );
-      const serverError = new aws.apigatewayv2.IntegrationResponse(
-        "500-server-error",
-        {
-          apiId: this.api.id,
-          integrationId: integration.id,
-          integrationResponseKey: "/500/",
-          templateSelectionExpression: "^(?!Missing).*",
-          responseTemplates: {
-            message: "Internal Server Error",
-          },
-        }
-      );
+
+      // TODO: This block will be used for custom integrations where the api handles error mapping.
+      // const ok = new aws.apigatewayv2.IntegrationResponse("200-ok", {
+      //   apiId: this.api.id,
+      //   integrationId: integration.id,
+      //   integrationResponseKey: "/200/",
+      //   templateSelectionExpression: "",
+      // });
+      // const clientError = new aws.apigatewayv2.IntegrationResponse(
+      //   "400-client-error",
+      //   {
+      //     apiId: this.api.id,
+      //     integrationId: integration.id,
+      //     integrationResponseKey: "/400/",
+      //     templateSelectionExpression: "^Missing.*",
+      //     responseTemplates: {
+      //       message: `$input.json("$.errorMessage")`,
+      //     },
+      //   }
+      // );
+      // const serverError = new aws.apigatewayv2.IntegrationResponse(
+      //   "500-server-error",
+      //   {
+      //     apiId: this.api.id,
+      //     integrationId: integration.id,
+      //     integrationResponseKey: "/500/",
+      //     templateSelectionExpression: "^(?!Missing).*",
+      //     responseTemplates: {
+      //       message: "Internal Server Error",
+      //     },
+      //   }
+      // );
 
       new aws.apigatewayv2.Route(route.name, {
         apiId: this.api.id,
