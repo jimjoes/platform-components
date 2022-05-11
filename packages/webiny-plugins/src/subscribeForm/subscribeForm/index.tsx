@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useFetch from "use-http";
 import { Form, Field } from "react-final-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useQueryString } from "./queryString";
 import { useSnackbar } from "react-simple-snackbar";
 
+// import { errorOptions } from "./errorStyles";
 import {
   FormContainer,
   SignupFieldContainer,
@@ -28,8 +29,8 @@ type Submission = {
 type SubscribeFormData = {
   ctaText?: string;
   successMessage?: string;
-  errorMessage: string;
-  termsText: string;
+  errorMessage?: string;
+  termsText?: string;
   tags?: string[];
 };
 
@@ -67,7 +68,6 @@ export const SubscribeForm = ({
     //@ts-ignore
     const recaptchaToken = await recaptchaRef.current.executeAsync();
     setSubmitting(true);
-    console.log(formValues);
     const submission: Submission = {
       email: formValues.email,
       humanKey: recaptchaToken,
@@ -88,13 +88,18 @@ export const SubscribeForm = ({
       console.log("response: ", response);
       if (response?.data?.status || fetchError) {
         setSubmitting(false);
+        openSnackbar(errorMessage);
+        setSubmitted(false);
         throw errorMessage;
       }
       setSubmitted(true);
       setSubmitting(false);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      openSnackbar(error.message);
+      openSnackbar(
+        error?.message ? error.message : "There was an error. Please try again"
+      );
+      setSubmitted(false);
     }
   };
 
@@ -130,12 +135,15 @@ export const SubscribeForm = ({
           <SignupFieldContainer>
             <Field name="email" validate={requiredEmail}>
               {({ input, meta }: { input: any; meta: any }) => {
-                if (meta.error && meta.touched) {
-                  setError(meta.error);
-                }
-                if (!meta.error && meta.touched) {
-                  setError(null);
-                }
+                useEffect(() => {
+                  if (meta.error && meta.touched) {
+                    setError(meta.error);
+                  }
+                  if (!meta.error && meta.touched) {
+                    setError(null);
+                  }
+                }, [meta]);
+
                 return (
                   <SignupFieldContainer>
                     <Input
