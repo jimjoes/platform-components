@@ -56,7 +56,6 @@ export const SubscribeForm = ({
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<null | string>();
-  const [completed, setCompleted] = useState<boolean>(false);
 
   const {
     post,
@@ -95,7 +94,6 @@ export const SubscribeForm = ({
       }
       setSubmitted(true);
       setSubmitting(false);
-      setCompleted(true);
     } catch (error: any) {
       console.log(error);
       openSnackbar(
@@ -123,7 +121,7 @@ export const SubscribeForm = ({
     return <CompletedText>Loading...</CompletedText>;
   }
 
-  if (completed) {
+  if (submitted) {
     return <CompletedText>{successMessage}</CompletedText>;
   }
 
