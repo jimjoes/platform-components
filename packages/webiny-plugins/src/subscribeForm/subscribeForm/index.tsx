@@ -88,10 +88,10 @@ export const SubscribeForm = ({
     try {
       await post("/subscribe", submission);
       console.log("response: ", response);
-      if (response?.data?.status || fetchError) {
+      if (response?.data?.statusCode || fetchError) {
         setSubmitting(false);
         openSnackbar(
-          response?.data?.status ? response?.data?.message : fetchError
+          response?.data?.statusCode ? response?.data?.message : fetchError
         );
         setSubmitted(false);
         throw errorMessage;
