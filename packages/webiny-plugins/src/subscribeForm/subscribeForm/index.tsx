@@ -99,7 +99,7 @@ export const SubscribeForm = ({
       setSubmitted(true);
       setSubmitting(false);
     } catch (error: any) {
-      console.log(error);
+      console.log("error: ", error);
       openSnackbar(
         error?.message ? error.message : "There was an error. Please try again"
       );
