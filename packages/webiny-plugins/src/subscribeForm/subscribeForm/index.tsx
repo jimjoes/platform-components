@@ -56,6 +56,7 @@ export const SubscribeForm = ({
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<null | string>();
+  const [completed, setCompleted] = useState<boolean>(false);
 
   const {
     post,
@@ -94,6 +95,7 @@ export const SubscribeForm = ({
       }
       setSubmitted(true);
       setSubmitting(false);
+      setCompleted(true);
     } catch (error: any) {
       console.log(error);
       openSnackbar(
@@ -117,13 +119,15 @@ export const SubscribeForm = ({
   //     setChecked(index);
   // };
 
-  return submitted || loading ? (
-    loading ? (
-      <CompletedText>Loading...</CompletedText>
-    ) : (
-      <CompletedText>{successMessage}</CompletedText>
-    )
-  ) : (
+  if (loading || submitting) {
+    return <CompletedText>Loading...</CompletedText>;
+  }
+
+  if (completed) {
+    return <CompletedText>{successMessage}</CompletedText>;
+  }
+
+  return (
     <Form
       onSubmit={onSubmit}
       render={({ handleSubmit, form }: { handleSubmit: any; form: any }) => (
