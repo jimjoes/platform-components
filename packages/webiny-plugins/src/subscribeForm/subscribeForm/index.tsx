@@ -5,7 +5,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useQueryString } from "./queryString";
 import { useSnackbar } from "react-simple-snackbar";
 
-// import { errorOptions } from "./errorStyles";
 import {
   FormContainer,
   SignupFieldContainer,

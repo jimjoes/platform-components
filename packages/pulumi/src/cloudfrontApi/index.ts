@@ -48,18 +48,22 @@ class CloudfrontApi {
     if (stackEnv === "dev") {
       alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
       allowedOrigins = [
-        "localhost:3000",
-        buildDomain(rootDomain, "www" + "-dev").domain,
-        buildDomain(rootDomain, "platform" + "-dev").domain,
-        buildDomain(rootDomain, "survey" + "-dev").domain,
-        buildDomain(rootDomain, "content" + "-dev").domain,
+        "http://localhost:3000",
+        "http://localhost:8000",
+        "https://" + buildDomain(rootDomain, "www" + "-dev").domain,
+        "https://" + buildDomain(rootDomain, "platform" + "-dev").domain,
+        "https://" + buildDomain(rootDomain, "admin" + "-dev").domain,
+        "https://" + buildDomain(rootDomain, "survey" + "-dev").domain,
+        "https://" + buildDomain(rootDomain, "content" + "-dev").domain,
       ];
     } else if (stackEnv === "prod") {
       alternateCnames.push(buildDomain(rootDomain, subdomain));
       allowedOrigins = [
-        buildDomain(rootDomain, subdomain).domain,
-        buildDomain(rootDomain, subdomain).domain,
-        buildDomain(rootDomain, subdomain).domain,
+        "https://" + buildDomain(rootDomain, "www").domain,
+        "https://" + buildDomain(rootDomain, "platform").domain,
+        "https://" + buildDomain(rootDomain, "admin").domain,
+        "https://" + buildDomain(rootDomain, "survey").domain,
+        "https://" + buildDomain(rootDomain, "content").domain,
       ];
     }
 
