@@ -13,17 +13,18 @@ class ApiGateway {
     this.api = new aws.apigatewayv2.Api("api-gateway", {
       protocolType: "HTTP",
       description: "Main API gateway",
-      corsConfiguration: {
-        allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-        allowHeaders: [
-          "Origin",
-          "X-Requested-With",
-          "Content-Type",
-          "Accept",
-          "Authorization",
-        ],
-        allowOrigins: allowedOrigins,
-      },
+      // TODO: Fix the cors configuration
+      // corsConfiguration: {
+      //   allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+      //   allowHeaders: [
+      //     "Origin",
+      //     "X-Requested-With",
+      //     "Content-Type",
+      //     "Accept",
+      //     "Authorization",
+      //   ],
+      //   allowOrigins: allowedOrigins,
+      // },
     });
 
     this.defaultStage = new aws.apigatewayv2.Stage("default", {
