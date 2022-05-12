@@ -1,14 +1,14 @@
 import React from "react";
 import { css } from "emotion";
 import { ElementRoot } from "@webiny/app-page-builder/render/components/ElementRoot";
-// import { SubscribeForm } from "@;
+import { SubscribeForm } from "../../subscribeForm";
 
 const outerWrapper = css({
   boxSizing: "border-box",
 });
 
 const SubscribFormRenderer = ({ element }: { element: any }) => {
-  //   const { data } = element;
+  const { data } = element;
 
   // Otherwise, let's render the mailcsubscribehimp form.
   return (
@@ -16,7 +16,7 @@ const SubscribFormRenderer = ({ element }: { element: any }) => {
       className={"webiny-pb-base-page-element-style " + outerWrapper}
       element={element}
     >
-      {/* <SubscribeForm data={data.subscribeForm} /> */}
+      <SubscribeForm data={data.subscribeForm} />
     </ElementRoot>
   );
 };
