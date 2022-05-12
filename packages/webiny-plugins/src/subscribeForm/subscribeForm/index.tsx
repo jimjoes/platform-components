@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import useFetch from "use-http";
-import { Form, Field } from "react-final-form";
+import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useQueryString } from "./queryString";
 import { useSnackbar } from "react-simple-snackbar";
@@ -15,9 +15,8 @@ import {
   TermsContainer,
   Error,
   Terms,
+  Spinner,
 } from "./styled";
-
-const validator = require("validator");
 
 type Submission = {
   email: string;
@@ -27,6 +26,7 @@ type Submission = {
 };
 
 type SubscribeFormData = {
+  placeholder?: string;
   ctaText?: string;
   successMessage?: string;
   termsText?: string;
@@ -44,17 +44,22 @@ export const SubscribeForm = ({
     ctaText = "Subscribe",
     successMessage = "You have applied successfully. Sit back, relax, and we will get back to you soon!",
     termsText = "*By signing up, you agree to the Terms of Service.",
+    placeholder = "Enter your email and...",
     tags = [],
   },
 }: SubscribeFormProps) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
   const [openSnackbar] = useSnackbar();
   const recaptchaRef = useRef(null);
   const [referrer] = useQueryString({ key: "r" });
-  // const [submitting, setSubmitting] = useState<boolean>(false);
-  const [submitted, setSubmitted] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
-  const [error, setError] = useState<null | string>();
-
+  const [submitted, setSubmitted] = useState<boolean>(false);
   const {
     post,
     response,
@@ -63,9 +68,8 @@ export const SubscribeForm = ({
   } = useFetch(process.env.REACT_APP_REST_API_URL);
 
   const onSubmit = async (formValues: any) => {
-    //@ts-ignore
-    const recaptchaToken = await recaptchaRef.current.executeAsync();
     setSubmitting(true);
+    const recaptchaToken = await recaptchaRef.current.executeAsync();
     const submission: Submission = {
       email: formValues.email,
       humanKey: recaptchaToken,
@@ -81,96 +85,67 @@ export const SubscribeForm = ({
     ) {
       submission.referrer = String(referrer);
     }
+
     try {
       await post("/subscribe", submission);
-      console.log("response: ", response.data);
-      if (response?.data?.statusCode && fetchError) {
+      if (response?.data?.statusCode / 100 !== 2 || fetchError) {
         openSnackbar(response?.data?.message);
         setSubmitting(false);
         setSubmitted(false);
+        reset();
+      } else {
+        openSnackbar("Successfully subscribed. Please check your email.");
+        setSubmitting(false);
+        setSubmitted(true);
       }
-      setSubmitted(true);
-      setSubmitting(false);
     } catch (error: any) {
-      console.log("error: ", JSON.stringify(error));
+      console.log("error: ", error);
       openSnackbar(
         error?.message ? error.message : "There was an error. Please try again"
       );
+      setSubmitting(false);
       setSubmitted(false);
+      reset();
     }
   };
 
-  const requiredEmail = (value: any) => {
-    if (!value) {
-      return "An email is required";
-    }
-    if (!validator.isEmail(value)) {
-      return "Invalid email address";
-    }
-    return undefined;
-  };
-
-  // const onChangeCheckbox = (index: number) => {
-  //     setChecked(index);
-  // };
-
-  if (loading || submitting) {
-    return <CompletedText>Loading...</CompletedText>;
-  }
+  console.log("errors: ", errors);
 
   if (submitted) {
     return <CompletedText>{successMessage}</CompletedText>;
   }
 
   return (
-    <Form
-      onSubmit={onSubmit}
-      render={({ handleSubmit, form }: { handleSubmit: any; form: any }) => (
-        <FormContainer
-          onSubmit={(event) => {
-            handleSubmit(event).then(form.change("email", ""));
-          }}
-        >
-          <SignupFieldContainer>
-            <Field name="email" validate={requiredEmail}>
-              {({ input, meta }: { input: any; meta: any }) => {
-                useEffect(() => {
-                  if (meta.error && meta.touched) {
-                    setError(meta.error);
-                  }
-                  if (!meta.error && meta.touched) {
-                    setError(null);
-                  }
-                }, [meta]);
-
-                return (
-                  <SignupFieldContainer>
-                    <Input
-                      {...input}
-                      type="email"
-                      placeholder="Enter your email and..."
-                    />
-                    {submitting ? (
-                      <Button>✓</Button>
-                    ) : (
-                      <Button>{ctaText}</Button>
-                    )}
-                  </SignupFieldContainer>
-                );
-              }}
-            </Field>
-          </SignupFieldContainer>
-          <TermsContainer>
-            <Error>{error && error}</Error>
-            <Terms className="terms">{termsText}</Terms>
-          </TermsContainer>
-          <ReCAPTCHA
-            sitekey={recaptchaSiteKey}
-            size="invisible"
-            ref={recaptchaRef}
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <SignupFieldContainer>
+        <SignupFieldContainer>
+          <Input
+            {...register("email", {
+              required: true,
+              pattern:
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            })}
+            type="email"
+            placeholder={placeholder}
           />
-        </FormContainer>
-      )}
-    />
+
+          <Button>{loading || submitting ? <Spinner /> : ctaText}</Button>
+        </SignupFieldContainer>
+      </SignupFieldContainer>
+      <TermsContainer>
+        {errors.email?.type === "required" && (
+          <Error> An email address is required</Error>
+        )}
+        {errors.email?.type === "pattern" && (
+          <Error>Email address must be valid</Error>
+        )}
+        <Terms className="terms">{termsText}</Terms>
+      </TermsContainer>
+      <ReCAPTCHA
+        sitekey={recaptchaSiteKey}
+        size="invisible"
+        ref={recaptchaRef}
+      />
+    </FormContainer>
   );
 };

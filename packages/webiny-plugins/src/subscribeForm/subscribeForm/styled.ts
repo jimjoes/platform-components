@@ -1,6 +1,17 @@
 import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
 
 // export const FormContainer = styled.form``;
+
+const loadingSpinner = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+
+`;
 
 export const FormContainer = styled.form`
   width: 100%;
@@ -44,11 +55,24 @@ export const Input = styled.input`
   }
   filter: drop-shadow(0 0 0.75rem gray);
 `;
-export const Button = styled.div`
+export const Button = styled.button`
+  display: inline-block;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   position: absolute;
   min-height: 2rem;
-  min-width: 2rem;
-
+  min-width: 6rem;
   right: 0;
   font-family: "Montserrat";
   color: white;
@@ -96,4 +120,15 @@ export const Error = styled.div`
   font-size: 0.75rem;
   line-height: 0.75rem;
   color: gray;
+`;
+
+export const Spinner = styled.div`
+  border: 0.2em solid #fff;
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  animation: ${loadingSpinner} 2s linear infinite;
+  margin: 0 auto;
+  box-sizing: border-box;
 `;

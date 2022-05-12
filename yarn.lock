@@ -2706,8 +2706,8 @@ __metadata:
     final-form: ^4.20.6
     react: 16.14.0
     react-dom: 16.14.0
-    react-final-form: ^6.5.9
     react-google-recaptcha: ^2.1.0
+    react-hook-form: ^7.31.1
     react-simple-snackbar: ^1.1.11
     stripe: ^8.216.0
     ts-loader: ^9.3.0
@@ -14755,18 +14755,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-final-form@npm:^6.5.9":
-  version: 6.5.9
-  resolution: "react-final-form@npm:6.5.9"
-  dependencies:
-    "@babel/runtime": ^7.15.4
-  peerDependencies:
-    final-form: ^4.20.4
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 2ab79b1b0230545af1b93b324e2ce61992087beda344f762e1c1306867c177ca6258651e992515fa6681a790f94380a388c18e898ffb20468562e62c83c6b289
-  languageName: node
-  linkType: hard
-
 "react-google-recaptcha@npm:^2.1.0":
   version: 2.1.0
   resolution: "react-google-recaptcha@npm:2.1.0"
@@ -14790,6 +14778,15 @@ __metadata:
   peerDependencies:
     react: ">=16.3.0"
   checksum: a4998479dab7fc1c2799eddefb1870a9d881b5f71cfdf97979a9882e42f4bb50402d55335f308f461e735e01a06f46b16cc7b4e6bcb22c7a4a6f85a753c5c106
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.31.1":
+  version: 7.31.1
+  resolution: "react-hook-form@npm:7.31.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: c387f81f0a740b610a601e06e148fce1abd466d353c9a5fd05253644d47270b69c8a0278cdc0f28a3adf5bef2c510adb4bcf37269892dc596750af8e8d062fb1
   languageName: node
   linkType: hard
 
