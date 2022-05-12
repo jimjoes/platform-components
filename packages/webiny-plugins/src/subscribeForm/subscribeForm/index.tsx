@@ -3,9 +3,9 @@ import useFetch from "use-http";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useQueryString } from "./queryString";
+//@ts-ignore
 import { useSnackbar } from "react-simple-snackbar";
 
-// import { errorOptions } from "./errorStyles";
 import {
   FormContainer,
   SignupFieldContainer,
@@ -37,6 +37,10 @@ type SubscribeFormProps = {
   data: SubscribeFormData;
 };
 
+type FormValues = {
+  email: string;
+};
+
 const recaptchaSiteKey = String(process.env.REACT_APP_RECAPTCHA_SITE_KEY);
 
 export const SubscribeForm = ({
@@ -53,7 +57,7 @@ export const SubscribeForm = ({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>();
 
   const [openSnackbar] = useSnackbar();
   const recaptchaRef = useRef(null);
@@ -67,8 +71,9 @@ export const SubscribeForm = ({
     error: fetchError,
   } = useFetch(process.env.REACT_APP_REST_API_URL);
 
-  const onSubmit = async (formValues: any) => {
+  const onSubmit = async (formValues: FormValues) => {
     setSubmitting(true);
+    //@ts-ignore
     const recaptchaToken = await recaptchaRef.current.executeAsync();
     const submission: Submission = {
       email: formValues.email,
@@ -109,23 +114,25 @@ export const SubscribeForm = ({
     }
   };
 
-  console.log("errors: ", errors);
-
   if (submitted) {
     return <CompletedText>{successMessage}</CompletedText>;
   }
+
+  const formFields = {
+    email: "email" as const,
+  };
 
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <SignupFieldContainer>
         <SignupFieldContainer>
           <Input
-            {...register("email", {
+            {...register(formFields.email, {
               required: true,
               pattern:
                 /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             })}
-            type="email"
+            type={"email"}
             placeholder={placeholder}
           />
 

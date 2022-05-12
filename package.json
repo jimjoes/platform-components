@@ -15,6 +15,8 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "resolutions": {
-    "@types/react": "17.0.43"
+    "@types/react": "17.0.43",
+    "@rmwc/base": "link:./node_modules/@webiny/ui/rmwc/base",
+    "typescript": "4.5.5"
   }
 }
