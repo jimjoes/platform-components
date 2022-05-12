@@ -18,6 +18,16 @@ import {
   Spinner,
 } from "./styled";
 
+const snackbarOptions = {
+  style: {
+    backgroundColor: "red",
+    border: "2px solid darkRed",
+    color: "white",
+    fontSize: "18px",
+    textAlign: "center",
+  },
+};
+
 type Submission = {
   email: string;
   humanKey: string;
@@ -59,7 +69,7 @@ export const SubscribeForm = ({
     formState: { errors },
   } = useForm<FormValues>();
 
-  const [openSnackbar] = useSnackbar();
+  const [openSnackbar] = useSnackbar(snackbarOptions);
   const recaptchaRef = useRef(null);
   const [referrer] = useQueryString({ key: "r" });
   const [submitting, setSubmitting] = useState<boolean>(false);
