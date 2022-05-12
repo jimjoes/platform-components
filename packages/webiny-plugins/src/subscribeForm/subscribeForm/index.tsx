@@ -29,7 +29,6 @@ type Submission = {
 type SubscribeFormData = {
   ctaText?: string;
   successMessage?: string;
-  errorMessage?: string;
   termsText?: string;
   tags?: string[];
 };
@@ -44,7 +43,6 @@ export const SubscribeForm = ({
   data: {
     ctaText = "Subscribe",
     successMessage = "You have applied successfully. Sit back, relax, and we will get back to you soon!",
-    errorMessage = "There was a problem. Maybe you've already subscribed?",
     termsText = "*By signing up, you agree to the Terms of Service.",
     tags = [],
   },
@@ -85,7 +83,7 @@ export const SubscribeForm = ({
     }
     try {
       await post("/subscribe", submission);
-      console.log("response: ", response);
+      console.log("response: ", response.data);
       if (response?.data?.statusCode && fetchError) {
         openSnackbar(response?.data?.message);
         setSubmitting(false);
