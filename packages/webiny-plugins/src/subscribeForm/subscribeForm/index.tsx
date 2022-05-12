@@ -86,7 +86,8 @@ export const SubscribeForm = ({
     // @ts-ignore
     recaptchaRef.current.reset();
     //@ts-ignore
-    const recaptchaToken = await recaptchaRef.current.executeAsync();
+    let recaptchaToken = await recaptchaRef.current.executeAsync();
+    console.log("recaptcha token: ", recaptchaToken);
     const submission: Submission = {
       email: formValues.email,
       humanKey: recaptchaToken,
