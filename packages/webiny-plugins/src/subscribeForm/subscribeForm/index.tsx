@@ -107,19 +107,25 @@ export const SubscribeForm = ({
         openSnackbar(response?.data?.message);
         setSubmitting(false);
         setSubmitted(false);
+        //@ts-ignore
+        recaptchaRef.current.reset();
         reset();
       } else {
         openSnackbar("Successfully subscribed. Please check your email.");
         setSubmitting(false);
         setSubmitted(true);
+        //@ts-ignore
+        recaptchaRef.current.reset();
+        reset();
       }
     } catch (error: any) {
-      console.log("error: ", error);
       openSnackbar(
         error?.message ? error.message : "There was an error. Please try again"
       );
       setSubmitting(false);
       setSubmitted(false);
+      //@ts-ignore
+      recaptchaRef.current.reset();
       reset();
     }
   };
