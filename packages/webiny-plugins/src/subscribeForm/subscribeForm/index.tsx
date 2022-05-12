@@ -64,8 +64,6 @@ export const SubscribeForm = ({
     error: fetchError,
   } = useFetch(process.env.REACT_APP_REST_API_URL);
 
-  console.log("fetchError: ", fetchError);
-
   const onSubmit = async (formValues: any) => {
     //@ts-ignore
     const recaptchaToken = await recaptchaRef.current.executeAsync();
@@ -88,18 +86,15 @@ export const SubscribeForm = ({
     try {
       await post("/subscribe", submission);
       console.log("response: ", response);
-      if (response?.data?.statusCode || fetchError) {
+      if (response?.data?.statusCode && fetchError) {
+        openSnackbar(response?.data?.message);
         setSubmitting(false);
-        openSnackbar(
-          response?.data?.statusCode ? response?.data?.message : fetchError
-        );
         setSubmitted(false);
-        throw errorMessage;
       }
       setSubmitted(true);
       setSubmitting(false);
     } catch (error: any) {
-      console.log("error: ", error);
+      console.log("error: ", JSON.stringify(error));
       openSnackbar(
         error?.message ? error.message : "There was an error. Please try again"
       );
