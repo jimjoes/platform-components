@@ -83,6 +83,8 @@ export const SubscribeForm = ({
 
   const onSubmit = async (formValues: FormValues) => {
     setSubmitting(true);
+    // @ts-ignore
+    recaptchaRef.current.reset();
     //@ts-ignore
     const recaptchaToken = await recaptchaRef.current.executeAsync();
     const submission: Submission = {
@@ -107,15 +109,11 @@ export const SubscribeForm = ({
         openSnackbar(response?.data?.message);
         setSubmitting(false);
         setSubmitted(false);
-        //@ts-ignore
-        recaptchaRef.current.reset();
         reset();
       } else {
         openSnackbar("Successfully subscribed. Please check your email.");
         setSubmitting(false);
         setSubmitted(true);
-        //@ts-ignore
-        recaptchaRef.current.reset();
         reset();
       }
     } catch (error: any) {
@@ -124,8 +122,6 @@ export const SubscribeForm = ({
       );
       setSubmitting(false);
       setSubmitted(false);
-      //@ts-ignore
-      recaptchaRef.current.reset();
       reset();
     }
   };
