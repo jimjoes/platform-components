@@ -28,6 +28,9 @@ export const useSignUp = (): ((
   ): Promise<void> => {
     const validationDataArray: CognitoUserAttribute[] = [];
 
+    console.log("username: ", username);
+    console.log("password: ", password);
+
     if (validationData) {
       for (const [name, value] of Object.entries(validationData)) {
         validationDataArray.push(

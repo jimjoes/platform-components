@@ -2603,7 +2603,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jimjoes/amplify-auth-hooks@^1.0.1, @jimjoes/amplify-auth-hooks@workspace:packages/amplify-auth-hooks":
+"@jimjoes/amplify-auth-hooks@^1.0.2, @jimjoes/amplify-auth-hooks@workspace:packages/amplify-auth-hooks":
   version: 0.0.0-use.local
   resolution: "@jimjoes/amplify-auth-hooks@workspace:packages/amplify-auth-hooks"
   dependencies:
@@ -2633,7 +2633,7 @@ __metadata:
     "@aws-amplify/core": ^4.3.10
     "@emotion/react": ^11.7.1
     "@emotion/styled": ^11.6.0
-    "@jimjoes/amplify-auth-hooks": ^1.0.1
+    "@jimjoes/amplify-auth-hooks": ^1.0.2
     "@mui/icons-material": ^5.2.5
     "@mui/material": ^5.2.7
     "@mui/styles": ^5.4.1

@@ -4,7 +4,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 export const LogoContainer = () => {
   const [showLogo, setShowLogo] = useState<boolean>(true);
-  console.log("showLogo: ", showLogo);
   return (
     <Box sx={{ m: 2 }}>
       {showLogo ? (
