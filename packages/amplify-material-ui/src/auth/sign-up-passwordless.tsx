@@ -7,6 +7,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import createStyles from "@mui/styles/createStyles";
 import { Formik, Field, Form } from "formik";
 import { TextField } from "formik-mui";
+const password = require("secure-random-password");
 
 import { FormSection, SectionHeader, SectionBody, SectionFooter } from "../ui";
 import { useNotificationContext } from "../notification";
@@ -87,24 +88,16 @@ export const SignUp: React.FC<SignUpProps> = (props) => {
   const { showNotification } = useNotificationContext();
   const signUp = useSignUp();
 
-  const getRandomString = (bytes: number) => {
-    const randomValues = new Uint8Array(bytes);
-    window.crypto.getRandomValues(randomValues);
-    return Array.from(randomValues).map(intToHex).join("");
-  };
-
-  const intToHex = (nr: number) => {
-    return nr.toString(16).padStart(2, "0");
-  };
-
   return (
     <Formik<SignUpValues>
       initialValues={initialValues}
       onSubmit={async ({ email, ...attributes }): Promise<void> => {
-        const password = getRandomString(30);
-        console.log("password: ", password);
+        const randomPassword = password.randomPassword({
+          length: 30,
+          characters: password.lower + password.upper + password.digits,
+        });
         try {
-          await signUp(email, password, validationData, attributes);
+          await signUp(email, randomPassword, validationData, attributes);
         } catch (error: any) {
           const content = formatMessage({
             id: `signUp.errors.${error.code}`,

@@ -2603,7 +2603,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jimjoes/amplify-auth-hooks@^1.0.2, @jimjoes/amplify-auth-hooks@workspace:packages/amplify-auth-hooks":
+"@jimjoes/amplify-auth-hooks@^1.0.3, @jimjoes/amplify-auth-hooks@workspace:packages/amplify-auth-hooks":
   version: 0.0.0-use.local
   resolution: "@jimjoes/amplify-auth-hooks@workspace:packages/amplify-auth-hooks"
   dependencies:
@@ -2633,7 +2633,7 @@ __metadata:
     "@aws-amplify/core": ^4.3.10
     "@emotion/react": ^11.7.1
     "@emotion/styled": ^11.6.0
-    "@jimjoes/amplify-auth-hooks": ^1.0.2
+    "@jimjoes/amplify-auth-hooks": ^1.0.3
     "@mui/icons-material": ^5.2.5
     "@mui/material": ^5.2.7
     "@mui/styles": ^5.4.1
@@ -2654,6 +2654,7 @@ __metadata:
     react-intl: ^5.23.0
     react-recaptcha-hook: ^1.2.2
     react-router-dom: ^6.3.0
+    secure-random-password: ^0.2.3
     tiny-invariant: ^1.2.0
     tiny-warning: ^1.0.3
     typescript: ^4.6.3
@@ -15795,6 +15796,22 @@ __metadata:
   version: 1.0.0
   resolution: "scoped-regex@npm:1.0.0"
   checksum: dcbf0426c37171b0391b4487806cfad67a7c7d53b060036dcc171acde66aeddad8f9f15ec09b46e6f1d44dac7f857f9072532a385734c40b8f3711adb9b08a01
+  languageName: node
+  linkType: hard
+
+"secure-random-password@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "secure-random-password@npm:0.2.3"
+  dependencies:
+    secure-random: ^1.1.2
+  checksum: 966cedfe5cb906b0b62aa305b8ec597af95787a1d284b84d7031ee7118c294b5d9d8838d4c54375a12b3e8adf618bac0193ff12a090cd639885a3e25356dca68
+  languageName: node
+  linkType: hard
+
+"secure-random@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "secure-random@npm:1.1.2"
+  checksum: 44744464a2cb41dd812d482aff1a01b05842359480f2b0cbd6466d1da8cab8ebb2a84f070b0ddee34ab3867f1f775b2bc34ef3e860f27dc8177791595d6debc9
   languageName: node
   linkType: hard
 
