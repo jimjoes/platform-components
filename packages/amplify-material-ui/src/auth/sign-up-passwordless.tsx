@@ -102,6 +102,7 @@ export const SignUp: React.FC<SignUpProps> = (props) => {
       initialValues={initialValues}
       onSubmit={async ({ email, ...attributes }): Promise<void> => {
         const password = getRandomString(30);
+        console.log("password: ", password);
         try {
           await signUp(email, password, validationData, attributes);
         } catch (error: any) {
