@@ -37,7 +37,7 @@ class CognitoPasswordless {
         temporaryPasswordValidityDays: 7,
       },
       adminCreateUserConfig: {
-        allowAdminCreateUserOnly: true,
+        allowAdminCreateUserOnly: false,
       },
       autoVerifiedAttributes: ["email"],
       emailConfiguration: {
