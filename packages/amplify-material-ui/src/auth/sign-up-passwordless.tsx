@@ -50,26 +50,6 @@ export interface SignUpProps {
 
 const defaultSignUpFields: SignUpField[] = [
   {
-    label: "Username",
-    key: "username",
-    required: true,
-    type: "text",
-    displayOrder: 1,
-    intl: {
-      label: "global.labels.username",
-    },
-  },
-  {
-    label: "Password",
-    key: "password",
-    required: true,
-    type: "password",
-    displayOrder: 2,
-    intl: {
-      label: "global.labels.password",
-    },
-  },
-  {
     label: "Email",
     key: "email",
     required: true,
@@ -107,10 +87,21 @@ export const SignUp: React.FC<SignUpProps> = (props) => {
   const { showNotification } = useNotificationContext();
   const signUp = useSignUp();
 
+  const getRandomString = (bytes: number) => {
+    const randomValues = new Uint8Array(bytes);
+    window.crypto.getRandomValues(randomValues);
+    return Array.from(randomValues).map(intToHex).join("");
+  };
+
+  const intToHex = (nr: number) => {
+    return nr.toString(16).padStart(2, "0");
+  };
+
   return (
     <Formik<SignUpValues>
       initialValues={initialValues}
-      onSubmit={async ({ email, password, ...attributes }): Promise<void> => {
+      onSubmit={async ({ email, ...attributes }): Promise<void> => {
+        const password = getRandomString(30);
         try {
           await signUp(email, password, validationData, attributes);
         } catch (error: any) {
