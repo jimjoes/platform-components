@@ -27,7 +27,7 @@ class CognitoPasswordless {
         DEBUG,
       },
     });
-    this.userPool = new aws.cognito.UserPool("api-user-pool", {
+    this.userPool = new aws.cognito.UserPool("platform-api-user-pool", {
       passwordPolicy: {
         minimumLength: 12,
         requireLowercase: true,
@@ -94,7 +94,7 @@ class CognitoPasswordless {
     });
 
     this.userPoolClient = new aws.cognito.UserPoolClient(
-      "api-user-pool-client",
+      "platform-api-user-pool-client",
       {
         userPoolId: this.userPool.id,
         explicitAuthFlows: ["CUSTOM_AUTH_FLOW_ONLY"],
