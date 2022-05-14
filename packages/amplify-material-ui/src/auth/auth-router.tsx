@@ -57,7 +57,7 @@ export const AuthRouter: React.FC<AuthRouterProps> = (props) => {
     },
     {
       validAuthStates: ["signUp"],
-      component: passwordless ? SignUnPasswordless : SignUp,
+      component: passwordless ? SignUpPasswordless : SignUp,
     },
     {
       validAuthStates: ["requireNewPassword"],
