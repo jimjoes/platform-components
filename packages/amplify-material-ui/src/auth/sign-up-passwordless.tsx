@@ -94,7 +94,11 @@ export const SignUpPasswordless: React.FC<SignUpProps> = (props) => {
       onSubmit={async ({ email, ...attributes }): Promise<void> => {
         const randomPassword = password.randomPassword({
           length: 30,
-          characters: password.lower + password.upper + password.digits,
+          characters:
+            password.lower +
+            password.upper +
+            password.digits +
+            password.symbols,
         });
         try {
           await signUp(email, randomPassword, validationData, attributes);
