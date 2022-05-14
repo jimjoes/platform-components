@@ -9,6 +9,7 @@ import { Loading } from "./loading";
 import { SignIn } from "./sign-in";
 import { SignInPasswordless } from "./sign-in-passwordless";
 import { SignUp } from "./sign-up";
+import { SignUpPasswordless } from "./sign-up-passwordless";
 import { RequireNewPassword } from "./require-new-password";
 import { ConfirmSignIn } from "./confirm-sign-in";
 import { ConfirmSignUp } from "./confirm-sign-up";
@@ -56,7 +57,7 @@ export const AuthRouter: React.FC<AuthRouterProps> = (props) => {
     },
     {
       validAuthStates: ["signUp"],
-      component: SignUp,
+      component: passwordless ? SignUnPasswordless : SignUp,
     },
     {
       validAuthStates: ["requireNewPassword"],

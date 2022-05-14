@@ -74,7 +74,7 @@ const sortByDisplayOrder = (a: SignUpField, b?: SignUpField) => {
   return Math.sign(a.displayOrder - (b.displayOrder ?? 0));
 };
 
-export const SignUp: React.FC<SignUpProps> = (props) => {
+export const SignUpPasswordless: React.FC<SignUpProps> = (props) => {
   const { validationData, signUpConfig } = props;
 
   const signUpFields = signUpConfig?.signUpFields ?? defaultSignUpFields;
