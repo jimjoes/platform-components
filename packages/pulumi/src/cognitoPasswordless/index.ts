@@ -10,11 +10,13 @@ class CognitoPasswordless {
   userPoolClient: aws.cognito.UserPoolClient;
   userPool: aws.cognito.UserPool;
   constructor() {
+    const ses = new SES({ rootDomain: String(process.env.ROOT_DOMAIN) });
     const createAuthChallenge = new CreateAuthChallenge({
       env: {
         REGION: process.env.AWS_REGION,
         DEBUG,
       },
+      sesIdentity: ses.domainIdentity,
     });
     const defineAuthChallenge = new DefineAuthChallenge({
       env: {
@@ -122,20 +124,6 @@ class CognitoPasswordless {
         function: verifyAuthChallengeResponse.function.name,
         principal: "cognito-idp.amazonaws.com",
         sourceArn: this.userPool.arn,
-      }
-    );
-
-    const ses = new SES({ rootDomain: String(process.env.ROOT_DOMAIN) });
-
-    const cognitoPolicy = policies.getCreateAuthChallengePolicy({
-      sesDomainIdentity: ses.domainIdentity,
-    });
-
-    new aws.iam.RolePolicyAttachment(
-      "create-challenge-lambda-role-createAuthChallengeLambdaPolicy",
-      {
-        role: createAuthChallenge.role,
-        policyArn: cognitoPolicy.arn.apply((arn: any) => arn),
       }
     );
   }
