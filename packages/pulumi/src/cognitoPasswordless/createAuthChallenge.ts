@@ -59,9 +59,9 @@ class CreateAuthChallenge {
     });
 
     new aws.iam.RolePolicyAttachment(
-      "create-challenge-lambda-role-createAuthChallengeLambdaPolicy",
+      "create-challenge-lambda-role-attachment",
       {
-        role: this.function.role,
+        role: this.role.arn,
         policyArn: cognitoPolicy.arn.apply((arn: any) => arn),
       }
     );
