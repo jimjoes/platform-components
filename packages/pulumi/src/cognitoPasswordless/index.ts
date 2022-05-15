@@ -100,6 +100,29 @@ class CognitoPasswordless {
         explicitAuthFlows: ["CUSTOM_AUTH_FLOW_ONLY"],
       }
     );
+
+    new aws.lambda.Permission("DefineAuthChallengeInvocationPermission", {
+      action: "lambda:InvokeFunction",
+      function: defineAuthChallenge.function.name,
+      principal: "cognito-idp.amazonaws.com",
+      sourceArn: this.userPool.arn,
+    });
+    new aws.lambda.Permission("CreateAuthChallengeInvocationPermission", {
+      action: "lambda:InvokeFunction",
+      function: createAuthChallenge.function.name,
+      principal: "cognito-idp.amazonaws.com",
+      sourceArn: this.userPool.arn,
+    });
+
+    new aws.lambda.Permission(
+      "VerifyAuthChallengeResponseInvocationPermission",
+      {
+        action: "lambda:InvokeFunction",
+        function: verifyAuthChallengeResponse.function.name,
+        principal: "cognito-idp.amazonaws.com",
+        sourceArn: this.userPool.arn,
+      }
+    );
   }
 }
 
