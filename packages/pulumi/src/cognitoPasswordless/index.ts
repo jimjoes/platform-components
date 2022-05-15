@@ -2,7 +2,8 @@ import * as aws from "@pulumi/aws";
 import CreateAuthChallenge from "./createAuthChallenge";
 import DefineAuthChallenge from "./defineAuthChallenge";
 import VerifyAuthChallengeResponse from "./verifyAuthChallengeResponse";
-
+import SES from "./ses";
+import policies from "./policies";
 const DEBUG = String(process.env.DEBUG);
 
 class CognitoPasswordless {
@@ -121,6 +122,20 @@ class CognitoPasswordless {
         function: verifyAuthChallengeResponse.function.name,
         principal: "cognito-idp.amazonaws.com",
         sourceArn: this.userPool.arn,
+      }
+    );
+
+    const ses = new SES({ rootDomain: String(process.env.ROOT_DOMAIN) });
+
+    const cognitoPolicy = policies.getCreateAuthChallengePolicy({
+      sesDomainIdentity: ses.domainIdentity,
+    });
+
+    new aws.iam.RolePolicyAttachment(
+      "create-challenge-lambda-role-createAuthChallengeLambdaPolicy",
+      {
+        role: createAuthChallenge.role,
+        policyArn: cognitoPolicy.arn.apply((arn: any) => arn),
       }
     );
   }
