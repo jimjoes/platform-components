@@ -13,6 +13,7 @@ class CognitoPasswordless {
     const createAuthChallenge = new CreateAuthChallenge({
       env: {
         REGION: process.env.AWS_REGION,
+        ROOT_DOMAIN: process.env.ROOT_DOMAIN,
         DEBUG,
       },
       sesIdentity: ses.domainIdentity,
