@@ -15,7 +15,7 @@ class SES {
     this.domainIdentity = new aws.ses.DomainIdentity("platform-domain-id", {
       domain: "contact." + rootDomain,
     });
-    this.domainDkim = new aws.ses.DomainDkim("domain-dkim", {
+    this.domainDkim = new aws.ses.DomainDkim("platform-domain-dkim", {
       domain: "contact." + rootDomain,
     });
 
