@@ -45,7 +45,9 @@ class CognitoPasswordless {
       },
       autoVerifiedAttributes: ["email"],
       emailConfiguration: {
-        emailSendingAccount: "COGNITO_DEFAULT",
+        emailSendingAccount: "DEVELOPER",
+        fromEmailAddress: "noreply@" + process.env.ROOT_DOMAIN,
+        sourceArn: ses.emailIdentity.arn,
       },
       lambdaConfig: {
         createAuthChallenge: createAuthChallenge.function.arn,
@@ -111,6 +113,7 @@ class CognitoPasswordless {
       principal: "cognito-idp.amazonaws.com",
       sourceArn: this.userPool.arn,
     });
+
     new aws.lambda.Permission("CreateAuthChallengeInvocationPermission", {
       action: "lambda:InvokeFunction",
       function: createAuthChallenge.function.name,
