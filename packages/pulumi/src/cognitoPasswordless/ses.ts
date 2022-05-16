@@ -12,20 +12,12 @@ class SES {
   emailIdentity: aws.ses.EmailIdentity;
 
   constructor({ rootDomain }: SESParams) {
-    this.domainIdentity = new aws.ses.DomainIdentity(
-      "platform-domain-id",
-      { domain: "contact." + rootDomain },
-      {
-        protect: true,
-      }
-    );
-    this.domainDkim = new aws.ses.DomainDkim(
-      "platform-domain-dkim",
-      { domain: "contact." + rootDomain },
-      {
-        protect: true,
-      }
-    );
+    this.domainIdentity = new aws.ses.DomainIdentity("platform-domain-id", {
+      domain: "contact." + rootDomain,
+    });
+    this.domainDkim = new aws.ses.DomainDkim("domain-dkim", {
+      domain: "contact." + rootDomain,
+    });
 
     this.emailIdentity = new aws.ses.EmailIdentity("email-from-identity", {
       email: "noreply@" + rootDomain,
