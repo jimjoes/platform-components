@@ -19,24 +19,15 @@ class Policies {
     emailIdentity: aws.ses.EmailIdentity;
   }): aws.iam.Policy {
     return new aws.iam.Policy("CreateAuthChallengeLambdaPolicy", {
-      description: "This policy allows auth challenges to work",
+      description: "This policy allows auth challenge to be sent via ses",
       policy: {
         Version: "2012-10-17",
         Statement: [
           {
-            Sid: "PermissionForLambda",
-            Effect: "Allow",
-            Action: ["lambda:InvokeFunction"],
-            Resource: pulumi.interpolate`arn:aws:lambda:${this.awsRegion}:${this.callerIdentityOutput.accountId}:function:*`,
-          },
-          {
             Sid: "PermissionForSES",
             Effect: "Allow",
             Action: "ses:SendEmail",
-            Resource: [
-              pulumi.interpolate`${sesDomainIdentity.arn}`,
-              pulumi.interpolate`${emailIdentity.arn}`,
-            ],
+            Resource: "*",
           },
         ],
       },
