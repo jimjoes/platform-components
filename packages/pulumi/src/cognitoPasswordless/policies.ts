@@ -13,8 +13,10 @@ class Policies {
 
   getCreateAuthChallengePolicy({
     sesDomainIdentity,
+    emailIdentity,
   }: {
     sesDomainIdentity: aws.ses.DomainIdentity;
+    emailIdentity: aws.ses.EmailIdentity;
   }): aws.iam.Policy {
     return new aws.iam.Policy("CreateAuthChallengeLambdaPolicy", {
       description: "This policy allows auth challenges to work",
@@ -31,7 +33,10 @@ class Policies {
             Sid: "PermissionForSES",
             Effect: "Allow",
             Action: "ses:SendEmail",
-            Resource: pulumi.interpolate`${sesDomainIdentity.arn}`,
+            Resource: [
+              pulumi.interpolate`${sesDomainIdentity.arn}`,
+              pulumi.interpolate`${emailIdentity.arn}`,
+            ],
           },
         ],
       },

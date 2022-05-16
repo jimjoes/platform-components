@@ -3,7 +3,6 @@ import CreateAuthChallenge from "./createAuthChallenge";
 import DefineAuthChallenge from "./defineAuthChallenge";
 import VerifyAuthChallengeResponse from "./verifyAuthChallengeResponse";
 import SES from "./ses";
-import policies from "./policies";
 const DEBUG = String(process.env.DEBUG);
 
 class CognitoPasswordless {
@@ -17,6 +16,7 @@ class CognitoPasswordless {
         DEBUG,
       },
       sesIdentity: ses.domainIdentity,
+      emailIdentity: ses.emailIdentity,
     });
     const defineAuthChallenge = new DefineAuthChallenge({
       env: {

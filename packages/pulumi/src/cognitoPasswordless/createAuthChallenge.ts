@@ -1,16 +1,18 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import policies from "./policies";
+
 interface CreateAuthChallengeParams {
   env: Record<string, any>;
   sesIdentity: aws.ses.DomainIdentity;
+  emailIdentity: aws.ses.EmailIdentity;
 }
 
 class CreateAuthChallenge {
   function: aws.lambda.Function;
   role: aws.iam.Role;
 
-  constructor({ env, sesIdentity }: CreateAuthChallengeParams) {
+  constructor({ env, sesIdentity, emailIdentity }: CreateAuthChallengeParams) {
     const roleName = "create-challenge-lambda-role";
     this.role = new aws.iam.Role(roleName, {
       assumeRolePolicy: {
@@ -56,13 +58,14 @@ class CreateAuthChallenge {
 
     const cognitoPolicy = policies.getCreateAuthChallengePolicy({
       sesDomainIdentity: sesIdentity,
+      emailIdentity: emailIdentity,
     });
 
     new aws.iam.RolePolicyAttachment(
       "create-challenge-lambda-role-attachment",
       {
         role: this.role,
-        policyArn: cognitoPolicy.arn.apply((arn: any) => arn),
+        policyArn: cognitoPolicy.arn,
       }
     );
   }
