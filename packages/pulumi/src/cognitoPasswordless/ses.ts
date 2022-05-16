@@ -20,7 +20,7 @@ class SES {
       }
     );
     this.domainDkim = new aws.ses.DomainDkim(
-      "domain-dkim",
+      "platform-domain-dkim",
       { domain: "contact." + rootDomain },
       {
         protect: true,
@@ -28,7 +28,7 @@ class SES {
     );
 
     this.emailIdentity = new aws.ses.EmailIdentity("email-from-identity", {
-      email: "noreply@" + String(process.env.ROOT_DOMAIN),
+      email: "noreply@" + rootDomain,
     });
 
     this.dkimRecords = [];
@@ -39,11 +39,11 @@ class SES {
         (t) => `${t}.dkim.amazonses.com`
       );
       const name = this.domainDkim.dkimTokens[i].apply(
-        (t) => `${t}._domainkey.${process.env.ROOT_DOMAIN}`
+        (t) => `${t}._domainkey.contact.${rootDomain}`
       );
 
       const dkimRecord = new aws.route53.Record(
-        `${process.env.ROOT_DOMAIN}-dkim-record-${i + 1}-of-${dkimRecordCount}`,
+        `contact.${rootDomain}-dkim-record-${i + 1}-of-${dkimRecordCount}`,
         {
           zoneId: String(process.env.ROOT_ZONE_ID),
           name,
@@ -57,7 +57,7 @@ class SES {
     }
 
     const mailFromDomain = new aws.ses.MailFrom(`ses-mail-from`, {
-      domain: "contact." + rootDomain,
+      domain: this.domainIdentity.domain,
       mailFromDomain: `bounce.${"contact." + rootDomain}`,
     });
 
@@ -78,7 +78,7 @@ class SES {
       ttl: 3600,
       zoneId: String(process.env.ROOT_ZONE_ID),
       // Allow email from amazonses.com and the stack's FQDN (ex. stack
-      records: [`v=spf1 include:amazonses.com mail -all`],
+      records: [`v=spf1 include:amazonses.com -all`],
     });
   }
 }
