@@ -13,3 +13,4 @@ export * from "./use-sign-out";
 export * from "./use-sign-up";
 export * from "./use-totp-setup";
 export * from "./use-verify-contact";
+export * from "./use-confirm-passwordless-challenge";

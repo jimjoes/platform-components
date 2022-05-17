@@ -6,7 +6,7 @@ import { ConsoleLogger as Logger } from "@aws-amplify/core";
 import { useAuthContext } from "./use-auth-context";
 import { useCheckContact } from "./use-check-contact";
 
-const logger = new Logger("useSignIn");
+const logger = new Logger("usePasswordlessSignIn");
 
 export const usePasswordlessSignIn = (): ((
   username: string
@@ -23,19 +23,10 @@ export const usePasswordlessSignIn = (): ((
     try {
       const user = await Auth.signIn(username);
       logger.debug(user);
-      if (
-        user.challengeName === "CUSTOM_CHALLENGE" ||
-        user.challengeName === "SMS_MFA" ||
-        user.challengeName === "SOFTWARE_TOKEN_MFA"
-      ) {
-        logger.debug("confirm user with " + user.challengeName);
-        handleStateChange("confirmSignIn", user);
-      } else if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
-        logger.debug("require new password", user.challengeParam);
-        handleStateChange("requireNewPassword", user);
-      } else if (user.challengeName === "MFA_SETUP") {
-        logger.debug("TOTP setup", user.challengeParam);
-        handleStateChange("TOTPSetup", user);
+      console.log("user: ", user);
+      if (user.challengeName === "CUSTOM_CHALLENGE") {
+        logger.debug("passwordless auth challenge " + user.challengeName);
+        handleStateChange("passwordlessChallenge", user);
       } else {
         checkContact(user);
       }

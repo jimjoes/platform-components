@@ -13,6 +13,7 @@ import { SignUpPasswordless } from "./sign-up-passwordless";
 import { RequireNewPassword } from "./require-new-password";
 import { ConfirmSignIn } from "./confirm-sign-in";
 import { ConfirmSignUp } from "./confirm-sign-up";
+import { PasswordlessChallenge } from "./passwordless-challenge";
 import { VerifyContact } from "./verify-contact";
 import { AuthRoute, AuthConfig } from "./auth-route";
 
@@ -70,6 +71,10 @@ export const AuthRouter: React.FC<AuthRouterProps> = (props) => {
     {
       validAuthStates: ["confirmSignIn"],
       component: ConfirmSignIn,
+    },
+    {
+      validAuthStates: ["passwordlessChallenge"],
+      component: PasswordlessChallenge,
     },
     {
       validAuthStates: ["confirmSignUp"],

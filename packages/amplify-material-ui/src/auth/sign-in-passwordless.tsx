@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useIntl, FormattedMessage } from "react-intl";
 import { Button, Grid, Box } from "@mui/material";
 import { Theme } from "@mui/material/styles";
@@ -38,7 +38,7 @@ export const SignInPasswordless: React.FC<SignInProps> = (props) => {
     hideForgotPasswordLink = false,
     usernameAttribute,
   } = props;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const classes = useStyles();
   const { formatMessage } = useIntl();
   const { showNotification } = useNotificationContext();
@@ -54,7 +54,6 @@ export const SignInPasswordless: React.FC<SignInProps> = (props) => {
       onSubmit={async (values): Promise<void> => {
         try {
           await signIn(values[usernamefieldName].trim());
-          navigate("/");
         } catch (error: any) {
           const content = formatMessage({
             id: `signIn.errors.${error.code}`,
