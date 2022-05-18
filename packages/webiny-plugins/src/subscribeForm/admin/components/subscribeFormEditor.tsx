@@ -1,5 +1,4 @@
 import React from "react";
-import "../../subscribeForm/styles.css";
 import { css } from "emotion";
 import styled from "@emotion/styled";
 import { ElementRoot } from "@webiny/app-page-builder/render/components/ElementRoot";
