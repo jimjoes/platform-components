@@ -1,17 +1,17 @@
 import React from "react";
-// import "../../subscribeForm/styles.css";
+import "../../subscribeForm/styles.css";
 import { css } from "emotion";
 import styled from "@emotion/styled";
 import { ElementRoot } from "@webiny/app-page-builder/render/components/ElementRoot";
 import icon from "../assets/mailchimp_logo.png";
 
-// import {
-//   FormContainer,
-//   SignupFieldContainer,
-//   Input,
-//   Button,
-//   TermsContainer,
-// } from "../../subscribeForm/styled";
+import {
+  FormContainer,
+  SignupFieldContainer,
+  Input,
+  Button,
+  TermsContainer,
+} from "../../subscribeForm/styled";
 
 const outerWrapper = css({
   boxSizing: "border-box",
@@ -45,14 +45,14 @@ const SubscribeFormEditor = ({ element }: { element: any }) => {
       className={"webiny-pb-base-page-element-style " + outerWrapper}
       element={element}
     >
-      {/* <FormContainer>
+      <FormContainer>
         <SignupFieldContainer>
           <Input type="email" placeholder="Enter your email and..." />
 
           <Button>{element.data.subscribeForm.ctaText}</Button>
         </SignupFieldContainer>
         <TermsContainer>{element.data.subscribeForm.termsText}</TermsContainer>
-      </FormContainer> */}
+      </FormContainer>
     </ElementRoot>
   );
 };
