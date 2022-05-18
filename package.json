@@ -8,6 +8,7 @@
   "devDependencies": {
     "@webpack-cli/generators": "^2.4.2",
     "copyfiles": "^2.4.1",
+    "jest-matcher-utils": "^28.1.0",
     "lerna": "^4.0.0",
     "rimraf": "^3.0.2"
   },
@@ -15,8 +16,17 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "resolutions": {
-    "@types/react": "17.0.43",
     "@rmwc/base": "link:./node_modules/@webiny/ui/rmwc/base",
-    "typescript": "4.5.5"
+    "@types/react": "17.0.44",
+    "@typescript/lib-dom": "npm:@types/web@*",
+    "@types/webpack": "^5.28.0",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "typescript": "4.5.5",
+    "codex-tooltip": "1.0.2",
+    "@pulumi/pulumi": "3.25.0",
+    "@pulumi/aws": "4.28.0",
+    "@types/eslint": "8.2.1",
+    "yargs": "^17.3.1"
   }
 }
