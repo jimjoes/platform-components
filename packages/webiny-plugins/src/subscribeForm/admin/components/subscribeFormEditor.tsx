@@ -10,6 +10,8 @@ import {
   Input,
   Button,
   TermsContainer,
+  Error,
+  Terms,
 } from "../../subscribeForm/styled";
 
 const outerWrapper = css({
@@ -50,7 +52,15 @@ const SubscribeFormEditor = ({ element }: { element: any }) => {
 
           <Button>{element.data.subscribeForm.ctaText}</Button>
         </SignupFieldContainer>
-        <TermsContainer>{element.data.subscribeForm.termsText}</TermsContainer>
+        <TermsContainer>
+          <Error> Missing email </Error>
+
+          <Error>Email address invalid</Error>
+
+          <Terms className="terms">
+            {element.data.subscribeForm.termsText}
+          </Terms>
+        </TermsContainer>
       </FormContainer>
     </ElementRoot>
   );
