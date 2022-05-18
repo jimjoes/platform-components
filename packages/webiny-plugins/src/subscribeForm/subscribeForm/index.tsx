@@ -138,19 +138,17 @@ export const SubscribeForm = ({
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <SignupFieldContainer>
-        <SignupFieldContainer>
-          <Input
-            {...register(formFields.email, {
-              required: true,
-              pattern:
-                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            })}
-            type={"email"}
-            placeholder={placeholder}
-          />
+        <Input
+          {...register(formFields.email, {
+            required: true,
+            pattern:
+              /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+          })}
+          type={"email"}
+          placeholder={placeholder}
+        />
 
-          <Button>{loading || submitting ? <Spinner /> : ctaText}</Button>
-        </SignupFieldContainer>
+        <Button>{loading || submitting ? <Spinner /> : ctaText}</Button>
       </SignupFieldContainer>
       <TermsContainer>
         {errors.email?.type === "required" && (
