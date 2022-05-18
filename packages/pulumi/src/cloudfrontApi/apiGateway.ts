@@ -41,10 +41,6 @@ class ApiGateway {
         integrationMethod: route.method,
         integrationUri: route.function.arn,
         passthroughBehavior: "WHEN_NO_MATCH",
-        requestParameters: {
-          "overwrite:header.User-Agent": `$context.identity.userAgent`,
-          "overwrite:header.X-Real-Ip": `$context.identity.sourceIp`,
-        },
       });
 
       // TODO: This block will be used for custom integrations where the api handles error mapping.
