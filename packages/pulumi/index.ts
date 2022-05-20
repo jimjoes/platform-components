@@ -12,6 +12,8 @@ import stripeWebinyClickHandler from "./src/stripeCheckout/clickHandler";
 import Subscribe from "./src/subscribe/pulumi";
 import subscribeHandler from "./src/subscribe/code";
 import subscribeWebinyClickHandler from "./src/subscribe/clickHandler";
+import Secret from "./src/secret";
+import Parameter from "./src/parameter";
 
 export {
   Subscribe,
@@ -28,4 +30,6 @@ export {
   UserGroups,
   CognitoPasswordless,
   DynamoDB,
+  Parameter,
+  Secret,
 };
