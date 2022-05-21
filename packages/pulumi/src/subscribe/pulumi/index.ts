@@ -62,13 +62,23 @@ class SubscribeHandler {
       }
     );
 
-    new aws.iam.RolePolicyAttachment(
-      `${roleName}-AWSLambdaBasicExecutionRole`,
-      {
-        role: this.role,
-        policyArn: aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole,
-      }
-    );
+    if (vpc && subnets) {
+      new aws.iam.RolePolicyAttachment(
+        `${roleName}-AWSLambdaVPCAccessExecutionRole`,
+        {
+          role: this.role,
+          policyArn: aws.iam.ManagedPolicy.AWSLambdaVPCAccessExecutionRole,
+        }
+      );
+    } else {
+      new aws.iam.RolePolicyAttachment(
+        `${roleName}-AWSLambdaBasicExecutionRole`,
+        {
+          role: this.role,
+          policyArn: aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole,
+        }
+      );
+    }
 
     const config: any = {
       runtime: "nodejs14.x",
