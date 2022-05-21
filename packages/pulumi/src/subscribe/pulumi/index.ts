@@ -3,8 +3,8 @@ import * as aws from "@pulumi/aws";
 import policies from "./policies";
 
 interface SubscribeHandlerParams {
-  vpc: aws.ec2.Vpc;
-  subnets: {
+  vpc?: aws.ec2.Vpc;
+  subnets?: {
     private: aws.ec2.Subnet[];
     public: aws.ec2.Subnet[];
   };
@@ -87,7 +87,7 @@ class SubscribeHandler {
       },
     };
 
-    if (vpc) {
+    if (vpc && subnets) {
       config.vpcConfig = {
         subnetIds: subnets.private.map((subNet) => subNet.id),
         securityGroupIds: [vpc.defaultSecurityGroupId],

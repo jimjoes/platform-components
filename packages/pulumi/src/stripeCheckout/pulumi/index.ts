@@ -3,8 +3,8 @@ import * as aws from "@pulumi/aws";
 import policies from "./policies";
 
 interface StripeCheckoutParams {
-  vpc: aws.ec2.Vpc;
-  subnets: {
+  vpc?: aws.ec2.Vpc;
+  subnets?: {
     private: aws.ec2.Subnet[];
     public: aws.ec2.Subnet[];
   };
@@ -74,7 +74,7 @@ class StripeCheckout {
       },
     };
 
-    if (vpc) {
+    if (vpc && subnets) {
       config.vpcConfig = {
         subnetIds: subnets.private.map((subNet) => subNet.id),
         securityGroupIds: [vpc.defaultSecurityGroupId],
