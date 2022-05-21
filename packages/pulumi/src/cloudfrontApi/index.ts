@@ -18,6 +18,7 @@ const buildDomain = (
   const subDomain = subDomainParts.join(".");
   const domain = [subDomain, parentDomain].join(".");
   const domainParts = domain.split(".").reverse();
+
   return {
     domain,
     subDomain,
@@ -41,34 +42,38 @@ class CloudfrontApi {
     subdomain,
   }: {
     routes: Array<any>;
-    subdomain: string;
+    subdomain?: string;
   }) {
     let allowedOrigins: string[] = [];
 
     if (stackEnv === "dev") {
-      alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
-      allowedOrigins = [
-        "http://localhost:3000",
-        "http://localhost:8000",
-        "https://" + buildDomain(rootDomain, "www" + "-dev").domain,
-        "https://" + buildDomain(rootDomain, "platform" + "-dev").domain,
-        "https://" + buildDomain(rootDomain, "admin" + "-dev").domain,
-        "https://" + buildDomain(rootDomain, "survey" + "-dev").domain,
-        "https://" + buildDomain(rootDomain, "content" + "-dev").domain,
-      ];
+      if (subdomain) {
+        alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
+        allowedOrigins = [
+          "http://localhost:3000",
+          "http://localhost:8000",
+          "https://" + buildDomain(rootDomain, "www" + "-dev").domain,
+          "https://" + buildDomain(rootDomain, "platform" + "-dev").domain,
+          "https://" + buildDomain(rootDomain, "admin" + "-dev").domain,
+          "https://" + buildDomain(rootDomain, "survey" + "-dev").domain,
+          "https://" + buildDomain(rootDomain, "content" + "-dev").domain,
+        ];
+      }
     } else if (stackEnv === "prod") {
-      alternateCnames.push(buildDomain(rootDomain, subdomain));
-      allowedOrigins = [
-        "https://" + buildDomain(rootDomain, "www").domain,
-        "https://" + buildDomain(rootDomain, "platform").domain,
-        "https://" + buildDomain(rootDomain, "admin").domain,
-        "https://" + buildDomain(rootDomain, "survey").domain,
-        "https://" + buildDomain(rootDomain, "content").domain,
-      ];
+      if (subdomain) {
+        alternateCnames.push(buildDomain(rootDomain, subdomain));
+        allowedOrigins = [
+          "https://" + buildDomain(rootDomain, "www").domain,
+          "https://" + buildDomain(rootDomain, "platform").domain,
+          "https://" + buildDomain(rootDomain, "admin").domain,
+          "https://" + buildDomain(rootDomain, "survey").domain,
+          "https://" + buildDomain(rootDomain, "content").domain,
+        ];
+      }
     }
 
     let viewerCertificate: inputs.cloudfront.DistributionViewerCertificate;
-    if (rootAcmCertificateArn) {
+    if (rootAcmCertificateArn && subdomain) {
       viewerCertificate = {
         acmCertificateArn: rootAcmCertificateArn,
         sslSupportMethod: "sni-only",
@@ -85,7 +90,7 @@ class CloudfrontApi {
 
     this.apiGateway = new ApiGateway({ routes, allowedOrigins });
 
-    this.cloudfront = new aws.cloudfront.Distribution("api-cloudfront", {
+    const config: any = {
       waitForDeployment: false,
       defaultCacheBehavior: {
         compress: true,
@@ -115,7 +120,6 @@ class CloudfrontApi {
       },
       isIpv6Enabled: true,
       enabled: true,
-      aliases: this.aliases,
       orderedCacheBehaviors: [
         {
           compress: true,
@@ -190,13 +194,21 @@ class CloudfrontApi {
         },
       },
       viewerCertificate,
-    });
-    alternateCnames
-      .map(
-        (domainDescriptor) =>
-          new Route53(domainDescriptor, this.cloudfront, rootZoneId)
-      )
-      .map((route53) => route53.record.fqdn);
+    };
+
+    if (subdomain) {
+      config.aliases = this.aliases;
+    }
+
+    this.cloudfront = new aws.cloudfront.Distribution("api-cloudfront", config);
+    if (subdomain) {
+      alternateCnames
+        .map(
+          (domainDescriptor) =>
+            new Route53(domainDescriptor, this.cloudfront, rootZoneId)
+        )
+        .map((route53) => route53.record.fqdn);
+    }
   }
 }
 

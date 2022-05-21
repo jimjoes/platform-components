@@ -2,7 +2,15 @@ import * as aws from "@pulumi/aws";
 
 class DynamoDB {
   table: aws.dynamodb.Table;
-  constructor({ name, gsiCount = 0 }: { name: string; gsiCount: number }) {
+  constructor({
+    name,
+    gsiCount = 0,
+    protectedEnvironment,
+  }: {
+    name: string;
+    gsiCount: number;
+    protectedEnvironment: boolean;
+  }) {
     let attributes = [
       { name: "PK", type: "S" },
       { name: "SK", type: "S" },
@@ -32,7 +40,13 @@ class DynamoDB {
       params.globalSecondaryIndexes = globalSecondaryIndexes;
     }
 
-    this.table = new aws.dynamodb.Table(name, params);
+    if (protectedEnvironment) {
+      this.table = new aws.dynamodb.Table(name, params, {
+        protect: protectedEnvironment,
+      });
+    } else {
+      this.table = new aws.dynamodb.Table(name, params);
+    }
   }
 }
 

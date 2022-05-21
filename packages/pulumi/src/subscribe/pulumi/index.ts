@@ -3,6 +3,11 @@ import * as aws from "@pulumi/aws";
 import policies from "./policies";
 
 interface SubscribeHandlerParams {
+  vpc: aws.ec2.Vpc;
+  subnets: {
+    private: aws.ec2.Subnet[];
+    public: aws.ec2.Subnet[];
+  };
   env: Record<string, any>;
   platformTableArn?: string;
   userPool?: aws.cognito.UserPool;
@@ -14,7 +19,13 @@ class SubscribeHandler {
   };
   role: aws.iam.Role;
 
-  constructor({ env, userPool, platformTableArn }: SubscribeHandlerParams) {
+  constructor({
+    vpc,
+    subnets,
+    env,
+    userPool,
+    platformTableArn,
+  }: SubscribeHandlerParams) {
     const roleName = "subscribe-handler-api-lambda-role";
     this.role = new aws.iam.Role(roleName, {
       assumeRolePolicy: {
@@ -59,23 +70,32 @@ class SubscribeHandler {
       }
     );
 
-    this.functions = {
-      subscribe: new aws.lambda.Function("subscribe-handler", {
-        runtime: "nodejs14.x",
-        handler: "handler.handler",
-        role: this.role.arn,
-        timeout: 600,
-        memorySize: 256,
-        code: new pulumi.asset.AssetArchive({
-          ".": new pulumi.asset.FileArchive("../code/subscribeHandler/build"),
-        }),
-        environment: {
-          variables: {
-            ...env,
-            AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
-          },
-        },
+    const config: any = {
+      runtime: "nodejs14.x",
+      handler: "handler.handler",
+      role: this.role.arn,
+      timeout: 600,
+      memorySize: 256,
+      code: new pulumi.asset.AssetArchive({
+        ".": new pulumi.asset.FileArchive("../code/subscribeHandler/build"),
       }),
+      environment: {
+        variables: {
+          ...env,
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
+        },
+      },
+    };
+
+    if (vpc) {
+      config.vpcConfig = {
+        subnetIds: subnets.private.map((subNet) => subNet.id),
+        securityGroupIds: [vpc.defaultSecurityGroupId],
+      };
+    }
+
+    this.functions = {
+      subscribe: new aws.lambda.Function("subscribe-handler", config),
     };
   }
 }

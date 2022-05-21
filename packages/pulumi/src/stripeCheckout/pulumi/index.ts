@@ -3,6 +3,11 @@ import * as aws from "@pulumi/aws";
 import policies from "./policies";
 
 interface StripeCheckoutParams {
+  vpc: aws.ec2.Vpc;
+  subnets: {
+    private: aws.ec2.Subnet[];
+    public: aws.ec2.Subnet[];
+  };
   env: {
     DEBUG: string;
     WEBINY_LOGS_FORWARD_URL: string;
@@ -17,7 +22,7 @@ class StripeCheckout {
   };
   role: aws.iam.Role;
 
-  constructor({ env }: StripeCheckoutParams) {
+  constructor({ env, vpc, subnets }: StripeCheckoutParams) {
     const roleName = "stripe-checkout-api-lambda-role";
     this.role = new aws.iam.Role(roleName, {
       assumeRolePolicy: {
@@ -52,23 +57,31 @@ class StripeCheckout {
       }
     );
 
-    this.functions = {
-      checkout: new aws.lambda.Function("stripe-checkout", {
-        runtime: "nodejs14.x",
-        handler: "handler.handler",
-        role: this.role.arn,
-        timeout: 30,
-        memorySize: 128,
-        code: new pulumi.asset.AssetArchive({
-          ".": new pulumi.asset.FileArchive("../code/stripeCheckout/build"),
-        }),
-        environment: {
-          variables: {
-            ...env,
-            AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
-          },
-        },
+    const config: any = {
+      runtime: "nodejs14.x",
+      handler: "handler.handler",
+      role: this.role.arn,
+      timeout: 30,
+      memorySize: 128,
+      code: new pulumi.asset.AssetArchive({
+        ".": new pulumi.asset.FileArchive("../code/stripeCheckout/build"),
       }),
+      environment: {
+        variables: {
+          ...env,
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
+        },
+      },
+    };
+
+    if (vpc) {
+      config.vpcConfig = {
+        subnetIds: subnets.private.map((subNet) => subNet.id),
+        securityGroupIds: [vpc.defaultSecurityGroupId],
+      };
+    }
+    this.functions = {
+      checkout: new aws.lambda.Function("stripe-checkout", config),
     };
   }
 }
