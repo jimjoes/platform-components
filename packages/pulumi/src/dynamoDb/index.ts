@@ -5,7 +5,7 @@ class DynamoDB {
   constructor({
     name,
     gsiCount = 0,
-    protectedEnvironment,
+    protectedEnvironment = false,
   }: {
     name: string;
     gsiCount: number;
