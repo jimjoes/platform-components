@@ -105,7 +105,9 @@ export const SubscribeForm = ({
 
     try {
       await post("/subscribe", submission);
-      if (response?.status / 100 !== 2 || fetchError) {
+      console.log("response: ", JSON.stringify(response));
+      console.log("fetchError: ", fetchError);
+      if (!response.ok || fetchError) {
         openSnackbar(response?.data?.message);
         setSubmitting(false);
         setSubmitted(false);
