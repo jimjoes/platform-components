@@ -18,20 +18,11 @@ import {
   Spinner,
 } from "./styled";
 
-const snackbarOptionsError = {
+const snackbarOptions = {
   style: {
-    backgroundColor: "#ff6961",
-    border: "1px solid darkRed",
-    color: "white",
-    fontSize: "14px",
-    textAlign: "center",
-  },
-};
-const snackbarOptionsSuccess = {
-  style: {
-    backgroundColor: "#bee5b0",
-    border: "1px solid darkGreen",
-    color: "white",
+    backgroundColor: "#B7BCB6",
+    borderRadius: "4px",
+    color: "black",
     fontSize: "14px",
     textAlign: "center",
   },
@@ -78,8 +69,7 @@ export const SubscribeForm = ({
     formState: { errors },
   } = useForm<FormValues>();
 
-  const [openErrorSnackbar] = useSnackbar(snackbarOptionsError);
-  const [openSuccessSnackbar] = useSnackbar(snackbarOptionsSuccess);
+  const [openSnackbar] = useSnackbar(snackbarOptions);
   const recaptchaRef = useRef(null);
   const [referrer] = useQueryString({ key: "r" });
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -118,20 +108,18 @@ export const SubscribeForm = ({
       console.log("response: ", JSON.stringify(response));
       console.log("fetchError: ", fetchError);
       if (!response.ok || fetchError) {
-        openErrorSnackbar(response?.data?.message);
+        openSnackbar(response?.data?.message);
         setSubmitting(false);
         setSubmitted(false);
         reset();
       } else {
-        openSuccessSnackbar(
-          "Successfully subscribed. Please check your email."
-        );
+        openSnackbar("Successfully subscribed. Please check your email.");
         setSubmitting(false);
         setSubmitted(true);
         reset();
       }
     } catch (error: any) {
-      openErrorSnackbar(
+      openSnackbar(
         error?.message ? error.message : "There was an error. Please try again"
       );
       setSubmitting(false);
