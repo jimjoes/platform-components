@@ -39,12 +39,12 @@ class CloudfrontPagebuilderDelivery {
     subdomain,
     appS3Bucket,
   }: {
-    subdomain: string;
+    subdomain?: string;
     appS3Bucket: aws.s3.Bucket;
   }) {
-    if (stackEnv === "dev") {
+    if (stackEnv === "dev" && subdomain) {
       alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
-    } else if (stackEnv === "prod") {
+    } else if (stackEnv === "prod" && subdomain) {
       alternateCnames.push(buildDomain(rootDomain, subdomain));
     }
 
@@ -73,7 +73,7 @@ class CloudfrontPagebuilderDelivery {
       (domainDescriptor) => domainDescriptor.domain
     );
 
-    this.cloudfront = new aws.cloudfront.Distribution("delivery", {
+    const config: any = {
       enabled: true,
       waitForDeployment: false,
       origins: [
@@ -98,7 +98,6 @@ class CloudfrontPagebuilderDelivery {
           },
         },
       ],
-      aliases: this.aliases,
       orderedCacheBehaviors: [
         {
           compress: true,
@@ -143,13 +142,22 @@ class CloudfrontPagebuilderDelivery {
         },
       },
       viewerCertificate,
-    });
-    alternateCnames
-      .map(
-        (domainDescriptor) =>
-          new Route53(domainDescriptor, this.cloudfront, rootZoneId)
-      )
-      .map((route53) => route53.record.fqdn);
+    };
+
+    if (subdomain) {
+      config.aliases = this.aliases;
+    }
+
+    this.cloudfront = new aws.cloudfront.Distribution("delivery", config);
+
+    if (subdomain) {
+      alternateCnames
+        .map(
+          (domainDescriptor) =>
+            new Route53(domainDescriptor, this.cloudfront, rootZoneId)
+        )
+        .map((route53) => route53.record.fqdn);
+    }
   }
 }
 

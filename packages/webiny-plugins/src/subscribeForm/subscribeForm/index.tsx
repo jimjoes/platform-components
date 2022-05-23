@@ -87,7 +87,6 @@ export const SubscribeForm = ({
     recaptchaRef.current.reset();
     //@ts-ignore
     let recaptchaToken = await recaptchaRef.current.executeAsync();
-    console.log("recaptcha token: ", recaptchaToken);
     const submission: Submission = {
       email: formValues.email,
       humanKey: recaptchaToken,
@@ -106,6 +105,7 @@ export const SubscribeForm = ({
 
     try {
       await post("/subscribe", submission);
+      console.log("response: ", JSON.stringify(response));
       if (response?.data?.statusCode / 100 !== 2 || fetchError) {
         openSnackbar(response?.data?.message);
         setSubmitting(false);
