@@ -62,54 +62,99 @@ class CloudfrontWebApp {
       (domainDescriptor) => domainDescriptor.domain
     );
 
-    this.cloudfront = new aws.cloudfront.Distribution(
-      subdomain + "-webapp-cloudfront",
-      {
-        enabled: true,
-        waitForDeployment: false,
-        origins: [
-          {
-            originId: bucket.arn,
-            domainName: bucket.websiteEndpoint,
-            customOriginConfig: {
-              originProtocolPolicy: "http-only",
-              httpPort: 80,
-              httpsPort: 443,
-              originSslProtocols: ["TLSv1.2"],
-            },
+    let config: any = {
+      enabled: true,
+      waitForDeployment: false,
+      origins: [
+        {
+          originId: bucket.arn,
+          domainName: bucket.websiteEndpoint,
+          customOriginConfig: {
+            originProtocolPolicy: "http-only",
+            httpPort: 80,
+            httpsPort: 443,
+            originSslProtocols: ["TLSv1.2"],
           },
-        ],
-        aliases: this.aliases,
-        defaultRootObject: "index.html",
-        defaultCacheBehavior: {
+        },
+      ],
+      aliases: this.aliases,
+      defaultRootObject: "index.html",
+      defaultCacheBehavior: {
+        compress: true,
+        targetOriginId: bucket.arn,
+        viewerProtocolPolicy: "redirect-to-https",
+        allowedMethods: ["GET", "HEAD", "OPTIONS"],
+        cachedMethods: ["GET", "HEAD", "OPTIONS"],
+        forwardedValues: {
+          cookies: { forward: "none" },
+          queryString: false,
+        },
+        minTtl: 0,
+        defaultTtl: 600,
+        maxTtl: 600,
+      },
+      priceClass: "PriceClass_100",
+      customErrorResponses: [
+        {
+          errorCode: 404,
+          responseCode: 404,
+          responsePagePath: "/index.html",
+        },
+      ],
+      restrictions: {
+        geoRestriction: {
+          restrictionType: "none",
+        },
+      },
+      viewerCertificate,
+    };
+
+    if (stackEnv === "prod") {
+      config.orderedCacheBehaviors = [
+        {
           compress: true,
-          targetOriginId: bucket.arn,
-          viewerProtocolPolicy: "redirect-to-https",
           allowedMethods: ["GET", "HEAD", "OPTIONS"],
           cachedMethods: ["GET", "HEAD", "OPTIONS"],
           forwardedValues: {
-            cookies: { forward: "none" },
+            cookies: {
+              forward: "none",
+            },
+            headers: [],
             queryString: false,
           },
+          pathPattern: "/robots.txt",
+          viewerProtocolPolicy: "allow-all",
+          targetOriginId: bucket.arn,
+          // MinTTL <= DefaultTTL <= MaxTTL
           minTtl: 0,
-          defaultTtl: 600,
-          maxTtl: 600,
+          defaultTtl: 2592000, // 30 days
+          maxTtl: 2592000,
         },
-        priceClass: "PriceClass_100",
-        customErrorResponses: [
-          {
-            errorCode: 404,
-            responseCode: 404,
-            responsePagePath: "/index.html",
+        {
+          compress: true,
+          allowedMethods: ["GET", "HEAD", "OPTIONS"],
+          cachedMethods: ["GET", "HEAD", "OPTIONS"],
+          forwardedValues: {
+            cookies: {
+              forward: "none",
+            },
+            headers: [],
+            queryString: false,
           },
-        ],
-        restrictions: {
-          geoRestriction: {
-            restrictionType: "none",
-          },
+          pathPattern: "/sitemap.xml",
+          viewerProtocolPolicy: "allow-all",
+          targetOriginId: bucket.arn,
+          // MinTTL <= DefaultTTL <= MaxTTL
+          minTtl: 0,
+          defaultTtl: 2592000, // 30 days
+          maxTtl: 2592000,
         },
-        viewerCertificate,
-      }
+      ];
+    }
+
+    this.cloudfront = new aws.cloudfront.Distribution(
+      subdomain + "-webapp-cloudfront",
+      config
     );
     // create dns records
     alternateCnames
