@@ -134,6 +134,44 @@ class CloudfrontPagebuilderDelivery {
           defaultTtl: 2592000, // 30 days
           maxTtl: 2592000,
         },
+        {
+          compress: true,
+          allowedMethods: ["GET", "HEAD", "OPTIONS"],
+          cachedMethods: ["GET", "HEAD", "OPTIONS"],
+          forwardedValues: {
+            cookies: {
+              forward: "none",
+            },
+            headers: [],
+            queryString: false,
+          },
+          pathPattern: "/robots.txt",
+          viewerProtocolPolicy: "allow-all",
+          targetOriginId: appS3Bucket.arn,
+          // MinTTL <= DefaultTTL <= MaxTTL
+          minTtl: 0,
+          defaultTtl: 2592000, // 30 days
+          maxTtl: 2592000,
+        },
+        {
+          compress: true,
+          allowedMethods: ["GET", "HEAD", "OPTIONS"],
+          cachedMethods: ["GET", "HEAD", "OPTIONS"],
+          forwardedValues: {
+            cookies: {
+              forward: "none",
+            },
+            headers: [],
+            queryString: false,
+          },
+          pathPattern: "/sitemap.xml",
+          viewerProtocolPolicy: "allow-all",
+          targetOriginId: appS3Bucket.arn,
+          // MinTTL <= DefaultTTL <= MaxTTL
+          minTtl: 0,
+          defaultTtl: 2592000, // 30 days
+          maxTtl: 2592000,
+        },
       ],
       defaultRootObject: "index.html",
       defaultCacheBehavior: {
