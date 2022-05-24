@@ -38,9 +38,11 @@ class CloudfrontPagebuilderDelivery {
   constructor({
     subdomain,
     appS3Bucket,
+    routingRules,
   }: {
     subdomain?: string;
     appS3Bucket: aws.s3.Bucket;
+    routingRules?: any;
   }) {
     if (stackEnv === "dev" && subdomain) {
       alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
@@ -59,15 +61,29 @@ class CloudfrontPagebuilderDelivery {
         cloudfrontDefaultCertificate: true,
       };
     }
+    let bucketConfig;
+    if (routingRules) {
+      bucketConfig = {
+        acl: "public-read",
+        forceDestroy: true,
+        website: {
+          indexDocument: "index.html",
+          errorDocument: "_NOT_FOUND_PAGE_/index.html",
+          routingRules,
+        },
+      };
+    } else {
+      bucketConfig = {
+        acl: "public-read",
+        forceDestroy: true,
+        website: {
+          indexDocument: "index.html",
+          errorDocument: "_NOT_FOUND_PAGE_/index.html",
+        },
+      };
+    }
 
-    this.bucket = new aws.s3.Bucket("delivery", {
-      acl: "public-read",
-      forceDestroy: true,
-      website: {
-        indexDocument: "index.html",
-        errorDocument: "_NOT_FOUND_PAGE_/index.html",
-      },
-    });
+    this.bucket = new aws.s3.Bucket("delivery", bucketConfig);
 
     this.aliases = alternateCnames.map(
       (domainDescriptor) => domainDescriptor.domain
