@@ -66,7 +66,12 @@ class Policies {
           {
             Effect: "Allow",
             Action: ["ssm:GetParameters"],
-            Resource: pulumi.interpolate`arn:aws:ssm:${this.awsRegion}:${this.callerIdentityOutput.accountId}:parameter/webiny-api*`,
+            Resource: pulumi.interpolate`arn:aws:ssm:${this.awsRegion}:${this.callerIdentityOutput.accountId}:parameter/webiny-api-url*`,
+          },
+          {
+            Effect: "Allow",
+            Action: ["ssm:GetParameters"],
+            Resource: pulumi.interpolate`arn:aws:ssm:${this.awsRegion}:${this.callerIdentityOutput.accountId}:parameter/webiny-cms-api-secret*`,
           },
           {
             Sid: "AccessToCloudfront",
