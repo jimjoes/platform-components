@@ -2128,14 +2128,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@editorjs/editorjs@npm:2.24.3":
-  version: 2.24.3
-  resolution: "@editorjs/editorjs@npm:2.24.3"
+"@editorjs/editorjs@npm:2.25.0":
+  version: 2.25.0
+  resolution: "@editorjs/editorjs@npm:2.25.0"
   dependencies:
     codex-notifier: ^1.1.2
     codex-tooltip: ^1.0.5
     nanoid: ^3.1.22
-  checksum: ced5f8c3fcec0f0cd9bb4d7263e78adbd334583301b188f25ad83cb2902cf16ef1f1b4aaea1a78a6870aca0f19748abce5f2ba6e68ccc12c3bfe5817c4b2061b
+  checksum: a7cf152bd2457715fab622b1fe7725b169259075ab6206f8964304dc1b6c0cac113aaa92d60ddbdb7aaafa001d3bb4e2036e2c62514a93bf8227038907914848
   languageName: node
   linkType: hard
 
@@ -2685,10 +2685,10 @@ __metadata:
     "@middy/http-error-handler": ^2.5.7
     "@middy/http-json-body-parser": ^2.5.7
     "@middy/validator": ^2.5.7
-    "@pulumi/aws": 4.28.0
-    "@pulumi/pulumi": 3.19.0
+    "@pulumi/aws": 5.9.0
+    "@pulumi/pulumi": 3.35.0
     "@stripe/stripe-js": ^1.27.0
-    "@webiny/app-page-builder": 5.28.0
+    "@webiny/app-page-builder": 5.29.0
     stripe: ^8.216.0
     typescript: ^4.6.3
   languageName: unknown
@@ -2705,14 +2705,14 @@ __metadata:
     "@middy/http-error-handler": ^2.5.7
     "@middy/http-json-body-parser": ^2.5.7
     "@middy/validator": ^2.5.7
-    "@pulumi/aws": 4.28.0
-    "@pulumi/pulumi": 3.19.0
+    "@pulumi/aws": 5.9.0
+    "@pulumi/pulumi": 3.35.0
     "@stripe/stripe-js": ^1.27.0
     "@types/medium-editor": ^5.0.5
     "@types/react": 16.14.4
     "@types/react-google-recaptcha": ^2.1.5
-    "@webiny/app-page-builder": 5.28.0
-    "@webiny/ui": 5.28.0
+    "@webiny/app-page-builder": 5.29.0
+    "@webiny/ui": 5.29.0
     react: 16.14.0
     react-dom: 16.14.0
     react-google-recaptcha: ^2.1.0
@@ -4712,82 +4712,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@protobufjs/aspromise@npm:^1.1.1, @protobufjs/aspromise@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@protobufjs/aspromise@npm:1.1.2"
-  checksum: 011fe7ef0826b0fd1a95935a033a3c0fd08483903e1aa8f8b4e0704e3233406abb9ee25350ec0c20bbecb2aad8da0dcea58b392bbd77d6690736f02c143865d2
-  languageName: node
-  linkType: hard
-
-"@protobufjs/base64@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@protobufjs/base64@npm:1.1.2"
-  checksum: 67173ac34de1e242c55da52c2f5bdc65505d82453893f9b51dc74af9fe4c065cf4a657a4538e91b0d4a1a1e0a0642215e31894c31650ff6e3831471061e1ee9e
-  languageName: node
-  linkType: hard
-
-"@protobufjs/codegen@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@protobufjs/codegen@npm:2.0.4"
-  checksum: 59240c850b1d3d0b56d8f8098dd04787dcaec5c5bd8de186fa548de86b86076e1c50e80144b90335e705a044edf5bc8b0998548474c2a10a98c7e004a1547e4b
-  languageName: node
-  linkType: hard
-
-"@protobufjs/eventemitter@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@protobufjs/eventemitter@npm:1.1.0"
-  checksum: 0369163a3d226851682f855f81413cbf166cd98f131edb94a0f67f79e75342d86e89df9d7a1df08ac28be2bc77e0a7f0200526bb6c2a407abbfee1f0262d5fd7
-  languageName: node
-  linkType: hard
-
-"@protobufjs/fetch@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@protobufjs/fetch@npm:1.1.0"
-  dependencies:
-    "@protobufjs/aspromise": ^1.1.1
-    "@protobufjs/inquire": ^1.1.0
-  checksum: 3fce7e09eb3f1171dd55a192066450f65324fd5f7cc01a431df01bb00d0a895e6bfb5b0c5561ce157ee1d886349c90703d10a4e11a1a256418ff591b969b3477
-  languageName: node
-  linkType: hard
-
-"@protobufjs/float@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@protobufjs/float@npm:1.0.2"
-  checksum: 5781e1241270b8bd1591d324ca9e3a3128d2f768077a446187a049e36505e91bc4156ed5ac3159c3ce3d2ba3743dbc757b051b2d723eea9cd367bfd54ab29b2f
-  languageName: node
-  linkType: hard
-
-"@protobufjs/inquire@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@protobufjs/inquire@npm:1.1.0"
-  checksum: ca06f02eaf65ca36fb7498fc3492b7fc087bfcc85c702bac5b86fad34b692bdce4990e0ef444c1e2aea8c034227bd1f0484be02810d5d7e931c55445555646f4
-  languageName: node
-  linkType: hard
-
-"@protobufjs/path@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@protobufjs/path@npm:1.1.2"
-  checksum: 856eeb532b16a7aac071cacde5c5620df800db4c80cee6dbc56380524736205aae21e5ae47739114bf669ab5e8ba0e767a282ad894f3b5e124197cb9224445ee
-  languageName: node
-  linkType: hard
-
-"@protobufjs/pool@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@protobufjs/pool@npm:1.1.0"
-  checksum: d6a34fbbd24f729e2a10ee915b74e1d77d52214de626b921b2d77288bd8f2386808da2315080f2905761527cceffe7ec34c7647bd21a5ae41a25e8212ff79451
-  languageName: node
-  linkType: hard
-
-"@protobufjs/utf8@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@protobufjs/utf8@npm:1.1.0"
-  checksum: f9bf3163d13aaa3b6f5e6fbf37a116e094ea021c0e1f2a7ccd0e12a29e2ce08dafba4e8b36e13f8ed7397e1591610ce880ed1289af4d66cf4ace8a36a9557278
-  languageName: node
-  linkType: hard
-
-"@pulumi/aws@npm:4.28.0":
-  version: 4.28.0
-  resolution: "@pulumi/aws@npm:4.28.0"
+"@pulumi/aws@npm:5.9.0":
+  version: 5.9.0
+  resolution: "@pulumi/aws@npm:5.9.0"
   dependencies:
     "@pulumi/pulumi": ^3.0.0
     aws-sdk: ^2.0.0
@@ -4795,22 +4722,22 @@ __metadata:
     mime: ^2.0.0
     read-package-tree: ^5.2.1
     resolve: ^1.7.1
-  checksum: fbcc255d7836ca7f6cd73e31c3e0b0a063606fb140dd221483839c3de949b3fd1535879c7cd673702c80970fcb5b8072610efca704de885f9a5ad33b215fd58d
+  checksum: caa8ac071770e3198fc9a8c3e724b245aab63bfb0b10e5f34777406b1c19f5d2a9571a36c3383d8d8b18fa1d2e29722cfa94d0060dcdee69b4432c7841378f6b
   languageName: node
   linkType: hard
 
-"@pulumi/pulumi@npm:3.25.0":
-  version: 3.25.0
-  resolution: "@pulumi/pulumi@npm:3.25.0"
+"@pulumi/pulumi@npm:3.35.0":
+  version: 3.35.0
+  resolution: "@pulumi/pulumi@npm:3.35.0"
   dependencies:
     "@grpc/grpc-js": ~1.3.8
     "@logdna/tail-file": ^2.0.6
     "@pulumi/query": ^0.3.0
     google-protobuf: ^3.5.0
+    ini: ^2.0.0
     js-yaml: ^3.14.0
-    minimist: ^1.2.0
+    minimist: ^1.2.6
     normalize-package-data: ^2.4.0
-    protobufjs: ^6.8.6
     read-package-tree: ^5.3.1
     require-from-string: ^2.0.1
     semver: ^6.1.0
@@ -4818,7 +4745,30 @@ __metadata:
     ts-node: ^7.0.1
     typescript: ~3.7.3
     upath: ^1.1.0
-  checksum: 5f7af45f2c2cfad5f6202ad50112b9ccc0261ce8aeec47700396a1cd33728997dc7e483a35b43724db18433097ff78fa34325a180b549957e9257dd2520b8153
+  checksum: 8ab70858ba20735f3bf3eccdbc9c938874750fccbaef29bff20121cb286aff035de5d12e74b1192b1bde016ff7ea156f9c15a93e37b87e94ada0e5795ab72032
+  languageName: node
+  linkType: hard
+
+"@pulumi/pulumi@npm:^3.0.0":
+  version: 3.35.1
+  resolution: "@pulumi/pulumi@npm:3.35.1"
+  dependencies:
+    "@grpc/grpc-js": ~1.3.8
+    "@logdna/tail-file": ^2.0.6
+    "@pulumi/query": ^0.3.0
+    google-protobuf: ^3.5.0
+    ini: ^2.0.0
+    js-yaml: ^3.14.0
+    minimist: ^1.2.6
+    normalize-package-data: ^2.4.0
+    read-package-tree: ^5.3.1
+    require-from-string: ^2.0.1
+    semver: ^6.1.0
+    source-map-support: ^0.4.16
+    ts-node: ^7.0.1
+    typescript: ~3.7.3
+    upath: ^1.1.0
+  checksum: 5c73f9a6eb2ce68073110dd49e677be9a70a1b823ed7e7ddb953c1c5c726303d0e9e116007a22fe937ee697aa78fe2a35387a2574479d11ab12bd16171903388
   languageName: node
   linkType: hard
 
@@ -5234,9 +5184,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rmwc/textfield@file:./rmwc/textfield::locator=%40webiny%2Fui%40npm%3A5.28.0":
+"@rmwc/textfield@file:./rmwc/textfield::locator=%40webiny%2Fui%40npm%3A5.29.0":
   version: 5.7.2
-  resolution: "@rmwc/textfield@file:./rmwc/textfield#./rmwc/textfield::hash=664c75&locator=%40webiny%2Fui%40npm%3A5.28.0"
+  resolution: "@rmwc/textfield@file:./rmwc/textfield#./rmwc/textfield::hash=664c75&locator=%40webiny%2Fui%40npm%3A5.29.0"
   dependencies:
     "@material/textfield": ^3.1.0
     "@rmwc/base": ^5.7.2
@@ -5762,13 +5712,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/long@npm:^4.0.1":
-  version: 4.0.2
-  resolution: "@types/long@npm:4.0.2"
-  checksum: d16cde7240d834cf44ba1eaec49e78ae3180e724cd667052b194a372f350d024cba8dd3f37b0864931683dab09ca935d52f0c4c1687178af5ada9fc85b0635f4
-  languageName: node
-  linkType: hard
-
 "@types/medium-editor@npm:5.0.5, @types/medium-editor@npm:^5.0.5":
   version: 5.0.5
   resolution: "@types/medium-editor@npm:5.0.5"
@@ -5804,10 +5747,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0, @types/node@npm:>=6, @types/node@npm:>=8.1.0":
+"@types/node@npm:*, @types/node@npm:>=6, @types/node@npm:>=8.1.0":
   version: 17.0.32
   resolution: "@types/node@npm:17.0.32"
   checksum: afb05704b42032566b3da8b2d80a68883cd3b888472d1b8b4dd6c84f8fad371454f083d4e28bd30c10589187296119d92aba255638b30067afe062b5922388a5
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:>=12.12.47":
+  version: 18.0.0
+  resolution: "@types/node@npm:18.0.0"
+  checksum: aab2b325727a2599f6d25ebe0dedf58c40fb66a51ce4ca9c0226ceb70fcda2d3afccdca29db5942eb48b158ee8585a274a1e3750c718bbd5399d7f41d62dfdcc
   languageName: node
   linkType: hard
 
@@ -6161,47 +6111,48 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webiny/app-admin-core@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/app-admin-core@npm:5.28.0"
+"@webiny/app-admin-core@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app-admin-core@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
     "@types/react": 16.14.2
-    "@webiny/app": 5.28.0
-    "@webiny/plugins": 5.28.0
-    "@webiny/react-composition": 5.28.0
-    "@webiny/react-router": 5.28.0
+    "@webiny/app": 5.29.0
+    "@webiny/plugins": 5.29.0
+    "@webiny/react-composition": 5.29.0
+    "@webiny/react-router": 5.29.0
     lodash.debounce: 4.0.8
     react: 16.14.0
     react-dom: 16.14.0
-  checksum: 779ed80d63d824a60e70791506e08aadd3c06a55b0f199fa931ca74cacda86364b6d7f8884fd713b870518998fba76dca931d81ff57bb2e97d45445ba964dcab
+  checksum: 6e2a94328013151787303b50678104d48909ee3c6d6adf501521c3e10196e414e34a823ae34e7d9ff08d08402a920569f4599c3ce39f91d9304d40eb59375b18
   languageName: node
   linkType: hard
 
-"@webiny/app-admin@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/app-admin@npm:5.28.0"
+"@webiny/app-admin@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app-admin@npm:5.29.0"
   dependencies:
     "@apollo/react-common": 3.1.4
     "@apollo/react-components": 3.1.5
     "@apollo/react-hooks": 3.1.5
     "@babel/runtime": 7.18.3
-    "@editorjs/editorjs": 2.24.3
+    "@editorjs/editorjs": 2.25.0
     "@emotion/core": 10.3.1
     "@emotion/styled": 10.3.0
     "@svgr/webpack": 6.2.1
     "@types/mime": 2.0.3
     "@types/react": 16.14.2
-    "@webiny/app": 5.28.0
-    "@webiny/app-admin-core": 5.28.0
-    "@webiny/app-security": 5.28.0
-    "@webiny/form": 5.28.0
-    "@webiny/plugins": 5.28.0
-    "@webiny/react-router": 5.28.0
-    "@webiny/telemetry": 5.28.0
-    "@webiny/ui": 5.28.0
-    "@webiny/ui-composer": 5.28.0
-    "@webiny/validation": 5.28.0
+    "@webiny/app": 5.29.0
+    "@webiny/app-admin-core": 5.29.0
+    "@webiny/app-security": 5.29.0
+    "@webiny/app-wcp": 5.29.0
+    "@webiny/form": 5.29.0
+    "@webiny/plugins": 5.29.0
+    "@webiny/react-router": 5.29.0
+    "@webiny/telemetry": 5.29.0
+    "@webiny/ui": 5.29.0
+    "@webiny/ui-composer": 5.29.0
+    "@webiny/validation": 5.29.0
     apollo-cache: 1.3.5
     apollo-client: 2.6.10
     apollo-link: 1.2.14
@@ -6209,7 +6160,7 @@ __metadata:
     bytes: 3.1.2
     classnames: 2.3.1
     dataurl-to-blob: 0.0.1
-    dayjs: 1.11.2
+    dayjs: 1.11.3
     dot-prop-immutable: 2.1.1
     downshift: 3.4.8
     emotion: 10.0.27
@@ -6230,27 +6181,27 @@ __metadata:
     react-transition-group: 4.4.2
     semver: 7.3.7
     store: 2.0.12
-  checksum: 601fe7258631279f86ad49b407712d8262be178f3f31b8f5e1fb22b0af2f809a6d4c0437104df3c05c08ad832d566ef11dffd4c8b378d592996d0acf9bf101c8
+  checksum: 2184e6602dea174c48dd32e94ad8625b9bd0e05f658aba5840482010abcd1e655ad02b1d4b39326fa6defbbf6d4cf1019283da24e7d6b68c041ba19d50b6c288
   languageName: node
   linkType: hard
 
-"@webiny/app-i18n@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/app-i18n@npm:5.28.0"
+"@webiny/app-i18n@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app-i18n@npm:5.29.0"
   dependencies:
     "@apollo/react-hooks": 3.1.5
     "@babel/runtime": 7.18.3
     "@emotion/core": 10.3.1
     "@emotion/styled": 10.3.0
     "@types/react": 16.14.2
-    "@webiny/app": 5.28.0
-    "@webiny/app-admin": 5.28.0
-    "@webiny/app-security": 5.28.0
-    "@webiny/form": 5.28.0
-    "@webiny/plugins": 5.28.0
-    "@webiny/react-router": 5.28.0
-    "@webiny/ui": 5.28.0
-    "@webiny/validation": 5.28.0
+    "@webiny/app": 5.29.0
+    "@webiny/app-admin": 5.29.0
+    "@webiny/app-security": 5.29.0
+    "@webiny/form": 5.29.0
+    "@webiny/plugins": 5.29.0
+    "@webiny/react-router": 5.29.0
+    "@webiny/ui": 5.29.0
+    "@webiny/validation": 5.29.0
     apollo-cache: 1.3.5
     apollo-client: 2.6.10
     apollo-link: 1.2.14
@@ -6262,26 +6213,26 @@ __metadata:
     prop-types: 15.8.1
     react: 16.14.0
     react-dom: 16.14.0
-  checksum: 0111b51fe7c1baf13bce2cebb26d5dc3d8c16092033822776aa321eb7fac41930df005151c9dec74c7bc08203291d78d700f00a6250a4cb0f3f2d1630f61539d
+  checksum: 4f312928e5a30c56a33604e8a91b93138e1e0396c5a3ca6fa712ec7ec259080d2738675d01076f60b08142e771f4f80513b766ab57c8ca4b6b4d39f07ee10eea
   languageName: node
   linkType: hard
 
-"@webiny/app-page-builder-elements@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/app-page-builder-elements@npm:5.28.0"
+"@webiny/app-page-builder-elements@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app-page-builder-elements@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
     "@emotion/css": 11.9.0
     csstype: 3.1.0
   peerDependencies:
     react: ^16.14.0
-  checksum: bcef63cd00dc14b4d13675210531c88a9e8e119c3a76096c4206038c4bdb57fac42eb8c5cb6e2ff49b5ff6f304d60d21acf61aba939e2feb224530c26b6b36de
+  checksum: 6feaa976133ee559790e3dcd91750a8802ef297f196c61ed08f41b8d46a9065609eeb202e723310e993258b4ae6b1122d437a170fd410869149573b256f4168e
   languageName: node
   linkType: hard
 
-"@webiny/app-page-builder@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/app-page-builder@npm:5.28.0"
+"@webiny/app-page-builder@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app-page-builder@npm:5.29.0"
   dependencies:
     "@apollo/react-common": 3.1.4
     "@apollo/react-components": 3.1.5
@@ -6298,19 +6249,19 @@ __metadata:
     "@svgr/webpack": 6.2.1
     "@types/medium-editor": 5.0.5
     "@types/react": 16.14.2
-    "@webiny/app": 5.28.0
-    "@webiny/app-admin": 5.28.0
-    "@webiny/app-i18n": 5.28.0
-    "@webiny/app-page-builder-elements": 5.28.0
-    "@webiny/app-plugin-admin-welcome-screen": 5.28.0
-    "@webiny/app-security": 5.28.0
-    "@webiny/app-tenancy": 5.28.0
-    "@webiny/form": 5.28.0
-    "@webiny/plugins": 5.28.0
-    "@webiny/react-router": 5.28.0
-    "@webiny/telemetry": 5.28.0
-    "@webiny/ui": 5.28.0
-    "@webiny/validation": 5.28.0
+    "@webiny/app": 5.29.0
+    "@webiny/app-admin": 5.29.0
+    "@webiny/app-i18n": 5.29.0
+    "@webiny/app-page-builder-elements": 5.29.0
+    "@webiny/app-plugin-admin-welcome-screen": 5.29.0
+    "@webiny/app-security": 5.29.0
+    "@webiny/app-tenancy": 5.29.0
+    "@webiny/form": 5.29.0
+    "@webiny/plugins": 5.29.0
+    "@webiny/react-router": 5.29.0
+    "@webiny/telemetry": 5.29.0
+    "@webiny/ui": 5.29.0
+    "@webiny/validation": 5.29.0
     aos: 2.3.4
     apollo-cache: 1.3.5
     apollo-client: 2.6.10
@@ -6347,70 +6298,88 @@ __metadata:
     timeago-react: 2.0.1
     uniqid: 5.4.0
     warning: 4.0.3
-  checksum: 77579b401061267d807527075c4df1e279d76592318de1f3d8aecf350e62a7f68c0a72cdd4aeecdc7a4988dc1198a0aa43fd6f02f43d64d403610ac9733ecf45
+  checksum: 6cac57a15751cf60e9886fde831e3960f00584425bbf26f189e9fb748dbc1ca60f2c8e2aadbb64e5ccd785a1fb0a6d090c79fbf75a9da11d443c3f54025835f5
   languageName: node
   linkType: hard
 
-"@webiny/app-plugin-admin-welcome-screen@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/app-plugin-admin-welcome-screen@npm:5.28.0"
+"@webiny/app-plugin-admin-welcome-screen@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app-plugin-admin-welcome-screen@npm:5.29.0"
   dependencies:
-    "@webiny/plugins": 5.28.0
+    "@webiny/plugins": 5.29.0
     react: 16.14.0
     react-dom: 16.14.0
-  checksum: 53cdee624a2f513dcfb160cde43d9d4f598014a9a09427d56557fb832e3ea059ca2b033fdac5addf1e4a816bc9303394d5eedafc6d0ba01696af38525fa1e5d2
+  checksum: ab8cf9465b5dd183eace98cf13789cf89d25002002feb6e77840404f9b891b71849bc134e3b7a69609708daf865c9c1cf9c68c9f436bf6c497b6c443873fb3c4
   languageName: node
   linkType: hard
 
-"@webiny/app-security@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/app-security@npm:5.28.0"
+"@webiny/app-security@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app-security@npm:5.29.0"
   dependencies:
-    "@webiny/app": 5.28.0
-    "@webiny/app-admin-core": 5.28.0
-    "@webiny/plugins": 5.28.0
+    "@webiny/app": 5.29.0
+    "@webiny/app-admin-core": 5.29.0
+    "@webiny/plugins": 5.29.0
     minimatch: 3.1.2
     react: 16.14.0
     react-dom: 16.14.0
-  checksum: e3d8ddda378e03ef5130e11b55e0794bac4077f0ba9be74ec7d73dcab43b7e10558292aaf81cddb763d936eaf7611caf2d9db6223813616c1ff5207fd9d38249
+  checksum: b04596fe5bbc0630c112e0f94897473cced9ba8be6b435ea216c6963b56dcf7a5b759a317e3b501b7649174d52dd505c46e44a561f8fefb1c0b1a1b2835002ef
   languageName: node
   linkType: hard
 
-"@webiny/app-tenancy@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/app-tenancy@npm:5.28.0"
+"@webiny/app-tenancy@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app-tenancy@npm:5.29.0"
   dependencies:
     "@apollo/react-hooks": 3.1.5
     "@babel/runtime": 7.18.3
     "@emotion/styled": 10.3.0
     "@types/react": 16.14.2
-    "@webiny/app": 5.28.0
-    "@webiny/app-admin": 5.28.0
-    "@webiny/plugins": 5.28.0
-    "@webiny/ui": 5.28.0
+    "@webiny/app": 5.29.0
+    "@webiny/app-admin": 5.29.0
+    "@webiny/plugins": 5.29.0
+    "@webiny/ui": 5.29.0
     apollo-client: 2.6.10
     graphql-tag: 2.12.6
     react: 16.14.0
     react-dom: 16.14.0
     store: 2.0.12
-  checksum: 049fcfdb5f95f4b4badfe290b49fee3edf067ee34e8c62bd0c83676a94bee95c05271816109fd0ef9418ef5db0167f7c2e5ea1311d9460307fd58b913437acc1
+  checksum: 2039e1d65c18ad163374f9a079763729f7e22ffa4dc69c70a2e2af1ba00c930f10a1dbc2dc73e7fb61c00e4cfcd19624404588bcee77b39b5a2eab1564b74775
   languageName: node
   linkType: hard
 
-"@webiny/app@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/app@npm:5.28.0"
+"@webiny/app-wcp@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app-wcp@npm:5.29.0"
+  dependencies:
+    "@apollo/react-hooks": 3.1.5
+    "@babel/runtime": 7.18.3
+    "@emotion/core": 10.3.1
+    apollo-cache: 1.3.5
+    apollo-client: 2.6.10
+    apollo-link: 1.2.14
+    apollo-utilities: 1.3.4
+    graphql-tag: 2.12.6
+    react: 16.14.0
+    react-dom: 16.14.0
+  checksum: f53150d5f48eb2e04829531226a99c8f245e97fc3e9de7eb1dded7032ba9d1de5154d117c57dd195f84666d10f32c29b5f018c7afdedb5eb6c67f1e7ce37b413
+  languageName: node
+  linkType: hard
+
+"@webiny/app@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/app@npm:5.29.0"
   dependencies:
     "@apollo/react-hooks": 3.1.5
     "@babel/runtime": 7.18.3
     "@emotion/styled": 10.3.0
     "@types/react": 16.14.2
     "@types/web": 0.0.61
-    "@webiny/i18n": 5.28.0
-    "@webiny/i18n-react": 5.28.0
-    "@webiny/plugins": 5.28.0
-    "@webiny/react-router": 5.28.0
-    "@webiny/ui": 5.28.0
+    "@webiny/i18n": 5.29.0
+    "@webiny/i18n-react": 5.29.0
+    "@webiny/plugins": 5.29.0
+    "@webiny/react-router": 5.29.0
+    "@webiny/ui": 5.29.0
     apollo-cache: 1.3.5
     apollo-cache-inmemory: 1.6.6
     apollo-client: 2.6.10
@@ -6427,50 +6396,50 @@ __metadata:
     react: 16.14.0
     react-dom: 16.14.0
     warning: 4.0.3
-  checksum: a7b3a66cf4effd14d817ef478ee7bb23f66a0a3f3a386299df2cdd161ff650093b6f61c55c5f4604d230e10225ed2da19807fc7e3469815b8c5e87c39248d128
+  checksum: 892a10de87e09b02fecde933584a1cc6de602deead7b34e33345140ff910434762a9fcf2aa29cfeea1aa559bcbfd4f45d40f6d58c6627c835827c80cbaf350eb
   languageName: node
   linkType: hard
 
-"@webiny/form@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/form@npm:5.28.0"
+"@webiny/form@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/form@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
-    "@webiny/validation": 5.28.0
+    "@webiny/validation": 5.29.0
     lodash: 4.17.21
   peerDependencies:
     react: ^16.14.0
-  checksum: 70b64de800de222f1c227acbc7efd16558ad006baf05f8af64f49099922698a33d2c824a0f104a435a696aa5d40b0d51240a8a608dde8b7956921f5586f2661d
+  checksum: 83149244caf914accd335c0ae1242a28840a2497a244b23b22891819ded491924ccf376b7284907e4e99e70f38c8da9c445337bf1ce49c33ae31a07f4fc166f4
   languageName: node
   linkType: hard
 
-"@webiny/global-config@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/global-config@npm:5.28.0"
+"@webiny/global-config@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/global-config@npm:5.29.0"
   dependencies:
     load-json-file: 6.2.0
     uuid: 8.3.2
     write-json-file: 4.3.0
-  checksum: 31acec7affa56eb00dbb3531918cf6255bb5ab9bb5f3c63c8baaf88f9cd966ca27632655f714b3d5ab3389706327369a4699612b767f3437c83c343399620ca3
+  checksum: 770fc30056e85fe12b99b88070c5752cae1c2607978e12a1f0c56eaf933ceacf90c0d8cfbcbcf30709e5ee71eb3dade2ec3d564a30e1841eea510f5012250401
   languageName: node
   linkType: hard
 
-"@webiny/i18n-react@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/i18n-react@npm:5.28.0"
+"@webiny/i18n-react@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/i18n-react@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
-    "@webiny/i18n": 5.28.0
+    "@webiny/i18n": 5.29.0
     lodash: 4.17.21
   peerDependencies:
     react: ^16.14.0
-  checksum: 2bcb77345c2ec4b28d3e12fcaad737365c2e4ee8cf084a92bc05bde4b6a1528ccbb90f42e1f891a41bccc128e900c439978e67f75ea5531005db2cbd6df27fc4
+  checksum: 779094738dc93b94f14b13192e9881773fdaa67dad8d83d45552a3b616e717f5190371b5d140ca5774e10ee9c8f87c22b947f87e7f39ca900512b851574c65ec
   languageName: node
   linkType: hard
 
-"@webiny/i18n@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/i18n@npm:5.28.0"
+"@webiny/i18n@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/i18n@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
     accounting: 0.4.1
@@ -6480,41 +6449,41 @@ __metadata:
     yargs: 17.5.1
   peerDependencies:
     react: ^16.14.0
-  checksum: 9708ac67c6d937ea06d67ca379a77f5655fc815f2c7b308e5fd3941180e6f2adcbc9da0a9c92bc7fb2adab006a8c7340f1bdfac21fc42b7ecf5fd90be16b0c27
+  checksum: a0a586a42b0007131cb1a08c6d7ddf35cb057de4b98ac2719d34e73e83787549e061ff670623476bb1a587469937ebc3251fada2dde66b3d2d840aed30f8e067
   languageName: node
   linkType: hard
 
-"@webiny/plugins@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/plugins@npm:5.28.0"
+"@webiny/plugins@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/plugins@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
     uniqid: 5.4.0
-  checksum: c0545db2c084b0bb6ae46fada81d6b9be9fcf2d937ce01920fd47da50c73ad6a59f26c5a519dd95369a617a21a209e48f1daa9ff40acd873dbba2d09b25f685a
+  checksum: 084ef0dd15efb650887f2de563f8af1faa79e24c3cf2ba10b17f193cdb3854a69d08cd49463ba8516df0278198448198c1db3babf763014d672296bc5acdf2e5
   languageName: node
   linkType: hard
 
-"@webiny/react-composition@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/react-composition@npm:5.28.0"
+"@webiny/react-composition@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/react-composition@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
     "@types/react": 16.14.2
     lodash.debounce: 4.0.8
     react: 16.14.0
     react-dom: 16.14.0
-  checksum: 7e0cf088c23fb25ad8f829b8417d632ec92bb3d4d4ff8a09f92bca1b1de7294549a06514f861977f284f67358d8b824084219e7f9094234add2f18ee15849cd7
+  checksum: 54c89ac7cea126ca9c5fe4a0c00b27dde9a4240757d952b0f55416676701b1e758aed0c0d08ced4bdb4e027bc236e88d63a29aff2aa1156106e1cd99ec4865c1
   languageName: node
   linkType: hard
 
-"@webiny/react-router@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/react-router@npm:5.28.0"
+"@webiny/react-router@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/react-router@npm:5.29.0"
   dependencies:
     "@apollo/react-hooks": 3.1.5
     "@babel/runtime": 7.18.3
-    "@webiny/plugins": 5.28.0
-    "@webiny/react-composition": 5.28.0
+    "@webiny/plugins": 5.29.0
+    "@webiny/react-composition": 5.29.0
     apollo-client: 2.6.10
     graphql: 15.8.0
     history: 5.3.0
@@ -6523,40 +6492,40 @@ __metadata:
     react-router-dom: 6.3.0
   peerDependencies:
     react: ^16.14.0
-  checksum: 668f6f8c403268ae71f6ff57b330664f981adac644353c04f6f8cb44dd0307ec78be8900e745d4f80a290b64aa546ad0fc7b57000f8de1fb2513c2e454d9e2d4
+  checksum: 5a1676311fd4be7645ecbe94b1514cf3901badbd28f2b97ad3963e68da761c76d02c1a563ea4e275900873880e5eda8e7216a5f4740e91d5d8e122c8e75a2914
   languageName: node
   linkType: hard
 
-"@webiny/telemetry@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/telemetry@npm:5.28.0"
+"@webiny/telemetry@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/telemetry@npm:5.29.0"
   dependencies:
-    "@webiny/global-config": 5.28.0
+    "@webiny/global-config": 5.29.0
     form-data: 3.0.0
     node-fetch: 2.6.1
-  checksum: 45d7f4c57445440b48108fc85e3222396e96953539e78795efcb5738019e1c1b13deb884c7328328e80e126dfdc52be603394c393a45afe0e30d0f5aef1943b9
+  checksum: f04f51275513aa657a1f3e2711d53ef98a9c59ff5bb5be877627c10f273809a40ec6d4fe055d33e9ee8c8113e69f3d552197ad020b6c5e6e062792d2bf9a364a
   languageName: node
   linkType: hard
 
-"@webiny/ui-composer@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/ui-composer@npm:5.28.0"
+"@webiny/ui-composer@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/ui-composer@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
-    "@webiny/plugins": 5.28.0
+    "@webiny/plugins": 5.29.0
     p-wait-for: 4.1.0
     react: 16.14.0
     react-dom: 16.14.0
-  checksum: da0f85d3b36b3e43fc36d1bcd3b172372fbe25883135023e0e3cb04390a44ba128ec59e6aacf4acdc9b1d6957be2369dd6c34ac5f31143b0a7190f7b9351afb8
+  checksum: 8c6f7d85fa8d2bf274672e94d1ed37a1059595d86cd994542d843b5c921182e24aa6d859e3157e9efac1fbf7c5b5254417fb25be11cd5704cfd0b4939675e3a1
   languageName: node
   linkType: hard
 
-"@webiny/ui@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/ui@npm:5.28.0"
+"@webiny/ui@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/ui@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
-    "@editorjs/editorjs": 2.24.3
+    "@editorjs/editorjs": 2.25.0
     "@emotion/core": 10.3.1
     "@emotion/styled": 10.3.0
     "@material/base": 3.1.0
@@ -6617,18 +6586,18 @@ __metadata:
   peerDependencies:
     react: ^16.14.0
     react-dom: ^16.14.0
-  checksum: c146ca5b5cc1961e2976991a782d7ec3f8b2aa19e9fc258b40539908b887a84ed334b46b2075b2cb3cf9fb34d68addb113258eb8b88819ae0bb9b0f928a88a70
+  checksum: c5a22a6b172a7ac25061a292fb157fd5b7ee17f7c99bbdd4e57aea031345d4445e934b3051dbc5804d0b4441c61752af26db1e5a221c4030879f70c48a2b5ca3
   languageName: node
   linkType: hard
 
-"@webiny/validation@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@webiny/validation@npm:5.28.0"
+"@webiny/validation@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@webiny/validation@npm:5.29.0"
   dependencies:
     "@babel/runtime": 7.18.3
     isnumeric: 0.3.3
     lodash: 4.17.21
-  checksum: f466338975bfde9adc0440ed486619d105c9064222c430c976d428a232f3d18d918640b27f3dfdeed93e09f173226b9f3e4e976c5191292d5165ec1f248a095a
+  checksum: 4a363b85fa00066da202c4f8b6d2aa50664d95d02f0150b81f5749947d0399cf381df45ac370062e024dbcc5a423ab47b38e8a6877e77c3109778f05a4ca806e
   languageName: node
   linkType: hard
 
@@ -7342,8 +7311,8 @@ __metadata:
   linkType: hard
 
 "aws-sdk@npm:^2.0.0":
-  version: 2.1133.0
-  resolution: "aws-sdk@npm:2.1133.0"
+  version: 2.1163.0
+  resolution: "aws-sdk@npm:2.1163.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -7352,9 +7321,9 @@ __metadata:
     querystring: 0.2.0
     sax: 1.2.1
     url: 0.10.3
-    uuid: 3.3.2
+    uuid: 8.0.0
     xml2js: 0.4.19
-  checksum: e8a96f539e389bb9ed3ce3359fb41bff2672d4729a03cd6c3627f2cc28ddcaa43d6e3ad6401a468cca6ea7d86e79d53e02c5349fe17fc9344ef12a2f62d7e292
+  checksum: 210512ababb8f912d3a7ddb53372633adc85878c855d6fca4ef63b607f5041ec07ed391bf1809f8b7b86b7e6ba68772e097c55d73b6058b9cc67757e23837018
   languageName: node
   linkType: hard
 
@@ -8791,10 +8760,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:1.11.2":
-  version: 1.11.2
-  resolution: "dayjs@npm:1.11.2"
-  checksum: 78f8bd04a9e5f5554aa06eacda65a7d59e162d39f621a46fd34fb3b51367c3662426d86b4e2f4ac535f81e0c4d5af3e8a83b37e672412eb556267d726c61f8f3
+"dayjs@npm:1.11.3":
+  version: 1.11.3
+  resolution: "dayjs@npm:1.11.3"
+  checksum: c87e06b562a51ae6568cc5b840c7579d82a0f8af7163128c858fe512d3d71d07bd8e8e464b8cc41b8698a9e26b80ab2c082d14a1cd4c33df5692d77ccdfc5a43
   languageName: node
   linkType: hard
 
@@ -11145,6 +11114,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ini@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "ini@npm:2.0.0"
+  checksum: e7aadc5fb2e4aefc666d74ee2160c073995a4061556b1b5b4241ecb19ad609243b9cceafe91bae49c219519394bbd31512516cb22a3b1ca6e66d869e0447e84e
+  languageName: node
+  linkType: hard
+
 "init-package-json@npm:^2.0.2":
   version: 2.0.5
   resolution: "init-package-json@npm:2.0.5"
@@ -11336,7 +11312,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-core-module@npm:^2.5.0, is-core-module@npm:^2.8.1":
+"is-core-module@npm:^2.5.0, is-core-module@npm:^2.8.1, is-core-module@npm:^2.9.0":
   version: 2.9.0
   resolution: "is-core-module@npm:2.9.0"
   dependencies:
@@ -12377,13 +12353,6 @@ __metadata:
   dependencies:
     chalk: ^2.0.1
   checksum: 4c95e3b65f0352dbe91dc4989c10baf7a44e2ef5b0db7e6721e1476268e2b6f7090c3aa880d4f833a05c5c3ff18f4ec5215a09bd0099986d64a8186cfeb48ac8
-  languageName: node
-  linkType: hard
-
-"long@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "long@npm:4.0.0"
-  checksum: 16afbe8f749c7c849db1f4de4e2e6a31ac6e617cead3bdc4f9605cb703cd20e1e9fc1a7baba674ffcca57d660a6e5b53a9e236d7b25a295d3855cca79cc06744
   languageName: node
   linkType: hard
 
@@ -14118,6 +14087,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "platform-components@workspace:."
   dependencies:
+    "@pulumi/aws": 5.9.0
+    "@pulumi/pulumi": 3.35.0
     "@webpack-cli/generators": ^2.4.2
     copyfiles: ^2.4.1
     jest-matcher-utils: ^28.1.0
@@ -14239,30 +14210,6 @@ __metadata:
   version: 1.2.4
   resolution: "proto-list@npm:1.2.4"
   checksum: 4d4826e1713cbfa0f15124ab0ae494c91b597a3c458670c9714c36e8baddf5a6aad22842776f2f5b137f259c8533e741771445eb8df82e861eea37a6eaba03f7
-  languageName: node
-  linkType: hard
-
-"protobufjs@npm:^6.8.6":
-  version: 6.11.2
-  resolution: "protobufjs@npm:6.11.2"
-  dependencies:
-    "@protobufjs/aspromise": ^1.1.2
-    "@protobufjs/base64": ^1.1.2
-    "@protobufjs/codegen": ^2.0.4
-    "@protobufjs/eventemitter": ^1.1.0
-    "@protobufjs/fetch": ^1.1.0
-    "@protobufjs/float": ^1.0.2
-    "@protobufjs/inquire": ^1.1.0
-    "@protobufjs/path": ^1.1.2
-    "@protobufjs/pool": ^1.1.0
-    "@protobufjs/utf8": ^1.1.0
-    "@types/long": ^4.0.1
-    "@types/node": ">=13.7.0"
-    long: ^4.0.0
-  bin:
-    pbjs: bin/pbjs
-    pbts: bin/pbts
-  checksum: 80e9d9610c3eb66f9eae4e44a1ae30381cedb721b7d5f635d781fe4c507e2c77bb7c879addcd1dda79733d3ae589d9e66fd18d42baf99b35df7382a0f9920795
   languageName: node
   linkType: hard
 
@@ -15475,7 +15422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.1.6, resolve@npm:^1.10.0, resolve@npm:^1.12.0, resolve@npm:^1.14.2, resolve@npm:^1.7.1, resolve@npm:^1.9.0":
+"resolve@npm:^1.1.6, resolve@npm:^1.10.0, resolve@npm:^1.12.0, resolve@npm:^1.14.2, resolve@npm:^1.9.0":
   version: 1.22.0
   resolution: "resolve@npm:1.22.0"
   dependencies:
@@ -15488,7 +15435,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.1.6#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.12.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.7.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.9.0#~builtin<compat/resolve>":
+"resolve@npm:^1.7.1":
+  version: 1.22.1
+  resolution: "resolve@npm:1.22.1"
+  dependencies:
+    is-core-module: ^2.9.0
+    path-parse: ^1.0.7
+    supports-preserve-symlinks-flag: ^1.0.0
+  bin:
+    resolve: bin/resolve
+  checksum: 07af5fc1e81aa1d866cbc9e9460fbb67318a10fa3c4deadc35c3ad8a898ee9a71a86a65e4755ac3195e0ea0cfbe201eb323ebe655ce90526fd61917313a34e4e
+  languageName: node
+  linkType: hard
+
+"resolve@patch:resolve@^1.1.6#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.12.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.9.0#~builtin<compat/resolve>":
   version: 1.22.0
   resolution: "resolve@patch:resolve@npm%3A1.22.0#~builtin<compat/resolve>::version=1.22.0&hash=07638b"
   dependencies:
@@ -15498,6 +15458,19 @@ __metadata:
   bin:
     resolve: bin/resolve
   checksum: c79ecaea36c872ee4a79e3db0d3d4160b593f2ca16e031d8283735acd01715a203607e9ded3f91f68899c2937fa0d49390cddbe0fb2852629212f3cda283f4a7
+  languageName: node
+  linkType: hard
+
+"resolve@patch:resolve@^1.7.1#~builtin<compat/resolve>":
+  version: 1.22.1
+  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=07638b"
+  dependencies:
+    is-core-module: ^2.9.0
+    path-parse: ^1.0.7
+    supports-preserve-symlinks-flag: ^1.0.0
+  bin:
+    resolve: bin/resolve
+  checksum: 5656f4d0bedcf8eb52685c1abdf8fbe73a1603bb1160a24d716e27a57f6cecbe2432ff9c89c2bd57542c3a7b9d14b1882b73bfe2e9d7849c9a4c0b8b39f02b8b
   languageName: node
   linkType: hard
 
@@ -17418,12 +17391,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:3.3.2":
-  version: 3.3.2
-  resolution: "uuid@npm:3.3.2"
+"uuid@npm:8.0.0":
+  version: 8.0.0
+  resolution: "uuid@npm:8.0.0"
   bin:
-    uuid: ./bin/uuid
-  checksum: 8793629d2799f500aeea9fcd0aec6c4e9fbcc4d62ed42159ad96be345c3fffac1bbf61a23e18e2782600884fee05e6d4012ce4b70d0037c8e987533ae6a77870
+    uuid: dist/bin/uuid
+  checksum: 56d4e23aa7ac26fa2db6bd1778db34cb8c9f5a10df1770a27167874bf6705fc8f14a4ac414af58a0d96c7653b2bd4848510b29d1c2ef8c91ccb17429c1872b5e
   languageName: node
   linkType: hard
 
