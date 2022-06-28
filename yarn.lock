@@ -2685,8 +2685,8 @@ __metadata:
     "@middy/http-error-handler": ^2.5.7
     "@middy/http-json-body-parser": ^2.5.7
     "@middy/validator": ^2.5.7
-    "@pulumi/aws": 5.9.0
-    "@pulumi/pulumi": 3.35.0
+    "@pulumi/aws": ^5.9.1
+    "@pulumi/pulumi": ^3.35.1
     "@stripe/stripe-js": ^1.27.0
     "@webiny/app-page-builder": 5.29.0
     stripe: ^8.216.0
@@ -2705,8 +2705,8 @@ __metadata:
     "@middy/http-error-handler": ^2.5.7
     "@middy/http-json-body-parser": ^2.5.7
     "@middy/validator": ^2.5.7
-    "@pulumi/aws": 5.9.0
-    "@pulumi/pulumi": 3.35.0
+    "@pulumi/aws": ^5.9.1
+    "@pulumi/pulumi": ^3.35.1
     "@stripe/stripe-js": ^1.27.0
     "@types/medium-editor": ^5.0.5
     "@types/react": 16.14.4
@@ -4726,6 +4726,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pulumi/aws@npm:^5.9.1":
+  version: 5.9.1
+  resolution: "@pulumi/aws@npm:5.9.1"
+  dependencies:
+    "@pulumi/pulumi": ^3.0.0
+    aws-sdk: ^2.0.0
+    builtin-modules: 3.0.0
+    mime: ^2.0.0
+    read-package-tree: ^5.2.1
+    resolve: ^1.7.1
+  checksum: 6bb9a2cd1583c538f4efd10b78c8c779703c9f39c47520dd5b9b25323f8ba7910c189d3bf483fcef9e2c33b1df9dd963d51992fbc3d240a17c9557373df94068
+  languageName: node
+  linkType: hard
+
 "@pulumi/pulumi@npm:3.35.0":
   version: 3.35.0
   resolution: "@pulumi/pulumi@npm:3.35.0"
@@ -4749,7 +4763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pulumi/pulumi@npm:^3.0.0":
+"@pulumi/pulumi@npm:^3.0.0, @pulumi/pulumi@npm:^3.35.1":
   version: 3.35.1
   resolution: "@pulumi/pulumi@npm:3.35.1"
   dependencies:
