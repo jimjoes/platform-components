@@ -27,10 +27,9 @@ const buildDomain = (
   };
 };
 
-const stackEnv = process.env.PULUMI_NODEJS_STACK;
+const stackEnv = String(process.env.WEBINY_ENV);
 const rootDomain =
   String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN);
-const rootZoneId = String(process.env.ROOT_ZONE_ID);
 const alternateCnames: DomainDescriptor[] = [];
 
 class CloudfrontApi {
@@ -205,11 +204,15 @@ class CloudfrontApi {
     }
 
     this.cloudfront = new aws.cloudfront.Distribution("api-cloudfront", config);
-    if (subdomain) {
+    if (subdomain && zone) {
       alternateCnames
         .map(
           (domainDescriptor) =>
-            new Route53(domainDescriptor, this.cloudfront, rootZoneId)
+            new Route53({
+              domainDescriptor,
+              distribution: this.cloudfront,
+              zone,
+            })
         )
         .map((route53) => route53.record.fqdn);
     }

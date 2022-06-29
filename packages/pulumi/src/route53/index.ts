@@ -44,19 +44,18 @@ export class Route53HostedZone {
 
 class Route53ARecord {
   record: aws.route53.Record;
-  constructor(
-    domainDescriptor: any,
-    distribution: aws.cloudfront.Distribution,
-    hostedZoneId?: string
-  ) {
-    const zoneId =
-      hostedZoneId ||
-      aws.route53
-        .getZone({ name: domainDescriptor.parentDomain }, { async: true })
-        .then((zone: any) => zone.zoneId);
+  constructor({
+    domainDescriptor,
+    distribution,
+    zone,
+  }: {
+    domainDescriptor: any;
+    distribution: aws.cloudfront.Distribution;
+    zone: aws.route53.Zone;
+  }) {
     this.record = new aws.route53.Record(domainDescriptor.domain, {
       name: domainDescriptor.subDomain,
-      zoneId,
+      zoneId: zone.id,
       type: "A",
       aliases: [
         {

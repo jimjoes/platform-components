@@ -25,9 +25,8 @@ const buildDomain = (
 };
 
 const stackEnv = process.env.PULUMI_NODEJS_STACK;
-const rootDomain = String(process.env.ROOT_DOMAIN);
-const rootZoneId = String(process.env.ROOT_ZONE_ID);
-const rootAcmCertificateArn = String(process.env.ROOT_ACM_CERTIFICATE_ARN);
+const rootDomain =
+  String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN);
 const alternateCnames: DomainDescriptor[] = [];
 
 class CloudfrontWebApp {
@@ -36,20 +35,25 @@ class CloudfrontWebApp {
   constructor({
     bucket,
     subdomain,
+    zone,
+    certificate,
   }: {
     bucket: aws.s3.Bucket;
     subdomain: string;
+    zone: aws.route53.Zone;
+    certificate: aws.acm.Certificate;
   }) {
-    if (stackEnv === "dev") {
-      alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
+    if (stackEnv === "dev" || stackEnv === "staging") {
+      alternateCnames.push(buildDomain(rootDomain, subdomain + "." + stackEnv));
     } else if (stackEnv === "prod") {
       alternateCnames.push(buildDomain(rootDomain, subdomain));
     }
 
     let viewerCertificate: inputs.cloudfront.DistributionViewerCertificate;
-    if (rootAcmCertificateArn) {
+
+    if (certificate) {
       viewerCertificate = {
-        acmCertificateArn: rootAcmCertificateArn,
+        acmCertificateArn: certificate.arn,
         sslSupportMethod: "sni-only",
       };
     } else {
@@ -160,7 +164,11 @@ class CloudfrontWebApp {
     alternateCnames
       .map(
         (domainDescriptor) =>
-          new Route53(domainDescriptor, this.cloudfront, rootZoneId)
+          new Route53({
+            domainDescriptor,
+            distribution: this.cloudfront,
+            zone: zone,
+          })
       )
       .map((route53) => route53.record.fqdn);
   }
