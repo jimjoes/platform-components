@@ -42,6 +42,30 @@ export class Route53HostedZone {
   }
 }
 
+export class Route53NsRecord {
+  record: aws.route53.Record;
+  constructor({
+    subDomain,
+    rootDomain,
+    zone,
+    records,
+  }: {
+    subDomain: string;
+    rootDomain: string;
+    zone: aws.route53.Zone;
+    records: string[];
+  }) {
+    this.record = new aws.route53.Record(subDomain + "-ns-record", {
+      zoneId: zone.id,
+      allowOverwrite: true,
+      name: subDomain + "." + rootDomain,
+      ttl: 172800,
+      type: "NS",
+      records: records,
+    });
+  }
+}
+
 class Route53ARecord {
   record: aws.route53.Record;
   constructor({

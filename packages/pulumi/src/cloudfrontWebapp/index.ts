@@ -1,6 +1,6 @@
 import * as aws from "@pulumi/aws";
 import { input as inputs } from "@pulumi/aws/types";
-import Route53 from "../route53";
+import Route53ARecord from "../route53";
 
 type DomainDescriptor = {
   domain: string;
@@ -164,7 +164,7 @@ class CloudfrontWebApp {
     alternateCnames
       .map(
         (domainDescriptor) =>
-          new Route53({
+          new Route53ARecord({
             domainDescriptor,
             distribution: this.cloudfront,
             zone: zone,
