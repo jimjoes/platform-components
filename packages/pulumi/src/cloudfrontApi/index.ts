@@ -28,9 +28,9 @@ const buildDomain = (
 };
 
 const stackEnv = process.env.PULUMI_NODEJS_STACK;
-const rootDomain = String(process.env.ROOT_DOMAIN);
+const rootDomain =
+  String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN);
 const rootZoneId = String(process.env.ROOT_ZONE_ID);
-const rootAcmCertificateArn = String(process.env.ROOT_ACM_CERTIFICATE_ARN);
 const alternateCnames: DomainDescriptor[] = [];
 
 class CloudfrontApi {
@@ -40,15 +40,19 @@ class CloudfrontApi {
   constructor({
     routes,
     subdomain,
+    zone,
+    certificate,
   }: {
     routes: Array<any>;
     subdomain?: string;
+    zone?: aws.route53.Zone;
+    certificate?: aws.acm.Certificate;
   }) {
     let allowedOrigins: string[] = [];
 
-    if (stackEnv === "dev") {
+    if (stackEnv === "dev" || stackEnv === "staging") {
       if (subdomain) {
-        alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
+        alternateCnames.push(buildDomain(rootDomain, subdomain + ".dev"));
         allowedOrigins = [
           "http://localhost:3000",
           "http://localhost:8000",
@@ -73,9 +77,9 @@ class CloudfrontApi {
     }
 
     let viewerCertificate: inputs.cloudfront.DistributionViewerCertificate;
-    if (rootAcmCertificateArn && subdomain) {
+    if (certificate && zone && subdomain) {
       viewerCertificate = {
-        acmCertificateArn: rootAcmCertificateArn,
+        acmCertificateArn: certificate.arn,
         sslSupportMethod: "sni-only",
       };
     } else {

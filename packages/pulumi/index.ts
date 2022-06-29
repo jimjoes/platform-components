@@ -14,8 +14,12 @@ import subscribeHandler from "./src/subscribe/code";
 import subscribeWebinyClickHandler from "./src/subscribe/clickHandler";
 import Secret from "./src/secret";
 import Parameter from "./src/parameter";
+import Route53ARecord from "./src/route53";
+import { Route53HostedZone } from "./src/route53";
 
 export {
+  Route53ARecord,
+  Route53HostedZone,
   Subscribe,
   subscribeHandler,
   subscribeWebinyClickHandler,
