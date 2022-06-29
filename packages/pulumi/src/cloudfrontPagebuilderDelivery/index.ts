@@ -39,21 +39,25 @@ class CloudfrontPagebuilderDelivery {
     subdomain,
     appS3Bucket,
     routingRules,
+    zone,
+    certificate,
   }: {
     subdomain?: string;
     appS3Bucket: aws.s3.Bucket;
     routingRules?: any;
+    zone?: aws.route53.Zone;
+    certificate?: aws.acm.Certificate;
   }) {
-    if (stackEnv === "dev" && subdomain) {
-      alternateCnames.push(buildDomain(rootDomain, subdomain + "-dev"));
+    if ((stackEnv === "dev" || stackEnv === "staging") && subdomain) {
+      alternateCnames.push(buildDomain(rootDomain, subdomain + "." + stackEnv));
     } else if (stackEnv === "prod" && subdomain) {
       alternateCnames.push(buildDomain(rootDomain, subdomain));
     }
 
     let viewerCertificate: inputs.cloudfront.DistributionViewerCertificate;
-    if (rootAcmCertificateArn) {
+    if (certificate) {
       viewerCertificate = {
-        acmCertificateArn: rootAcmCertificateArn,
+        acmCertificateArn: certificate.arn,
         sslSupportMethod: "sni-only",
       };
     } else {
@@ -204,11 +208,15 @@ class CloudfrontPagebuilderDelivery {
 
     this.cloudfront = new aws.cloudfront.Distribution("delivery", config);
 
-    if (subdomain) {
+    if (subdomain && zone) {
       alternateCnames
         .map(
           (domainDescriptor) =>
-            new Route53(domainDescriptor, this.cloudfront, rootZoneId)
+            new Route53({
+              domainDescriptor,
+              distribution: this.cloudfront,
+              zone: zone,
+            })
         )
         .map((route53) => route53.record.fqdn);
     }
