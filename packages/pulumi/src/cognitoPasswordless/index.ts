@@ -8,12 +8,19 @@ const DEBUG = String(process.env.DEBUG);
 class CognitoPasswordless {
   userPoolClient: aws.cognito.UserPoolClient;
   userPool: aws.cognito.UserPool;
-  constructor() {
-    const ses = new SES({ rootDomain: String(process.env.ROOT_DOMAIN) });
+
+  rootDomain: string;
+  constructor({ zone }: { zone: aws.route53.Zone }) {
+    this.rootDomain =
+      String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN);
+    const ses = new SES({
+      rootDomain: this.rootDomain,
+      zone: zone,
+    });
     const createAuthChallenge = new CreateAuthChallenge({
       env: {
         REGION: process.env.AWS_REGION,
-        ROOT_DOMAIN: process.env.ROOT_DOMAIN,
+        ROOT_DOMAIN: this.rootDomain,
         DEBUG,
       },
       sesIdentity: ses.domainIdentity,
@@ -46,7 +53,7 @@ class CognitoPasswordless {
       autoVerifiedAttributes: ["email"],
       emailConfiguration: {
         emailSendingAccount: "DEVELOPER",
-        fromEmailAddress: "noreply@" + process.env.ROOT_DOMAIN,
+        fromEmailAddress: "noreply@" + this.rootDomain,
         sourceArn: ses.emailIdentity.arn,
       },
       lambdaConfig: {

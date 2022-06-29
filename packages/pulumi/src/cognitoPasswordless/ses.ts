@@ -3,6 +3,7 @@ import pulumi from "@pulumi/aws";
 
 interface SESParams {
   rootDomain: string;
+  zone: aws.route53.Zone;
 }
 
 class SES {
@@ -11,7 +12,7 @@ class SES {
   dkimRecords: aws.route53.Record[];
   emailIdentity: aws.ses.EmailIdentity;
 
-  constructor({ rootDomain }: SESParams) {
+  constructor({ rootDomain, zone }: SESParams) {
     this.domainIdentity = new aws.ses.DomainIdentity("platform-domain-id", {
       domain: "contact." + rootDomain,
     });
@@ -68,7 +69,7 @@ class SES {
       name: "contact." + rootDomain,
       type: "TXT",
       ttl: 3600,
-      zoneId: String(process.env.ROOT_ZONE_ID),
+      zoneId: zone.id,
       // Allow email from amazonses.com and the stack's FQDN (ex. stack
       records: [`v=spf1 include:amazonses.com -all`],
     });
