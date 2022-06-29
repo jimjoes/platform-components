@@ -51,7 +51,9 @@ class CloudfrontApi {
 
     if (stackEnv === "dev" || stackEnv === "staging") {
       if (subdomain) {
-        alternateCnames.push(buildDomain(rootDomain, subdomain + ".dev"));
+        alternateCnames.push(
+          buildDomain(rootDomain, subdomain + "." + stackEnv)
+        );
         allowedOrigins = [
           "http://localhost:3000",
           "http://localhost:8000",
