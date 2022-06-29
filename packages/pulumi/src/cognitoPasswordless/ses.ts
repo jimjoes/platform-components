@@ -38,7 +38,7 @@ class SES {
       const dkimRecord = new aws.route53.Record(
         `contact.${rootDomain}-dkim-record-${i + 1}-of-${dkimRecordCount}`,
         {
-          zoneId: String(process.env.ROOT_ZONE_ID),
+          zoneId: zone.id,
           name,
           type: "CNAME",
           ttl: 3600,
@@ -56,7 +56,7 @@ class SES {
 
     // MAIL FROM MX record
     new aws.route53.Record(`ses-mail-from-mx-record`, {
-      zoneId: String(process.env.ROOT_ZONE_ID),
+      zoneId: zone.id,
       name: mailFromDomain.mailFromDomain,
       type: "MX",
       ttl: 3600,
