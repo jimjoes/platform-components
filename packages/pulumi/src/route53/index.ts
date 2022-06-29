@@ -4,13 +4,13 @@ export class Route53HostedZone {
   zone: aws.route53.Zone;
   certificate: aws.acm.Certificate;
   domainName: string;
-  constructor(rootDomain: string, hostname?: string) {
-    if (hostname) {
-      this.domainName = hostname + "." + rootDomain;
+  constructor(rootDomain: string, subDomain?: string) {
+    if (subDomain) {
+      this.domainName = subDomain + "." + rootDomain;
     } else {
       this.domainName = rootDomain;
     }
-    this.zone = new aws.route53.Zone(hostname + "-hosted-zone", {
+    this.zone = new aws.route53.Zone(this.domainName + "-hosted-zone", {
       name: this.domainName,
     });
     this.certificate = new aws.acm.Certificate("cert", {
