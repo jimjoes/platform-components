@@ -43,10 +43,14 @@ export class Route53HostedZone {
         ttl: 600,
       }
     );
-    new aws.acm.CertificateValidation("certificateValidation", {
-      certificateArn: this.certificate.arn,
-      validationRecordFqdns: [certificateValidationDomain.fqdn],
-    });
+    new aws.acm.CertificateValidation(
+      "certificateValidation",
+      {
+        certificateArn: this.certificate.arn,
+        validationRecordFqdns: [certificateValidationDomain.fqdn],
+      },
+      { provider: useast1 }
+    );
   }
 }
 
