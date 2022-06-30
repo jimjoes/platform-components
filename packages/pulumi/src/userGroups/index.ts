@@ -14,7 +14,7 @@ class UserGroups {
   };
 
   constructor({ prefix, userPool, api, defaultStage }: UserGroupsParams) {
-    const roleName = prefix + "-adminGroupRole";
+    const roleName = process.env.WEBINY_ENV + "-" + prefix + "-adminGroupRole";
 
     const groupRole = new aws.iam.Role(prefix + "-adminsGroupRole", {
       name: roleName,
