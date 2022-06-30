@@ -24,6 +24,7 @@ class SES {
     });
 
     this.dkimRecords = [];
+
     const dkimRecordCount = 3;
 
     for (let i = 0; i < dkimRecordCount; i++) {
@@ -31,11 +32,11 @@ class SES {
         (t) => `${t}.dkim.amazonses.com`
       );
       const name = this.domainDkim.dkimTokens[i].apply(
-        (t) => `${t}._domainkey.contact.${rootDomain}`
+        (t) => `${t}._domainkey.${rootDomain}`
       );
 
       const dkimRecord = new aws.route53.Record(
-        `contact.${rootDomain}-dkim-record-${i + 1}-of-${dkimRecordCount}`,
+        `${rootDomain}-dkim-record-${i + 1}-of-${dkimRecordCount}`,
         {
           zoneId: zone.id,
           name,
@@ -65,7 +66,7 @@ class SES {
     });
 
     new aws.route53.Record(`ses-spf-mx-record`, {
-      name: "contact." + rootDomain,
+      name: rootDomain,
       type: "TXT",
       ttl: 3600,
       zoneId: zone.id,
