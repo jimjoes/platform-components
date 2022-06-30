@@ -38,73 +38,76 @@ class CognitoPasswordless {
         DEBUG,
       },
     });
-    this.userPool = new aws.cognito.UserPool("platform-api-user-pool", {
-      passwordPolicy: {
-        minimumLength: 12,
-        requireLowercase: true,
-        requireNumbers: true,
-        requireSymbols: true,
-        requireUppercase: true,
-        temporaryPasswordValidityDays: 7,
-      },
-      adminCreateUserConfig: {
-        allowAdminCreateUserOnly: false,
-      },
-      autoVerifiedAttributes: ["email"],
-      emailConfiguration: {
-        emailSendingAccount: "DEVELOPER",
-        fromEmailAddress: "noreply@" + this.rootDomain,
-        sourceArn: ses.emailIdentity.arn,
-      },
-      lambdaConfig: {
-        createAuthChallenge: createAuthChallenge.function.arn,
-        defineAuthChallenge: defineAuthChallenge.function.arn,
-        verifyAuthChallengeResponse: verifyAuthChallengeResponse.function.arn,
-      },
-      mfaConfiguration: "OFF",
-      userPoolAddOns: {
-        advancedSecurityMode: "OFF" /* required */,
-      },
-      usernameAttributes: ["email"],
-      verificationMessageTemplate: {
-        defaultEmailOption: "CONFIRM_WITH_CODE",
-      },
-      schemas: [
-        {
-          attributeDataType: "String",
-          name: "email",
-          required: true,
-          developerOnlyAttribute: false,
-          mutable: true,
-          stringAttributeConstraints: {
-            maxLength: "2048",
-            minLength: "0",
-          },
+    this.userPool = new aws.cognito.UserPool(
+      process.env.WEBINY_ENV + "-platform-api-user-pool",
+      {
+        passwordPolicy: {
+          minimumLength: 12,
+          requireLowercase: true,
+          requireNumbers: true,
+          requireSymbols: true,
+          requireUppercase: true,
+          temporaryPasswordValidityDays: 7,
         },
-        {
-          attributeDataType: "String",
-          name: "family_name",
-          required: false,
-          developerOnlyAttribute: false,
-          mutable: true,
-          stringAttributeConstraints: {
-            maxLength: "2048",
-            minLength: "0",
-          },
+        adminCreateUserConfig: {
+          allowAdminCreateUserOnly: false,
         },
-        {
-          attributeDataType: "String",
-          name: "given_name",
-          required: false,
-          developerOnlyAttribute: false,
-          mutable: true,
-          stringAttributeConstraints: {
-            maxLength: "2048",
-            minLength: "0",
-          },
+        autoVerifiedAttributes: ["email"],
+        emailConfiguration: {
+          emailSendingAccount: "DEVELOPER",
+          fromEmailAddress: "noreply@" + this.rootDomain,
+          sourceArn: ses.emailIdentity.arn,
         },
-      ],
-    });
+        lambdaConfig: {
+          createAuthChallenge: createAuthChallenge.function.arn,
+          defineAuthChallenge: defineAuthChallenge.function.arn,
+          verifyAuthChallengeResponse: verifyAuthChallengeResponse.function.arn,
+        },
+        mfaConfiguration: "OFF",
+        userPoolAddOns: {
+          advancedSecurityMode: "OFF" /* required */,
+        },
+        usernameAttributes: ["email"],
+        verificationMessageTemplate: {
+          defaultEmailOption: "CONFIRM_WITH_CODE",
+        },
+        schemas: [
+          {
+            attributeDataType: "String",
+            name: "email",
+            required: true,
+            developerOnlyAttribute: false,
+            mutable: true,
+            stringAttributeConstraints: {
+              maxLength: "2048",
+              minLength: "0",
+            },
+          },
+          {
+            attributeDataType: "String",
+            name: "family_name",
+            required: false,
+            developerOnlyAttribute: false,
+            mutable: true,
+            stringAttributeConstraints: {
+              maxLength: "2048",
+              minLength: "0",
+            },
+          },
+          {
+            attributeDataType: "String",
+            name: "given_name",
+            required: false,
+            developerOnlyAttribute: false,
+            mutable: true,
+            stringAttributeConstraints: {
+              maxLength: "2048",
+              minLength: "0",
+            },
+          },
+        ],
+      }
+    );
 
     this.userPoolClient = new aws.cognito.UserPoolClient(
       "platform-api-user-pool-client",
