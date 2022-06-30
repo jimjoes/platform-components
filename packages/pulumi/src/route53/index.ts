@@ -19,10 +19,17 @@ export class Route53HostedZone {
     this.zone = new aws.route53.Zone(this.domainName + "-hosted-zone", {
       name: this.domainName,
     });
-    this.certificate = new aws.acm.Certificate("cert", {
-      domainName: this.domainName,
-      validationMethod: "DNS",
-    });
+
+    const useast1 = new aws.Provider("useast1", { region: "us-east-1" });
+
+    this.certificate = new aws.acm.Certificate(
+      "cert",
+      {
+        domainName: this.domainName,
+        validationMethod: "DNS",
+      },
+      { provider: useast1 }
+    );
     const certificateValidationDomain = new aws.route53.Record(
       `${this.domainName}-validation`,
       {
