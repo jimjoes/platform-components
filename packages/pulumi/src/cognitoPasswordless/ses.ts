@@ -66,7 +66,7 @@ class SES {
     });
 
     new aws.route53.Record(`ses-spf-mx-record`, {
-      name: rootDomain,
+      name: mailFromDomain.mailFromDomain,
       type: "TXT",
       ttl: 3600,
       zoneId: zone.id,
