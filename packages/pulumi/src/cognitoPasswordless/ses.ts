@@ -1,5 +1,4 @@
 import * as aws from "@pulumi/aws";
-import pulumi from "@pulumi/aws";
 
 interface SESParams {
   rootDomain: string;
@@ -14,10 +13,10 @@ class SES {
 
   constructor({ rootDomain, zone }: SESParams) {
     this.domainIdentity = new aws.ses.DomainIdentity("platform-domain-id", {
-      domain: "contact." + rootDomain,
+      domain: rootDomain,
     });
     this.domainDkim = new aws.ses.DomainDkim("platform-domain-dkim", {
-      domain: "contact." + rootDomain,
+      domain: rootDomain,
     });
 
     this.emailIdentity = new aws.ses.EmailIdentity("email-from-identity", {

@@ -12,7 +12,9 @@ class CognitoPasswordless {
   rootDomain: string;
   constructor({ zone }: { zone: aws.route53.Zone }) {
     this.rootDomain =
-      String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN);
+      String(process.env.WEBINY_ENV) !== "prod"
+        ? String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN)
+        : String(process.env.ROOT_DOMAIN);
     const ses = new SES({
       rootDomain: this.rootDomain,
       zone: zone,
