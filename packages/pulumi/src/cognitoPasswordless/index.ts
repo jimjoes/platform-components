@@ -15,6 +15,7 @@ class CognitoPasswordless {
       String(process.env.WEBINY_ENV) !== "prod"
         ? String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN)
         : String(process.env.ROOT_DOMAIN);
+
     const ses = new SES({
       rootDomain: this.rootDomain,
       zone: zone,

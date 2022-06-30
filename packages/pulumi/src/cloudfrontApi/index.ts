@@ -29,7 +29,10 @@ const buildDomain = (
 
 const stackEnv = String(process.env.WEBINY_ENV);
 const rootDomain =
-  String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN);
+  String(process.env.WEBINY_ENV) !== "prod"
+    ? String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN)
+    : String(process.env.ROOT_DOMAIN);
+
 const alternateCnames: DomainDescriptor[] = [];
 
 class CloudfrontApi {
@@ -49,32 +52,27 @@ class CloudfrontApi {
   }) {
     let allowedOrigins: string[] = [];
 
-    if (stackEnv === "dev" || stackEnv === "staging") {
-      if (subdomain) {
-        alternateCnames.push(
-          buildDomain(rootDomain, subdomain + "." + stackEnv)
-        );
-        allowedOrigins = [
-          "http://localhost:3000",
-          "http://localhost:8000",
-          "https://" + buildDomain(rootDomain, "www" + "-dev").domain,
-          "https://" + buildDomain(rootDomain, "platform" + "-dev").domain,
-          "https://" + buildDomain(rootDomain, "admin" + "-dev").domain,
-          "https://" + buildDomain(rootDomain, "survey" + "-dev").domain,
-          "https://" + buildDomain(rootDomain, "content" + "-dev").domain,
-        ];
-      }
-    } else if (stackEnv === "prod") {
-      if (subdomain) {
-        alternateCnames.push(buildDomain(rootDomain, subdomain));
-        allowedOrigins = [
-          "https://" + buildDomain(rootDomain, "www").domain,
-          "https://" + buildDomain(rootDomain, "platform").domain,
-          "https://" + buildDomain(rootDomain, "admin").domain,
-          "https://" + buildDomain(rootDomain, "survey").domain,
-          "https://" + buildDomain(rootDomain, "content").domain,
-        ];
-      }
+    if (subdomain) {
+      alternateCnames.push(buildDomain(rootDomain, subdomain));
+    }
+    if (stackEnv !== "prod") {
+      allowedOrigins = [
+        "http://localhost:3000",
+        "http://localhost:8000",
+        "https://" + buildDomain(rootDomain, "www" + "-dev").domain,
+        "https://" + buildDomain(rootDomain, "platform" + "-dev").domain,
+        "https://" + buildDomain(rootDomain, "admin" + "-dev").domain,
+        "https://" + buildDomain(rootDomain, "survey" + "-dev").domain,
+        "https://" + buildDomain(rootDomain, "content" + "-dev").domain,
+      ];
+    } else {
+      allowedOrigins = [
+        "https://" + buildDomain(rootDomain, "www").domain,
+        "https://" + buildDomain(rootDomain, "platform").domain,
+        "https://" + buildDomain(rootDomain, "admin").domain,
+        "https://" + buildDomain(rootDomain, "survey").domain,
+        "https://" + buildDomain(rootDomain, "content").domain,
+      ];
     }
 
     let viewerCertificate: inputs.cloudfront.DistributionViewerCertificate;
