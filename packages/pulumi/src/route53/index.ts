@@ -26,6 +26,7 @@ export class Route53HostedZone {
       "cert",
       {
         domainName: this.domainName,
+        subjectAlternativeNames: ["*." + this.domainName],
         validationMethod: "DNS",
       },
       { provider: useast1 }
