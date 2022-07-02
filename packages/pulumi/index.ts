@@ -5,6 +5,7 @@ import DynamoDB from "./src/dynamoDb";
 import CloudfrontWebApp from "./src/cloudfrontWebapp";
 import UserGroups from "./src/userGroups";
 import CognitoPasswordless from "./src/cognitoPasswordless";
+import Cognito from "./src/cognito";
 import CloudfrontPagebuilderDelivery from "./src/cloudfrontPagebuilderDelivery";
 import StripeCheckout from "./src/stripeCheckout/pulumi";
 import stripeCheckoutHandler from "./src/stripeCheckout/code";
@@ -34,6 +35,7 @@ export {
   CloudfrontApi,
   UserGroups,
   CognitoPasswordless,
+  Cognito,
   DynamoDB,
   Parameter,
   Secret,
