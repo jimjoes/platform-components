@@ -1,6 +1,9 @@
 import * as React from "react";
 import { useIntl, FormattedMessage } from "react-intl";
-import { useRequireNewPassword } from "@jimjoes/amplify-auth-hooks";
+import {
+  useRequireNewPassword,
+  useAuthContext,
+} from "@jimjoes/amplify-auth-hooks";
 import { Button, Grid } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import makeStyles from "@mui/styles/makeStyles";
