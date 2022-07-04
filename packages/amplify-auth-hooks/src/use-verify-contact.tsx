@@ -1,17 +1,17 @@
-import * as React from 'react';
-import invariant from 'tiny-invariant';
-import Auth from '@aws-amplify/auth';
-import { ConsoleLogger as Logger } from '@aws-amplify/core';
+import * as React from "react";
+import invariant from "tiny-invariant";
+import { Auth } from "@aws-amplify/auth";
+import { ConsoleLogger as Logger } from "@aws-amplify/core";
 
-import { useAuthContext } from './use-auth-context';
+import { useAuthContext } from "./use-auth-context";
 
-const logger = new Logger('useVerifyContact');
+const logger = new Logger("useVerifyContact");
 
 export const useVerifyContact = () => {
   invariant(
-    (Auth && typeof Auth.verifyCurrentUserAttribute === 'function') ||
-      typeof Auth.verifyCurrentUserAttributeSubmit === 'function',
-    'No Auth module found, please ensure @aws-amplify/auth is imported',
+    (Auth && typeof Auth.verifyCurrentUserAttribute === "function") ||
+      typeof Auth.verifyCurrentUserAttributeSubmit === "function",
+    "No Auth module found, please ensure @aws-amplify/auth is imported"
   );
 
   const { handleStateChange, authData } = useAuthContext();
@@ -35,7 +35,7 @@ export const useVerifyContact = () => {
 
     try {
       await Auth.verifyCurrentUserAttributeSubmit(verifyAttr, code);
-      handleStateChange('signedIn', authData);
+      handleStateChange("signedIn", authData);
     } catch (error) {
       logger.error(error);
       throw error;

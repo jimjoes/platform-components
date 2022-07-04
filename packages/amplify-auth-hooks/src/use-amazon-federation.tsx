@@ -1,11 +1,11 @@
-import invariant from 'tiny-invariant';
-import Auth from '@aws-amplify/auth';
-import { ConsoleLogger as Logger } from '@aws-amplify/core';
-import useScript from 'react-script-hook';
+import invariant from "tiny-invariant";
+import { Auth } from "@aws-amplify/auth";
+import { ConsoleLogger as Logger } from "@aws-amplify/core";
+import useScript from "react-script-hook";
 
-import { useAuthContext } from './use-auth-context';
+import { useAuthContext } from "./use-auth-context";
 
-const logger = new Logger('useAmazonFederation');
+const logger = new Logger("useAmazonFederation");
 
 export interface AmazonFederationProps {
   clientId: string;
@@ -25,18 +25,21 @@ interface AuthorizeResponse {
 
 export const useAmazonFederation = (props: AmazonFederationProps) => {
   invariant(
-    Auth && typeof Auth.federatedSignIn === 'function' && typeof Auth.currentAuthenticatedUser === 'function',
-    'No Auth module found, please ensure @aws-amplify/auth is imported',
+    Auth &&
+      typeof Auth.federatedSignIn === "function" &&
+      typeof Auth.currentAuthenticatedUser === "function",
+    "No Auth module found, please ensure @aws-amplify/auth is imported"
   );
 
-  const { clientId, scriptSrc = 'https://api-cdn.amazon.com/sdk/login1.js' } = props;
+  const { clientId, scriptSrc = "https://api-cdn.amazon.com/sdk/login1.js" } =
+    props;
 
   const { handleStateChange } = useAuthContext();
 
   const [loading, error] = useScript({
     src: scriptSrc,
     onload: () => {
-      logger.debug('init amazon');
+      logger.debug("init amazon");
       const amz = (window as any).amazon;
       amz.Login.setClientId(clientId);
     },
@@ -55,7 +58,7 @@ export const useAmazonFederation = (props: AmazonFederationProps) => {
 
     amz.Login.retrieveProfile(async (userInfo: UserInfo) => {
       if (!userInfo.success) {
-        logger.debug('Get user Info failed');
+        logger.debug("Get user Info failed");
         return;
       }
 
@@ -64,20 +67,24 @@ export const useAmazonFederation = (props: AmazonFederationProps) => {
         email: userInfo.profile.PrimaryEmail,
       };
 
-      await Auth.federatedSignIn('amazon', { token: accessToken, expires_at: expiresAt }, user);
+      await Auth.federatedSignIn(
+        "amazon",
+        { token: accessToken, expires_at: expiresAt },
+        user
+      );
       const authUser = await Auth.currentAuthenticatedUser();
 
-      handleStateChange('signedIn', authUser);
+      handleStateChange("signedIn", authUser);
     });
   };
 
   const signIn = () => {
     const amz = (window as any).amazon;
-    const options = { scope: 'profile' };
+    const options = { scope: "profile" };
 
     amz.Login.authorize(options, async (response: AuthorizeResponse) => {
       if (response.error) {
-        logger.debug('Failed to login with amazon: ' + response.error);
+        logger.debug("Failed to login with amazon: " + response.error);
         return;
       }
 
@@ -89,11 +96,11 @@ export const useAmazonFederation = (props: AmazonFederationProps) => {
     const amz = (window as any).amazon;
 
     if (!amz) {
-      logger.debug('Amazon Login sdk undefined');
+      logger.debug("Amazon Login sdk undefined");
       return;
     }
 
-    logger.debug('Amazon signing out');
+    logger.debug("Amazon signing out");
     amz.Login.logout();
   };
 
