@@ -35,7 +35,6 @@ export const useSignIn = (): ((
         validationData,
       });
       logger.debug(user);
-      console.log("user: ", user);
       if (
         user.challengeName === "SMS_MFA" ||
         user.challengeName === "SOFTWARE_TOKEN_MFA"
@@ -50,6 +49,7 @@ export const useSignIn = (): ((
         logger.debug("TOTP setup", user.challengeParam);
         handleStateChange("TOTPSetup", user);
       } else {
+        console.log("else:");
         checkContact(user);
       }
     } catch (error) {
