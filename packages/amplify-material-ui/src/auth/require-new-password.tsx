@@ -51,6 +51,7 @@ export const RequireNewPassword: React.FC = () => {
         }),
       })}
       onSubmit={async ({ password }): Promise<void> => {
+        console.log("submit");
         try {
           await completeNewPassword(password);
         } catch (error) {
