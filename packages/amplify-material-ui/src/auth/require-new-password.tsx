@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const RequireNewPassword: React.FC = () => {
+  console.log("requireNewPassword: ");
   const classes = useStyles();
   const { formatMessage } = useIntl();
   const { showNotification } = useNotificationContext();

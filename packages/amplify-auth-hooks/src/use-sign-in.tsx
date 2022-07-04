@@ -44,6 +44,7 @@ export const useSignIn = (): ((
         handleStateChange("confirmSignIn", user);
       } else if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
         logger.debug("require new password", user.challengeParam);
+        console.log("challengeName: useSignin");
         handleStateChange("requireNewPassword", user);
       } else if (user.challengeName === "MFA_SETUP") {
         logger.debug("TOTP setup", user.challengeParam);
