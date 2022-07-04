@@ -53,7 +53,7 @@ class CognitoPasswordless {
           temporaryPasswordValidityDays: 7,
         },
         adminCreateUserConfig: {
-          allowAdminCreateUserOnly: false,
+          allowAdminCreateUserOnly: true,
         },
         autoVerifiedAttributes: ["email"],
         emailConfiguration: {
@@ -70,7 +70,7 @@ class CognitoPasswordless {
         userPoolAddOns: {
           advancedSecurityMode: "OFF" /* required */,
         },
-        usernameAttributes: ["email"],
+        aliasAttributes: ["email"],
         verificationMessageTemplate: {
           defaultEmailOption: "CONFIRM_WITH_CODE",
         },

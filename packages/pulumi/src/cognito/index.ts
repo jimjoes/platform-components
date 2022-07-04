@@ -25,28 +25,28 @@ class Cognito {
       process.env.WEBINY_ENV + "-api-user-pool",
       {
         passwordPolicy: {
-          minimumLength: 8,
-          requireLowercase: false,
-          requireNumbers: false,
-          requireSymbols: false,
-          requireUppercase: false,
+          minimumLength: 12,
+          requireLowercase: true,
+          requireNumbers: true,
+          requireSymbols: true,
+          requireUppercase: true,
           temporaryPasswordValidityDays: 7,
         },
+        aliasAttributes: ["email"],
         adminCreateUserConfig: {
           allowAdminCreateUserOnly: true,
         },
         autoVerifiedAttributes: ["email"],
-        lambdaConfig: {
-          preTokenGeneration: preTokenGeneration.function.arn,
-        },
         emailConfiguration: {
           emailSendingAccount: "COGNITO_DEFAULT",
+        },
+        lambdaConfig: {
+          preTokenGeneration: preTokenGeneration.function.arn,
         },
         mfaConfiguration: "OFF",
         userPoolAddOns: {
           advancedSecurityMode: "OFF" /* required */,
         },
-        usernameAttributes: ["email"],
         verificationMessageTemplate: {
           defaultEmailOption: "CONFIRM_WITH_CODE",
         },
