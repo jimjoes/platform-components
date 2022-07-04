@@ -1,9 +1,25 @@
 import * as aws from "@pulumi/aws";
+import PreTokenGeneration from "./cognitoPreTokenGeneration";
+const DEBUG = String(process.env.DEBUG);
 
 class Cognito {
   userPoolClient: aws.cognito.UserPoolClient;
   userPool: aws.cognito.UserPool;
-  constructor({ protectedEnvironment }: { protectedEnvironment: boolean }) {
+  constructor({
+    protectedEnvironment,
+    table,
+  }: {
+    protectedEnvironment: boolean;
+    table: aws.dynamodb.Table;
+  }) {
+    const preTokenGeneration = new PreTokenGeneration({
+      env: {
+        REGION: process.env.AWS_REGION,
+        DEBUG,
+      },
+      table: table,
+    });
+
     this.userPool = new aws.cognito.UserPool(
       process.env.WEBINY_ENV + "-api-user-pool",
       {
@@ -35,28 +51,6 @@ class Cognito {
           {
             attributeDataType: "String",
             name: "email",
-            required: true,
-            developerOnlyAttribute: false,
-            mutable: true,
-            stringAttributeConstraints: {
-              maxLength: "2048",
-              minLength: "0",
-            },
-          },
-          {
-            attributeDataType: "String",
-            name: "family_name",
-            required: true,
-            developerOnlyAttribute: false,
-            mutable: true,
-            stringAttributeConstraints: {
-              maxLength: "2048",
-              minLength: "0",
-            },
-          },
-          {
-            attributeDataType: "String",
-            name: "given_name",
             required: true,
             developerOnlyAttribute: false,
             mutable: true,

@@ -27,6 +27,12 @@ export const usePasswordlessSignIn = (): ((
       if (user.challengeName === "CUSTOM_CHALLENGE") {
         logger.debug("passwordless auth challenge " + user.challengeName);
         handleStateChange("passwordlessChallenge", user);
+      } else if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
+        logger.debug("require new password", user.challengeParam);
+        handleStateChange("requireNewPassword", user);
+      } else if (user.challengeName === "MFA_SETUP") {
+        logger.debug("TOTP setup", user.challengeParam);
+        handleStateChange("TOTPSetup", user);
       } else {
         checkContact(user);
       }

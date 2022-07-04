@@ -33,6 +33,27 @@ class Policies {
       },
     });
   }
+
+  getPreTokenGenerationPolicy({
+    table,
+  }: {
+    table: aws.dynamodb.Table;
+  }): aws.iam.Policy {
+    return new aws.iam.Policy("PreTokenGenerationLambdaPolicy", {
+      description: "This policy allows token generator to access ddb table",
+      policy: {
+        Version: "2012-10-17",
+        Statement: [
+          {
+            Sid: "SpecificTable",
+            Effect: "Allow",
+            Action: ["dynamodb:DescribeTable", "dynamodb:Query"],
+            Resource: table.arn,
+          },
+        ],
+      },
+    });
+  }
 }
 
 const policies = new Policies();
