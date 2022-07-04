@@ -5,7 +5,7 @@ class Cognito {
   userPool: aws.cognito.UserPool;
   constructor({ protectedEnvironment }: { protectedEnvironment: boolean }) {
     this.userPool = new aws.cognito.UserPool(
-      "api-user-pool",
+      process.env.WEBINY_ENV + "-api-user-pool",
       {
         passwordPolicy: {
           minimumLength: 8,
@@ -27,7 +27,7 @@ class Cognito {
         userPoolAddOns: {
           advancedSecurityMode: "OFF" /* required */,
         },
-        aliasAttributes: ["preferred_username"],
+        usernameAttributes: ["email"],
         verificationMessageTemplate: {
           defaultEmailOption: "CONFIRM_WITH_CODE",
         },
