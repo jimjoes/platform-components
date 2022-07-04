@@ -16,6 +16,7 @@ class Cognito {
       env: {
         REGION: process.env.AWS_REGION,
         DEBUG,
+        PLATFORM_TABLE_NAME: table.name,
       },
       table: table,
     });
@@ -35,10 +36,12 @@ class Cognito {
           allowAdminCreateUserOnly: true,
         },
         autoVerifiedAttributes: ["email"],
+        lambdaConfig: {
+          preTokenGeneration: preTokenGeneration.function.arn,
+        },
         emailConfiguration: {
           emailSendingAccount: "COGNITO_DEFAULT",
         },
-        lambdaConfig: {},
         mfaConfiguration: "OFF",
         userPoolAddOns: {
           advancedSecurityMode: "OFF" /* required */,
@@ -70,6 +73,13 @@ class Cognito {
         userPoolId: this.userPool.id,
       }
     );
+
+    new aws.lambda.Permission("PreTokenGenerationInvocationPermission", {
+      action: "lambda:InvokeFunction",
+      function: preTokenGeneration.function.name,
+      principal: "cognito-idp.amazonaws.com",
+      sourceArn: this.userPool.arn,
+    });
   }
 }
 
