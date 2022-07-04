@@ -27,6 +27,5 @@ export const AuthContext = createNamedContext<AuthContextProps | null>(
 );
 
 export const useAuthContext = (): AuthContextProps => {
-  console.log(AuthContext);
   return React.useContext(AuthContext) as AuthContextProps;
 };

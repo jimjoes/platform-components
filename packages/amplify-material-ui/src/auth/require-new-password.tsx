@@ -31,7 +31,9 @@ export const RequireNewPassword: React.FC = () => {
   const { formatMessage } = useIntl();
   const { showNotification } = useNotificationContext();
   const completeNewPassword = useRequireNewPassword();
+  const { authData } = useAuthContext();
 
+  console.log("component authData: ", authData);
   return (
     <Formik<{ password: string }>
       initialValues={{

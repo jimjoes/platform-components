@@ -26,6 +26,7 @@ export const useAuth = (props: AuthProps): AuthContextProps => {
 
   const handleStateChange = React.useCallback(
     (authState: string, authData: AuthData) => {
+      console.log("authState: ",authState)
       if (authState === "signedOut") {
         authState = "signIn";
       }
