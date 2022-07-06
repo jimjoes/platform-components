@@ -9,7 +9,8 @@ class SES {
   domainIdentity: aws.ses.DomainIdentity;
   domainDkim: aws.ses.DomainDkim;
   dkimRecords: aws.route53.Record[];
-  emailIdentity: aws.ses.EmailIdentity;
+  fromEmailIdentity: aws.ses.EmailIdentity;
+  toEmailIdentity: aws.ses.EmailIdentity;
 
   constructor({ rootDomain, zone }: SESParams) {
     this.domainIdentity = new aws.ses.DomainIdentity("platform-domain-id", {
@@ -19,11 +20,11 @@ class SES {
       domain: rootDomain,
     });
 
-    this.emailIdentity = new aws.ses.EmailIdentity("email-from-identity", {
+    this.fromEmailIdentity = new aws.ses.EmailIdentity("email-from-identity", {
       email: "noreply@" + rootDomain,
     });
 
-    this.emailIdentity = new aws.ses.EmailIdentity("test-email-to-identity", {
+    this.toEmailIdentity = new aws.ses.EmailIdentity("test-email-to-identity", {
       email: "tech@" + rootDomain,
     });
 
