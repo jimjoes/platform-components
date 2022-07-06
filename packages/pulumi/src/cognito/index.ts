@@ -81,7 +81,7 @@ class Cognito {
       "api-user-pool-client",
       {
         userPoolId: this.userPool.id,
-        explicitAuthFlows: ["ALLOW_USER_SRP_AUTH"],
+        explicitAuthFlows: ["ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"],
       }
     );
 
