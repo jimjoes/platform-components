@@ -73,12 +73,12 @@ class UserGroups {
         ],
       },
     });
-    const policy = policies.getUnAuthenticatedGroupPolicy({});
+    // const policy = policies.getUnAuthenticatedGroupPolicy({});
 
-    new aws.iam.RolePolicyAttachment(`${roleName}-GroupRoleAttachment`, {
-      role: groupRole,
-      policyArn: policy.arn.apply((arn: any) => arn),
-    });
+    // new aws.iam.RolePolicyAttachment(`${roleName}-GroupRoleAttachment`, {
+    //   role: groupRole,
+    //   policyArn: policy.arn.apply((arn: any) => arn),
+    // });
   }
 }
 
