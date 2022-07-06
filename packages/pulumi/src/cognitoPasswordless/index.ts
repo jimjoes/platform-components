@@ -27,7 +27,7 @@ class CognitoPasswordless {
         DEBUG,
       },
       sesIdentity: ses.domainIdentity,
-      emailIdentity: ses.emailIdentity,
+      fromEmailIdentity: ses.fromEmailIdentity,
     });
     const defineAuthChallenge = new DefineAuthChallenge({
       env: {
@@ -59,7 +59,7 @@ class CognitoPasswordless {
         emailConfiguration: {
           emailSendingAccount: "DEVELOPER",
           fromEmailAddress: "noreply@" + this.rootDomain,
-          sourceArn: ses.emailIdentity.arn,
+          sourceArn: ses.fromEmailIdentity.arn,
         },
         lambdaConfig: {
           createAuthChallenge: createAuthChallenge.function.arn,

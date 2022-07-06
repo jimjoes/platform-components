@@ -5,14 +5,18 @@ import policies from "./policies";
 interface CreateAuthChallengeParams {
   env: Record<string, any>;
   sesIdentity: aws.ses.DomainIdentity;
-  emailIdentity: aws.ses.EmailIdentity;
+  fromEmailIdentity: aws.ses.EmailIdentity;
 }
 
 class CreateAuthChallenge {
   function: aws.lambda.Function;
   role: aws.iam.Role;
 
-  constructor({ env, sesIdentity, emailIdentity }: CreateAuthChallengeParams) {
+  constructor({
+    env,
+    sesIdentity,
+    fromEmailIdentity,
+  }: CreateAuthChallengeParams) {
     const roleName = "create-challenge-lambda-role";
     this.role = new aws.iam.Role(roleName, {
       assumeRolePolicy: {
@@ -58,7 +62,7 @@ class CreateAuthChallenge {
 
     const cognitoPolicy = policies.getCreateAuthChallengePolicy({
       sesDomainIdentity: sesIdentity,
-      emailIdentity: emailIdentity,
+      fromEmailIdentity: fromEmailIdentity,
     });
 
     new aws.iam.RolePolicyAttachment(

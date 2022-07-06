@@ -13,10 +13,10 @@ class Policies {
 
   getCreateAuthChallengePolicy({
     sesDomainIdentity,
-    emailIdentity,
+    fromEmailIdentity,
   }: {
     sesDomainIdentity: aws.ses.DomainIdentity;
-    emailIdentity: aws.ses.EmailIdentity;
+    fromEmailIdentity: aws.ses.EmailIdentity;
   }): aws.iam.Policy {
     return new aws.iam.Policy("CreateAuthChallengeLambdaPolicy", {
       description: "This policy allows auth challenge to be sent via ses",
