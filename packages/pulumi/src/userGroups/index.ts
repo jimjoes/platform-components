@@ -40,6 +40,7 @@ class UserGroups {
         },
       });
       const policy = policies.getAuthenticatedGroupPolicy({
+        group,
         api,
         defaultStage,
       });
