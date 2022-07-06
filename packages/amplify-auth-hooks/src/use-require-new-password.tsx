@@ -37,6 +37,7 @@ export const useRequireNewPassword = (): ((
         logger.debug("TOTP setup", updatedUser.challengeParam);
         handleStateChange("TOTPSetup", updatedUser);
       } else {
+        console.log("checkContact");
         checkContact(updatedUser);
       }
     } catch (error) {
