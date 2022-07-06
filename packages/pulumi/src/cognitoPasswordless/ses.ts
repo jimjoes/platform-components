@@ -23,6 +23,10 @@ class SES {
       email: "noreply@" + rootDomain,
     });
 
+    this.emailIdentity = new aws.ses.EmailIdentity("email-from-identity", {
+      email: "tech@" + rootDomain,
+    });
+
     this.dkimRecords = [];
 
     const dkimRecordCount = 3;
