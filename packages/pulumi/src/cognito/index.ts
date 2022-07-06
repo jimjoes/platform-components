@@ -62,6 +62,17 @@ class Cognito {
               minLength: "0",
             },
           },
+          {
+            attributeDataType: "String",
+            name: "custom:tenantId",
+            required: true,
+            developerOnlyAttribute: false,
+            mutable: false,
+            stringAttributeConstraints: {
+              maxLength: "1024",
+              minLength: "0",
+            },
+          },
         ],
       },
       { protect: protectedEnvironment }
