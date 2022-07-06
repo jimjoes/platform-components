@@ -16,13 +16,15 @@ class Policies {
   }
 
   getAuthenticatedGroupPolicy({
+    group,
     api,
     defaultStage,
   }: {
+    group: string;
     api: aws.apigatewayv2.Api;
     defaultStage: aws.apigatewayv2.Stage;
   }): aws.iam.Policy {
-    return new aws.iam.Policy("AuthenticatedGroupsCognitoGroupPolicy", {
+    return new aws.iam.Policy(group + "-GroupCognitoGroupPolicy", {
       description: "This policy enables access to Lambda via the api gateway",
       policy: {
         Version: "2012-10-17",
@@ -39,7 +41,7 @@ class Policies {
   }
 
   getUnAuthenticatedGroupPolicy({}: {}): aws.iam.Policy {
-    return new aws.iam.Policy("UnAuthenticatedGroupsCognitoGroupPolicy", {
+    return new aws.iam.Policy("UnAuthenticatedGroupCognitoGroupPolicy", {
       description: "This policy manages unauthenticated access",
       policy: {
         Version: "2012-10-17",
