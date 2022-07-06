@@ -48,7 +48,7 @@ class Policies {
             Sid: "SpecificTable",
             Effect: "Allow",
             Action: ["dynamodb:DescribeTable", "dynamodb:Query"],
-            Resource: table.arn,
+            Resource: [table.arn, table.arn + "/*"],
           },
         ],
       },
