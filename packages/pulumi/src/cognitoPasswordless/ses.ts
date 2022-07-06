@@ -23,7 +23,7 @@ class SES {
       email: "noreply@" + rootDomain,
     });
 
-    this.emailIdentity = new aws.ses.EmailIdentity("email-from-identity", {
+    this.emailIdentity = new aws.ses.EmailIdentity("test-email-to-identity", {
       email: "tech@" + rootDomain,
     });
 
