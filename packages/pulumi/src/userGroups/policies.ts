@@ -15,15 +15,15 @@ class Policies {
     this.awsRegion = aws.config.requireRegion();
   }
 
-  getAdminApiPolicy({
+  getAuthenticatedGroupPolicy({
     api,
     defaultStage,
   }: {
     api: aws.apigatewayv2.Api;
     defaultStage: aws.apigatewayv2.Stage;
   }): aws.iam.Policy {
-    return new aws.iam.Policy("AdminsCognitoGroupPolicy", {
-      description: "This policy enables access to  Lambda",
+    return new aws.iam.Policy("AuthenticatedGroupsCognitoGroupPolicy", {
+      description: "This policy enables access to Lambda via the api gateway",
       policy: {
         Version: "2012-10-17",
         Statement: [
@@ -34,6 +34,16 @@ class Policies {
             Resource: pulumi.interpolate`arn:aws:execute-api:${this.awsRegion}:${this.callerIdentityOutput.accountId}:${api.id}/${defaultStage.name}/*`,
           },
         ],
+      },
+    });
+  }
+
+  getUnAuthenticatedGroupPolicy({}: {}): aws.iam.Policy {
+    return new aws.iam.Policy("UnAuthenticatedGroupsCognitoGroupPolicy", {
+      description: "This policy manages unauthenticated access",
+      policy: {
+        Version: "2012-10-17",
+        Statement: [],
       },
     });
   }
