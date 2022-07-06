@@ -55,7 +55,7 @@ class SES {
 
     const mailFromDomain = new aws.ses.MailFrom(`ses-mail-from`, {
       domain: this.domainIdentity.domain,
-      mailFromDomain: `bounce.${"contact." + rootDomain}`,
+      mailFromDomain: `bounce.${rootDomain}`,
     });
 
     // MAIL FROM MX record
