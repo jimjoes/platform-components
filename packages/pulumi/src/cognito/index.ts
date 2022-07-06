@@ -65,7 +65,6 @@ class Cognito {
           {
             attributeDataType: "String",
             name: "custom:tenantId",
-            required: true,
             developerOnlyAttribute: false,
             mutable: false,
             stringAttributeConstraints: {
