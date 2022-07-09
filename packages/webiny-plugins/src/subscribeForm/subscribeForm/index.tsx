@@ -5,6 +5,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useQueryString } from "./queryString";
 //@ts-ignore
 import { useSnackbar } from "react-simple-snackbar";
+import { sendEvent, sendUserId } from "../../utils/useGtm";
 
 import {
   FormContainer,
@@ -104,7 +105,7 @@ export const SubscribeForm = ({
     }
 
     try {
-      await post("/subscribe", submission);
+      const data = await post("/subscribe", submission);
       console.log("response: ", JSON.stringify(response));
       console.log("fetchError: ", fetchError);
       if (!response.ok || fetchError) {
@@ -113,6 +114,10 @@ export const SubscribeForm = ({
         setSubmitted(false);
         reset();
       } else {
+        sendEvent("userRegistered");
+        if (data?.id) {
+          sendUserId(data.id);
+        }
         openSnackbar("Successfully subscribed. Please check your email.");
         setSubmitting(false);
         setSubmitted(true);
