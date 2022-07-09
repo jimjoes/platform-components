@@ -49,7 +49,6 @@ export const useSignIn = (): ((
         logger.debug("TOTP setup", user.challengeParam);
         handleStateChange("TOTPSetup", user);
       } else {
-        console.log("else:");
         checkContact(user);
       }
     } catch (error) {
