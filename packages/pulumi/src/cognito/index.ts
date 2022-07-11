@@ -25,11 +25,11 @@ class Cognito {
       process.env.WEBINY_ENV + "-api-user-pool",
       {
         passwordPolicy: {
-          minimumLength: 12,
-          requireLowercase: true,
-          requireNumbers: true,
-          requireSymbols: true,
-          requireUppercase: true,
+          minimumLength: 6,
+          requireLowercase: false,
+          requireNumbers: false,
+          requireSymbols: false,
+          requireUppercase: false,
           temporaryPasswordValidityDays: 7,
         },
         aliasAttributes: ["email"],
