@@ -71,7 +71,7 @@ class SES {
     });
 
     // DOMAIN MX record
-    new aws.route53.Record(`ses-mail-from-mx-record`, {
+    new aws.route53.Record(`domain-mx-record`, {
       zoneId: zone.id,
       name: rootDomain,
       type: "MX",

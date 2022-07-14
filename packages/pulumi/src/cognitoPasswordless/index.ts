@@ -8,7 +8,6 @@ const DEBUG = String(process.env.DEBUG);
 class CognitoPasswordless {
   userPoolClient: aws.cognito.UserPoolClient;
   userPool: aws.cognito.UserPool;
-
   rootDomain: string;
   constructor({ zone }: { zone: aws.route53.Zone }) {
     this.rootDomain =
