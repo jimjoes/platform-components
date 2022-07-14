@@ -39,7 +39,7 @@ class PreTokenGeneration {
     const cognitoPolicy = policies.getPreTokenGenerationPolicy({ table });
 
     new aws.iam.RolePolicyAttachment(
-      "create-challenge-lambda-role-attachment",
+      "pre-token-generation-lambda-role-attachment",
       {
         role: this.role,
         policyArn: cognitoPolicy.arn,
