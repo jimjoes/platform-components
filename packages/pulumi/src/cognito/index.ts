@@ -1,5 +1,5 @@
 import * as aws from "@pulumi/aws";
-import PreTokenGeneration from "./cognitoPreTokenGeneration";
+import PreTokenGeneration from "./preTokenGeneration";
 const DEBUG = String(process.env.DEBUG);
 
 class Cognito {

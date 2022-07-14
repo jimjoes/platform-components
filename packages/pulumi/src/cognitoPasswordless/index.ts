@@ -2,6 +2,7 @@ import * as aws from "@pulumi/aws";
 import CreateAuthChallenge from "./createAuthChallenge";
 import DefineAuthChallenge from "./defineAuthChallenge";
 import VerifyAuthChallengeResponse from "./verifyAuthChallengeResponse";
+import PreTokenGeneration from "../cognito/preTokenGeneration";
 import SES from "./ses";
 const DEBUG = String(process.env.DEBUG);
 
@@ -9,7 +10,24 @@ class CognitoPasswordless {
   userPoolClient: aws.cognito.UserPoolClient;
   userPool: aws.cognito.UserPool;
   rootDomain: string;
-  constructor({ zone }: { zone: aws.route53.Zone }) {
+
+  constructor({
+    protectedEnvironment = false,
+    table,
+    zone,
+  }: {
+    protectedEnvironment: boolean;
+    table: aws.dynamodb.Table;
+    zone: aws.route53.Zone;
+  }) {
+    const preTokenGeneration = new PreTokenGeneration({
+      env: {
+        REGION: process.env.AWS_REGION,
+        DEBUG,
+        PLATFORM_TABLE_NAME: table.name,
+      },
+      table: table,
+    });
     this.rootDomain =
       String(process.env.WEBINY_ENV) !== "prod"
         ? String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN)
@@ -63,6 +81,7 @@ class CognitoPasswordless {
           sourceArn: ses.fromEmailIdentity.arn,
         },
         lambdaConfig: {
+          preTokenGeneration: preTokenGeneration.function.arn,
           createAuthChallenge: createAuthChallenge.function.arn,
           defineAuthChallenge: defineAuthChallenge.function.arn,
           verifyAuthChallengeResponse: verifyAuthChallengeResponse.function.arn,
@@ -98,7 +117,8 @@ class CognitoPasswordless {
             },
           },
         ],
-      }
+      },
+      { protect: protectedEnvironment }
     );
 
     this.userPoolClient = new aws.cognito.UserPoolClient(
@@ -132,6 +152,13 @@ class CognitoPasswordless {
         sourceArn: this.userPool.arn,
       }
     );
+
+    new aws.lambda.Permission("PreTokenGenerationInvocationPermission", {
+      action: "lambda:InvokeFunction",
+      function: preTokenGeneration.function.name,
+      principal: "cognito-idp.amazonaws.com",
+      sourceArn: this.userPool.arn,
+    });
   }
 }
 
