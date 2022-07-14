@@ -203,6 +203,8 @@ class CloudfrontApi {
       config.aliases = this.aliases;
     }
 
+    console.log("cloufrontConfig.json", JSON.stringify(config));
+
     this.cloudfront = new aws.cloudfront.Distribution("api-cloudfront", config);
     if (subdomain && zone) {
       alternateCnames

@@ -20,6 +20,7 @@ class CognitoPasswordless {
       rootDomain: this.rootDomain,
       zone: zone,
     });
+
     const createAuthChallenge = new CreateAuthChallenge({
       env: {
         REGION: process.env.AWS_REGION,
@@ -29,6 +30,7 @@ class CognitoPasswordless {
       sesIdentity: ses.domainIdentity,
       fromEmailIdentity: ses.fromEmailIdentity,
     });
+
     const defineAuthChallenge = new DefineAuthChallenge({
       env: {
         REGION: process.env.AWS_REGION,
