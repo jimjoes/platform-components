@@ -1,6 +1,5 @@
 import * as aws from "@pulumi/aws";
 import { input as inputs } from "@pulumi/aws/types";
-import { parse } from "url";
 import Route53ARecord from "../route53";
 
 type DomainDescriptor = {
@@ -27,8 +26,6 @@ const buildDomain = (
 
 const stackEnv = process.env.PULUMI_NODEJS_STACK;
 const rootDomain = String(process.env.ROOT_DOMAIN);
-const rootZoneId = String(process.env.ROOT_ZONE_ID);
-const rootAcmCertificateArn = String(process.env.ROOT_ACM_CERTIFICATE_ARN);
 const alternateCnames: DomainDescriptor[] = [];
 
 class CloudfrontPagebuilderDelivery {
@@ -119,6 +116,28 @@ class CloudfrontPagebuilderDelivery {
         },
       ],
       orderedCacheBehaviors: [
+        routingRules.map((rule: any) => {
+          const path = rule.Condition.KeyPrefixEquals;
+          return {
+            compress: true,
+            allowedMethods: ["GET", "HEAD", "OPTIONS"],
+            cachedMethods: ["GET", "HEAD", "OPTIONS"],
+            forwardedValues: {
+              cookies: {
+                forward: "none",
+              },
+              headers: [],
+              queryString: false,
+            },
+            pathPattern: `/${path}`,
+            viewerProtocolPolicy: "allow-all",
+            targetOriginId: this.bucket.arn,
+            // MinTTL <= DefaultTTL <= MaxTTL
+            minTtl: 0,
+            defaultTtl: 2592000, // 30 days
+            maxTtl: 2592000,
+          };
+        }),
         {
           compress: true,
           allowedMethods: ["GET", "HEAD", "OPTIONS"],
