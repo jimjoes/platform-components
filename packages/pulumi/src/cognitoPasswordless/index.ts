@@ -108,11 +108,33 @@ class CognitoPasswordless {
           },
           {
             attributeDataType: "String",
-            name: "tenantId",
+            name: "family_name",
+            required: true,
+            developerOnlyAttribute: false,
+            mutable: true,
+            stringAttributeConstraints: {
+              maxLength: "2048",
+              minLength: "0",
+            },
+          },
+          {
+            attributeDataType: "String",
+            name: "given_name",
+            required: true,
+            developerOnlyAttribute: false,
+            mutable: true,
+            stringAttributeConstraints: {
+              maxLength: "2048",
+              minLength: "0",
+            },
+          },
+          {
+            attributeDataType: "String",
+            name: "tenant_id",
             developerOnlyAttribute: false,
             mutable: false,
             stringAttributeConstraints: {
-              maxLength: "1024",
+              maxLength: "2048",
               minLength: "0",
             },
           },

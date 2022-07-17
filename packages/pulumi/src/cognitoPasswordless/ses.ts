@@ -16,6 +16,7 @@ class SES {
     this.domainIdentity = new aws.ses.DomainIdentity("platform-domain-id", {
       domain: rootDomain,
     });
+
     this.domainDkim = new aws.ses.DomainDkim("platform-domain-dkim", {
       domain: rootDomain,
     });
@@ -93,6 +94,19 @@ class SES {
       // Allow email from amazonses.com and the stack's FQDN (ex. stack
       records: [`v=spf1 include:amazonses.com -all`],
     });
+    // DMARC TXT record
+    const dmarcRecord = new aws.route53.Record(
+      `${process.env.WEBINY_ENV}-external-dmarc`,
+      {
+        name: `_dmarc.${rootDomain}`,
+        zoneId: zone.id,
+        ttl: 3600,
+        type: "TXT",
+        records: [
+          `v=DMARC1; p=none; rua=mailto:hello@strabo-sanbox.com; fo=1;`,
+        ],
+      }
+    );
   }
 }
 
