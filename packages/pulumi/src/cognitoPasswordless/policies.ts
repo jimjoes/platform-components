@@ -40,7 +40,8 @@ class Policies {
     table: aws.dynamodb.Table;
   }): aws.iam.Policy {
     return new aws.iam.Policy("PreTokenGenerationLambdaPolicy", {
-      description: "This policy allows token generator to access ddb table",
+      description:
+        "This policy allows token generator read-only access ddb table",
       policy: {
         Version: "2012-10-17",
         Statement: [
