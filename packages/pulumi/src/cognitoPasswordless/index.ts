@@ -148,6 +148,7 @@ class CognitoPasswordless {
       {
         userPoolId: this.userPool.id,
         explicitAuthFlows: ["CUSTOM_AUTH_FLOW_ONLY"],
+        supportedIdentityProviders: ["COGNITO"],
       }
     );
 

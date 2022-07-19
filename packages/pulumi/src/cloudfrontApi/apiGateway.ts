@@ -1,14 +1,24 @@
 import * as aws from "@pulumi/aws";
 
+interface Route {
+  name: string;
+  path: string;
+  method: string;
+  function: aws.lambda.Function;
+  oauthScope?: string[];
+}
+
 class ApiGateway {
   api: aws.apigatewayv2.Api;
   defaultStage: aws.apigatewayv2.Stage;
   constructor({
     routes,
     allowedOrigins,
+    userPoolClient,
   }: {
-    routes: Array<any>;
+    routes: Route[];
     allowedOrigins: string[];
+    userPoolClient: aws.cognito.UserPoolClient;
   }) {
     this.api = new aws.apigatewayv2.Api("api-gateway", {
       protocolType: "HTTP",
@@ -31,6 +41,19 @@ class ApiGateway {
       apiId: this.api.id,
       autoDeploy: true,
     });
+
+    const authorizer = new aws.apigatewayv2.Authorizer(
+      `${process.env.WEBINY_ENV}-authorizer`,
+      {
+        apiId: this.api.id,
+        authorizerType: "JWT",
+        identitySources: [`$request.header.Authorization`],
+        jwtConfiguration: {
+          audiences: [userPoolClient.id],
+          issuer: `https://${this.api.apiEndpoint}`,
+        },
+      }
+    );
 
     for (let i = 0; i < routes.length; i++) {
       const route = routes[i];
@@ -75,16 +98,25 @@ class ApiGateway {
       //   }
       // );
 
-      new aws.apigatewayv2.Route(route.name, {
+      const routeConfig: any = {
         apiId: this.api.id,
         routeKey: `${route.method} ${route.path}`,
         target: integration.id.apply((value) => `integrations/${value}`),
-      });
+      };
+
+      if (route.oauthScope) {
+        routeConfig.authorizationType = "JWT";
+        routeConfig.authorizerId = authorizer.id;
+        routeConfig.authorizationScopes = route.oauthScope;
+      }
+
+      new aws.apigatewayv2.Route(route.name, routeConfig);
 
       new aws.lambda.Permission(`allow-${route.name}`, {
         action: "lambda:InvokeFunction",
         function: route.function.arn,
         principal: "apigateway.amazonaws.com",
+
         sourceArn: this.api.executionArn.apply(
           (arn) => `${arn}/*/*${route.path}`
         ),

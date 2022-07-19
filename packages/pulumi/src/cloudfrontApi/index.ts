@@ -39,16 +39,19 @@ class CloudfrontApi {
   cloudfront: aws.cloudfront.Distribution;
   apiGateway: ApiGateway;
   aliases: string[];
+
   constructor({
     routes,
     subdomain,
     zone,
     certificate,
+    userPoolClient,
   }: {
     routes: Array<any>;
     subdomain?: string;
     zone?: aws.route53.Zone;
     certificate?: aws.acm.Certificate;
+    userPoolClient: aws.cognito.UserPoolClient;
   }) {
     let allowedOrigins: string[] = [];
 
@@ -91,7 +94,11 @@ class CloudfrontApi {
       (domainDescriptor) => domainDescriptor.domain
     );
 
-    this.apiGateway = new ApiGateway({ routes, allowedOrigins });
+    this.apiGateway = new ApiGateway({
+      routes,
+      allowedOrigins,
+      userPoolClient,
+    });
 
     const config: any = {
       waitForDeployment: false,

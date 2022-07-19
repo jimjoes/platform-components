@@ -104,6 +104,7 @@ class Cognito {
       {
         userPoolId: this.userPool.id,
         explicitAuthFlows: ["ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"],
+        supportedIdentityProviders: ["COGNITO"],
       }
     );
 
