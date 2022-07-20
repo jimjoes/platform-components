@@ -6,7 +6,7 @@ interface Route {
   path: string;
   method: string;
   function: aws.lambda.Function;
-  oauthScope?: string[];
+  oauthScopes?: string[];
 }
 
 class ApiGateway {
@@ -105,10 +105,12 @@ class ApiGateway {
         target: integration.id.apply((value) => `integrations/${value}`),
       };
 
-      if (route.oauthScope) {
+      if (route.oauthScopes) {
         routeConfig.authorizationType = "JWT";
         routeConfig.authorizerId = authorizer.id;
-        routeConfig.authorizationScopes = pulumi.interpolate`${route.oauthScope}-${userPoolClient.userPoolId}`;
+        routeConfig.authorizationScopes = route.oauthScopes.map(
+          (scope) => pulumi.interpolate`${scope}-${userPoolClient.userPoolId}`
+        );
       }
 
       new aws.apigatewayv2.Route(route.name, routeConfig);
