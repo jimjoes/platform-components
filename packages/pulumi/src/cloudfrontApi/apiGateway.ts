@@ -1,4 +1,5 @@
 import * as aws from "@pulumi/aws";
+import * as pulumi from "@pulumi/pulumi";
 
 interface Route {
   name: string;
@@ -50,7 +51,7 @@ class ApiGateway {
         identitySources: [`$request.header.Authorization`],
         jwtConfiguration: {
           audiences: [userPoolClient.id],
-          issuer: `https://${this.api.apiEndpoint}`,
+          issuer: pulumi.interpolate`https://cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${userPoolClient.userPoolId}`,
         },
       }
     );
