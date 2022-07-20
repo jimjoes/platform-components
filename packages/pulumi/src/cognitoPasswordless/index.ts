@@ -3,6 +3,7 @@ import CreateAuthChallenge from "./createAuthChallenge";
 import DefineAuthChallenge from "./defineAuthChallenge";
 import VerifyAuthChallengeResponse from "./verifyAuthChallengeResponse";
 import PreTokenGeneration from "../cognito/preTokenGeneration";
+import PreSignup from "./preSignup";
 import SES from "./ses";
 const DEBUG = String(process.env.DEBUG);
 
@@ -60,6 +61,14 @@ class CognitoPasswordless {
         DEBUG,
       },
     });
+
+    const preSignup = new PreSignup({
+      env: {
+        REGION: process.env.AWS_REGION,
+        DEBUG,
+      },
+    });
+
     this.userPool = new aws.cognito.UserPool(
       process.env.WEBINY_ENV + "-platform-api-user-pool",
       {
@@ -81,6 +90,7 @@ class CognitoPasswordless {
           sourceArn: ses.fromEmailIdentity.arn,
         },
         lambdaConfig: {
+          preSignUp: preSignup.function.arn,
           preTokenGeneration: preTokenGeneration.function.arn,
           createAuthChallenge: createAuthChallenge.function.arn,
           defineAuthChallenge: defineAuthChallenge.function.arn,
