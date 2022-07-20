@@ -108,7 +108,7 @@ class ApiGateway {
       if (route.oauthScope) {
         routeConfig.authorizationType = "JWT";
         routeConfig.authorizerId = authorizer.id;
-        routeConfig.authorizationScopes = route.oauthScope;
+        routeConfig.authorizationScopes = pulumi.interpolate`${route.oauthScope}-${userPoolClient.userPoolId}`;
       }
 
       new aws.apigatewayv2.Route(route.name, routeConfig);
