@@ -109,7 +109,7 @@ class ApiGateway {
         routeConfig.authorizationType = "JWT";
         routeConfig.authorizerId = authorizer.id;
         routeConfig.authorizationScopes = route.oauthScopes.map(
-          (scope) => pulumi.interpolate`${scope}-${userPoolClient.userPoolId}`
+          (scope) => pulumi.interpolate`${scope}-${userPoolClient.id}`
         );
       }
 
