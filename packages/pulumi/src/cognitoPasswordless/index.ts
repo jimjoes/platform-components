@@ -3,7 +3,7 @@ import CreateAuthChallenge from "./createAuthChallenge";
 import DefineAuthChallenge from "./defineAuthChallenge";
 import VerifyAuthChallengeResponse from "./verifyAuthChallengeResponse";
 import PreTokenGeneration from "../cognito/preTokenGeneration";
-import PreSignup from "./preSignup";
+import PostConfirmation from "../cognito/postConfirmation";
 import SES from "./ses";
 const DEBUG = String(process.env.DEBUG);
 
@@ -21,14 +21,6 @@ class CognitoPasswordless {
     table: aws.dynamodb.Table;
     zone: aws.route53.Zone;
   }) {
-    const preTokenGeneration = new PreTokenGeneration({
-      env: {
-        REGION: process.env.AWS_REGION,
-        DEBUG,
-        PLATFORM_TABLE_NAME: table.name,
-      },
-      table: table,
-    });
     this.rootDomain =
       String(process.env.WEBINY_ENV) !== "prod"
         ? String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN)
@@ -37,6 +29,15 @@ class CognitoPasswordless {
     const ses = new SES({
       rootDomain: this.rootDomain,
       zone: zone,
+    });
+
+    const preTokenGeneration = new PreTokenGeneration({
+      env: {
+        REGION: process.env.AWS_REGION,
+        DEBUG,
+        PLATFORM_TABLE_NAME: table.name,
+      },
+      table: table,
     });
 
     const createAuthChallenge = new CreateAuthChallenge({
@@ -62,10 +63,12 @@ class CognitoPasswordless {
       },
     });
 
-    const preSignup = new PreSignup({
+    const postConfirmation = new PostConfirmation({
+      table,
       env: {
         REGION: process.env.AWS_REGION,
         DEBUG,
+        PLATFORM_TABLE_NAME: table.name,
       },
     });
 
@@ -90,7 +93,7 @@ class CognitoPasswordless {
           sourceArn: ses.fromEmailIdentity.arn,
         },
         lambdaConfig: {
-          preSignUp: preSignup.function.arn,
+          postConfirmation: postConfirmation.function.arn,
           preTokenGeneration: preTokenGeneration.function.arn,
           createAuthChallenge: createAuthChallenge.function.arn,
           defineAuthChallenge: defineAuthChallenge.function.arn,
@@ -189,6 +192,13 @@ class CognitoPasswordless {
     new aws.lambda.Permission("PreTokenGenerationInvocationPermission", {
       action: "lambda:InvokeFunction",
       function: preTokenGeneration.function.name,
+      principal: "cognito-idp.amazonaws.com",
+      sourceArn: this.userPool.arn,
+    });
+
+    new aws.lambda.Permission("PostConfirmationInvocationPermission", {
+      action: "lambda:InvokeFunction",
+      function: postConfirmation.function.name,
       principal: "cognito-idp.amazonaws.com",
       sourceArn: this.userPool.arn,
     });
