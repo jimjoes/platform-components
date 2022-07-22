@@ -49,7 +49,7 @@ class PostConfirmation {
     );
 
     this.function = new aws.lambda.Function(
-      `post-confirmation-lambda-role-${process.env.WEBINY_ENV}`,
+      `post-confirmation-lambda-${process.env.WEBINY_ENV}`,
       {
         runtime: "nodejs14.x",
         handler: "handler.handler",
