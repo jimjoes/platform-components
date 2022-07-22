@@ -6,6 +6,7 @@ const DEBUG = String(process.env.DEBUG);
 
 class Cognito {
   userPoolClient: aws.cognito.UserPoolClient;
+  userPoolDomain: aws.cognito.UserPoolDomain;
   userPool: aws.cognito.UserPool;
   constructor({
     protectedEnvironment,
@@ -117,6 +118,14 @@ class Cognito {
         userPoolId: this.userPool.id,
         explicitAuthFlows: ["ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"],
         supportedIdentityProviders: ["COGNITO"],
+      }
+    );
+
+    this.userPoolDomain = new aws.cognito.UserPoolDomain(
+      "platform-api-user-pool-domain",
+      {
+        domain: "srabo-auth",
+        userPoolId: this.userPool.id,
       }
     );
 
