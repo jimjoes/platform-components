@@ -9,6 +9,7 @@ const DEBUG = String(process.env.DEBUG);
 
 class CognitoPasswordless {
   userPoolClient: aws.cognito.UserPoolClient;
+  userPoolDomain: aws.cognito.UserPoolDomain;
   userPool: aws.cognito.UserPool;
   rootDomain: string;
 
@@ -162,6 +163,14 @@ class CognitoPasswordless {
         userPoolId: this.userPool.id,
         explicitAuthFlows: ["CUSTOM_AUTH_FLOW_ONLY"],
         supportedIdentityProviders: ["COGNITO"],
+      }
+    );
+
+    this.userPoolDomain = new aws.cognito.UserPoolDomain(
+      "platform-api-user-pool-domain",
+      {
+        domain: "srabo-auth",
+        userPoolId: this.userPool.id,
       }
     );
 
