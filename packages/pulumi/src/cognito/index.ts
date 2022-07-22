@@ -45,7 +45,7 @@ class Cognito {
         },
         aliasAttributes: ["email"],
         adminCreateUserConfig: {
-          allowAdminCreateUserOnly: true,
+          allowAdminCreateUserOnly: false,
         },
         autoVerifiedAttributes: ["email"],
         emailConfiguration: {
