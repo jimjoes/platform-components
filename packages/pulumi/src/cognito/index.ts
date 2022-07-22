@@ -47,7 +47,6 @@ class Cognito {
         adminCreateUserConfig: {
           allowAdminCreateUserOnly: false,
         },
-        autoVerifiedAttributes: ["email"],
         emailConfiguration: {
           emailSendingAccount: "COGNITO_DEFAULT",
         },
@@ -60,7 +59,7 @@ class Cognito {
           advancedSecurityMode: "OFF" /* required */,
         },
         verificationMessageTemplate: {
-          defaultEmailOption: "CONFIRM_WITH_CODE",
+          defaultEmailOption: "CONFIRM_WITH_LINK",
         },
         schemas: [
           {

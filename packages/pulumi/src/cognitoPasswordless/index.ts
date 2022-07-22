@@ -86,7 +86,6 @@ class CognitoPasswordless {
         adminCreateUserConfig: {
           allowAdminCreateUserOnly: false,
         },
-        autoVerifiedAttributes: ["email"],
         emailConfiguration: {
           emailSendingAccount: "DEVELOPER",
           fromEmailAddress: "noreply@" + this.rootDomain,
@@ -105,7 +104,7 @@ class CognitoPasswordless {
         },
         aliasAttributes: ["email"],
         verificationMessageTemplate: {
-          defaultEmailOption: "CONFIRM_WITH_CODE",
+          defaultEmailOption: "CONFIRM_WITH_LINK",
         },
         schemas: [
           {
