@@ -103,6 +103,7 @@ class CognitoPasswordless {
           advancedSecurityMode: "OFF" /* required */,
         },
         aliasAttributes: ["email"],
+        autoVerifiedAttributes: ["email"],
         verificationMessageTemplate: {
           defaultEmailOption: "CONFIRM_WITH_LINK",
         },

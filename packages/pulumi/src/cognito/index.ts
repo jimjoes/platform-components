@@ -47,6 +47,7 @@ class Cognito {
         adminCreateUserConfig: {
           allowAdminCreateUserOnly: false,
         },
+        autoVerifiedAttributes: ["email"],
         emailConfiguration: {
           emailSendingAccount: "COGNITO_DEFAULT",
         },
