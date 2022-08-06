@@ -34,6 +34,10 @@ class DynamoDB {
       billingMode: "PAY_PER_REQUEST",
       hashKey: "PK",
       rangeKey: "SK",
+      ttl: {
+        attributeName: "deleteOn",
+        enabled: true,
+      },
     };
 
     if (globalSecondaryIndexes.length > 0) {
