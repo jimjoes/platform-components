@@ -71,7 +71,7 @@ export class Route53MxRecord {
   }) {
     const recordConfig = {
       zoneId: zone.id,
-      allowOverwrite: false,
+      allowOverwrite: true,
       name: subDomain ? subDomain + "." + rootDomain : rootDomain,
       ttl: 300,
       type: "MX",
