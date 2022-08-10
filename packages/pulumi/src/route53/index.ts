@@ -63,16 +63,14 @@ export class Route53NsRecord {
   constructor({
     subDomain,
     rootDomain,
-    rootZoneId,
     zone,
   }: {
     subDomain: string;
     rootDomain: string;
-    rootZoneId: string;
     zone: aws.route53.Zone;
   }) {
     this.record = new aws.route53.Record(subDomain + "-ns-record", {
-      zoneId: rootZoneId,
+      zoneId: zone.id,
       allowOverwrite: true,
       name: subDomain + "." + rootDomain,
       ttl: 172800,
