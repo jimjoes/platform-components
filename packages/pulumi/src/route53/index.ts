@@ -58,6 +58,39 @@ export class Route53HostedZone {
   }
 }
 
+export class Route53MxRecord {
+  record: aws.route53.Record;
+  constructor({
+    rootDomain,
+    subDomain,
+    zone,
+  }: {
+    rootDomain: string;
+    subDomain?: string;
+    zone: aws.route53.Zone;
+  }) {
+    const recordConfig = {
+      zoneId: zone.id,
+      allowOverwrite: false,
+      name: subDomain ? subDomain + "." + rootDomain : rootDomain,
+      ttl: 300,
+      type: "MX",
+      records: [
+        `1 aspmx.l.google.com`,
+        `5 alt1.aspmx.l.google.com`,
+        `5 alt2.aspmx.l.google.com`,
+        `10 alt3.aspmx.l.google.com`,
+        `10 alt4.aspmx.l.google.com`,
+      ],
+    };
+
+    this.record = new aws.route53.Record(
+      subDomain + "-mx-record",
+      recordConfig
+    );
+  }
+}
+
 export class Route53NsRecord {
   record: aws.route53.Record;
   constructor({
