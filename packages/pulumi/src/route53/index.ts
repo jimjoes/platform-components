@@ -85,7 +85,7 @@ export class Route53MxRecord {
     };
 
     this.record = new aws.route53.Record(
-      subDomain + "-mx-record",
+      subDomain ? subDomain + "mx-record" : "mx-record",
       recordConfig
     );
   }
