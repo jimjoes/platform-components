@@ -157,6 +157,7 @@ class CloudfrontWebApp {
     }
 
     fs.writeFileSync("cloudfrontConfig.json", JSON.stringify(config));
+    fs.writeFileSync("alternateCNames.json", JSON.stringify(alternateCnames));
 
     this.cloudfront = new aws.cloudfront.Distribution(
       subdomain + "-webapp-cloudfront",
