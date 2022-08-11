@@ -124,7 +124,7 @@ class Route53ARecord {
     zone: aws.route53.Zone;
   }) {
     this.record = new aws.route53.Record(domainDescriptor.domain, {
-      name: domainDescriptor.domainParts.slice(-1),
+      name: domainDescriptor.domainParts.slice(-1)[0],
       zoneId: zone.id,
       type: "A",
       aliases: [
