@@ -26,8 +26,7 @@ const buildDomain = (
 };
 
 const stackEnv = process.env.PULUMI_NODEJS_STACK;
-const rootDomain =
-  String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN);
+const rootDomain = String(process.env.ROOT_DOMAIN);
 const alternateCnames: DomainDescriptor[] = [];
 
 class CloudfrontWebApp {
