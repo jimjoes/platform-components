@@ -1,7 +1,7 @@
 import * as aws from "@pulumi/aws";
 import { input as inputs } from "@pulumi/aws/types";
 import Route53ARecord from "../route53";
-import * as fs from "fs";
+// import * as fs from "fs";
 
 type DomainDescriptor = {
   domain: string;
@@ -156,8 +156,8 @@ class CloudfrontWebApp {
       ];
     }
 
-    fs.writeFileSync("cloudfrontConfig.json", JSON.stringify(config));
-    fs.writeFileSync("alternateCNames.json", JSON.stringify(alternateCnames));
+    // fs.writeFileSync("cloudfrontConfig.json", JSON.stringify(config));
+    // fs.writeFileSync("alternateCNames.json", JSON.stringify(alternateCnames));
 
     this.cloudfront = new aws.cloudfront.Distribution(
       subdomain + "-webapp-cloudfront",
