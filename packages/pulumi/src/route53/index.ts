@@ -31,6 +31,7 @@ export class Route53HostedZone {
       },
       { provider: useast1 }
     );
+
     const certificateValidationDomain = new aws.route53.Record(
       `${this.domainName}-validation`,
       {
@@ -92,14 +93,16 @@ export class Route53NsRecord {
   constructor({
     subDomain,
     rootDomain,
+    rootZone,
     zone,
   }: {
     subDomain: string;
     rootDomain: string;
+    rootZone: aws.route53.Zone;
     zone: aws.route53.Zone;
   }) {
     this.record = new aws.route53.Record(subDomain + "-ns-record", {
-      zoneId: zone.id,
+      zoneId: rootZone.id,
       allowOverwrite: true,
       name: subDomain + "." + rootDomain,
       ttl: 172800,
