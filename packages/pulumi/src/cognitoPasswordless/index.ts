@@ -169,7 +169,7 @@ class CognitoPasswordless {
     this.userPoolDomain = new aws.cognito.UserPoolDomain(
       "platform-api-user-pool-domain",
       {
-        domain: "srabo-auth",
+        domain: `${process.env.WEBINY_ENV}-strabo-auth`,
         userPoolId: this.userPool.id,
       }
     );
