@@ -54,7 +54,13 @@ class CloudfrontApi {
     let allowedOrigins: string[] = [];
 
     if (subdomain) {
-      alternateCnames.push(buildDomain(rootDomain, subdomain));
+      if (stackEnv === "dev" || stackEnv === "staging") {
+        alternateCnames.push(
+          buildDomain(rootDomain, subdomain + "." + stackEnv)
+        );
+      } else if (stackEnv === "prod") {
+        alternateCnames.push(buildDomain(rootDomain, subdomain));
+      }
     }
 
     if (stackEnv !== "prod") {
@@ -208,7 +214,8 @@ class CloudfrontApi {
     if (subdomain) {
       config.aliases = this.aliases;
     }
-    fs.writeFileSync("cloudfront-config.json", config);
+    fs.writeFileSync("cloudfront-config.json", JSON.stringify(config));
+
     this.cloudfront = new aws.cloudfront.Distribution("api-cloudfront", config);
     if (subdomain && zone) {
       alternateCnames
