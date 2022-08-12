@@ -69,7 +69,7 @@ class CognitoPasswordless {
       env: {
         REGION: process.env.AWS_REGION,
         DEBUG,
-        PLATFORM_TABLE_NAME: table.name,
+        DB_TABLE: table.name,
       },
     });
 
