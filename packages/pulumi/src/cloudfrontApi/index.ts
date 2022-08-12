@@ -3,6 +3,7 @@ import { input as inputs } from "@pulumi/aws/types";
 import { parse } from "url";
 import ApiGateway from "./apiGateway";
 import Route53ARecord from "../route53";
+import * as fs from "fs";
 
 type DomainDescriptor = {
   domain: string;
@@ -28,10 +29,7 @@ const buildDomain = (
 };
 
 const stackEnv = String(process.env.WEBINY_ENV);
-const rootDomain =
-  String(process.env.WEBINY_ENV) !== "prod"
-    ? String(process.env.WEBINY_ENV) + "." + String(process.env.ROOT_DOMAIN)
-    : String(process.env.ROOT_DOMAIN);
+const rootDomain = String(process.env.ROOT_DOMAIN);
 
 const alternateCnames: DomainDescriptor[] = [];
 
@@ -58,6 +56,7 @@ class CloudfrontApi {
     if (subdomain) {
       alternateCnames.push(buildDomain(rootDomain, subdomain));
     }
+
     if (stackEnv !== "prod") {
       allowedOrigins = [
         "http://localhost:3000",
@@ -209,7 +208,7 @@ class CloudfrontApi {
     if (subdomain) {
       config.aliases = this.aliases;
     }
-
+    fs.writeFileSync("cloudfront-config.json", config);
     this.cloudfront = new aws.cloudfront.Distribution("api-cloudfront", config);
     if (subdomain && zone) {
       alternateCnames
