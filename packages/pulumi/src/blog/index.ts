@@ -32,7 +32,7 @@ class Blog {
       repo: repo,
     });
     new Secret({
-      name: "webiny-cms-api-secret",
+      name: `${process.env.WEBINY_ENV}/webiny-cms-api-secret`,
       value: String(process.env.WEBINY_API_SECRET),
     });
   }

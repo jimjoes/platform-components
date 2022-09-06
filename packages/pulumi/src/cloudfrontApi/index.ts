@@ -222,7 +222,7 @@ class CloudfrontApi {
         .map(
           (domainDescriptor) =>
             new Route53ARecord({
-              domainDescriptor,
+              domainDescriptor, 
               distribution: this.cloudfront,
               zone,
             })
