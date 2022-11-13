@@ -9,7 +9,7 @@ interface SubscribeHandlerParams {
     public: aws.ec2.Subnet[];
   };
   env: Record<string, any>;
-  platformTableArn?: string;
+  platformTable?: aws.dynamodb.Table;
   userPool?: aws.cognito.UserPool;
 }
 
@@ -24,7 +24,7 @@ class SubscribeHandler {
     subnets,
     env,
     userPool,
-    platformTableArn,
+    platformTable,
   }: SubscribeHandlerParams) {
     const roleName = "subscribe-handler-api-lambda-role";
     this.role = new aws.iam.Role(roleName, {
@@ -48,8 +48,8 @@ class SubscribeHandler {
       policyParams.userPool = userPool;
     }
 
-    if (platformTableArn) {
-      policyParams.platformTableArn = platformTableArn;
+    if (platformTable) {
+      policyParams.platformTableArn = platformTable.arn;
     }
 
     const policy = policies.getSubscribeHandlerLambdaPolicy(policyParams);
