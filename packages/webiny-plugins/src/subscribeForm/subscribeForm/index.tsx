@@ -54,6 +54,8 @@ type FormValues = {
 
 const recaptchaSiteKey = String(process.env.REACT_APP_RECAPTCHA_SITE_KEY);
 
+console.log("recaptchaSiteKey: ", recaptchaSiteKey);
+
 export const SubscribeForm = ({
   data: {
     ctaText = "Subscribe",
