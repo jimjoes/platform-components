@@ -43,7 +43,7 @@ class SubscribeHandler {
     }
 
     if (table) {
-      policyParams.tableArn = table.arn;
+      policyParams.table = table;
     }
 
     const policy = policies.getSubscribeHandlerLambdaPolicy(policyParams);

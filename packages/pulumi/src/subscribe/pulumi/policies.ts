@@ -17,10 +17,10 @@ class Policies {
 
   getSubscribeHandlerLambdaPolicy({
     userPool,
-    tableArn,
+    table,
   }: {
     userPool?: aws.cognito.UserPool;
-    tableArn?: string;
+    table?: aws.dynamodb.Table;
   }): aws.iam.Policy {
     const policy: any = {
       description: "This policy enables access to Lambda",
@@ -44,7 +44,7 @@ class Policies {
         Resource: pulumi.interpolate`${userPool.arn}`,
       });
     }
-    if (tableArn) {
+    if (table) {
       policy.policy.Statement.push({
         Sid: "PermissionForDynamodb",
         Effect: "Allow",
@@ -59,7 +59,10 @@ class Policies {
           "dynamodb:Query",
           "dynamodb:UpdateItem",
         ],
-        Resource: [`${tableArn}`, `${tableArn}/*`],
+        Resource: [
+          pulumi.interpolate`${table.arn}`,
+          pulumi.interpolate`${table.arn}/*`,
+        ],
       });
     }
     return new aws.iam.Policy("subscribeHandlerLambdaPolicy", policy);
