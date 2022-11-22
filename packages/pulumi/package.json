@@ -34,7 +34,7 @@
     "@pulumi/aws": "^5.9.1",
     "@pulumi/pulumi": "^3.35.1",
     "@stripe/stripe-js": "^1.27.0",
-    "@webiny/app-page-builder": "5.31.0",
+    "@webiny/app-page-builder": "5.33.0",
     "stripe": "^8.216.0"
   },
   "files": [
