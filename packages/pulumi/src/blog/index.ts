@@ -14,13 +14,37 @@ class Blog {
     repo,
     zone,
     certificate,
+    routingRules,
   }: {
     subdomain: string;
     repo: string;
     zone: aws.route53.Zone;
     certificate: aws.acm.Certificate;
+    routingRules: any[];
   }) {
-    this.bucket = new Bucket();
+    let bucketConfig;
+    if (routingRules) {
+      bucketConfig = {
+        acl: "public-read",
+        forceDestroy: true,
+        website: {
+          indexDocument: "index.html",
+          errorDocument: "_NOT_FOUND_PAGE_/index.html",
+          routingRules,
+        },
+      };
+    } else {
+      bucketConfig = {
+        acl: "public-read",
+        forceDestroy: true,
+        website: {
+          indexDocument: "index.html",
+          errorDocument: "_NOT_FOUND_PAGE_/index.html",
+        },
+      };
+    }
+
+    this.bucket = new Bucket({ routingRules });
     this.webapp = new CloudfrontWebApp({
       bucket: this.bucket.bucket,
       subdomain: subdomain,
